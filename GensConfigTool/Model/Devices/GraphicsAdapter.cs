@@ -19,7 +19,7 @@ namespace GensConfigTool.Model
              * - INTZ
              * - DF16
              * - DF24
-             * Currently we're forcing INTZ
+             * Currently we're forcing INTZ since most GPUs support it and I can't find a way to get this info
              */
             this.DepthFormat = "1515474505";
         }

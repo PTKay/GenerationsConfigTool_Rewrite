@@ -5,6 +5,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>ConfigurationTool.ico</ApplicationIcon>
+    <StartupObject>GensConfigTool.App</StartupObject>
+    <PackageId>Sonic Generations</PackageId>
+    <Product>Sonic Generations</Product>
+    <Description>Sonic Generations Configuration Tool</Description>
+    <Company />
+    <Authors>PTKickass</Authors>
   </PropertyGroup>
 
   <ItemGroup>

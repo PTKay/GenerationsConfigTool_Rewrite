@@ -13,7 +13,6 @@ namespace GensConfigTool
         public MainWindow()
         {
             InitializeComponent();
-
             DevicesFinder finder = new DevicesFinder();
             List<GraphicsAdapter> adapters = finder.GetGraphicsAdapters();
             this.GPUSelector.ItemsSource = adapters;
@@ -32,7 +31,8 @@ namespace GensConfigTool
 
         private void UI_SaveAndQuit_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO: Save options
+            Application.Current.Shutdown();
         }
 
         private void UI_Quit_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
