@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ConfigurationTool.Model
+namespace ConfigurationTool.Settings.Model
 {
     public class Resolution : IComparable<Resolution>
     {

@@ -1,11 +1,13 @@
-﻿namespace ConfigurationTool.Model
+﻿using ConfigurationTool.Settings.Model;
+
+namespace ConfigurationTool.Model
 {
     class BasicConfiguration
     {
         public Resolution Resolution;
         public GraphicsAdapter GraphicsAdapter;
         public DepthFormat DepthFormat = DepthFormat.INTZ;
-        public AudioDevice AudioDevice;
+        public AudioDevice AudioDevice = new AudioDevice();
 
         public OnOff Antialiasing = OnOff.On;
         public OnOff VSync = OnOff.On;
@@ -14,7 +16,6 @@
         public HighLow ShadowQuality = HighLow.High;
         public HighLow ReflectionQuality = HighLow.High;
 
-        public DisplayMode DisplayMode = DisplayMode.Widescreen;
-
+        public DisplayMode DisplayMode = DisplayMode.Letterbox;
     }
 }

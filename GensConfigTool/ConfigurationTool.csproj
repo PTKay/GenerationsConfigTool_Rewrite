@@ -11,7 +11,7 @@
     <Description>Sonic Generations Configuration Tool</Description>
     <Company />
     <Authors>PTKickass</Authors>
-    <Platforms>AnyCPU</Platforms>
+    <Platforms>AnyCPU;x86</Platforms>
     <AssemblyName>ConfigurationTool</AssemblyName>
     <RootNamespace>ConfigurationTool</RootNamespace>
   </PropertyGroup>

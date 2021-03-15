@@ -1,10 +1,11 @@
 ﻿using ConfigurationTool.Model;
+using ConfigurationTool.Settings.Model;
 using SharpDX.Direct3D9;
 using System.Collections.Generic;
 
-namespace ConfigurationTool
+namespace ConfigurationTool.Handlers
 {
-    class DevicesFinder
+    class DevicesHandler
     {
         public List<GraphicsAdapter> GetGraphicsAdapters()
         {
@@ -23,19 +24,6 @@ namespace ConfigurationTool
                 };
                 toReturn.Add(currAdapter);
 
-                /*
-                // Adding the current resolution to avoid it not being detected in GetDisplayModes (yes, that happens).
-                // Also using HashSet just in case it appears again.
-                HashSet<Resolution> resolutions = new HashSet<Resolution>();
-
-                resolutions.Add(new Resolution()
-                {
-                    Width = adapter.CurrentDisplayMode.Width,
-                    Height = adapter.CurrentDisplayMode.Height,
-                    Frequency = adapter.CurrentDisplayMode.RefreshRate
-                });
-                */
-
                 foreach (SharpDX.Direct3D9.DisplayMode mode in adapter.GetDisplayModes(adapter.CurrentDisplayMode.Format))
                 {
                     currAdapter.Resolutions.Add(new Resolution()
@@ -46,8 +34,6 @@ namespace ConfigurationTool
                     });
                 }
 
-                //currAdapter.Resolutions = resolutions.ToList();
-
                 currAdapter.Resolutions.Sort((a, b) => b.CompareTo(a));
             }
 
@@ -57,12 +43,7 @@ namespace ConfigurationTool
         public IEnumerable<AudioDevice> GetAudioDevices()
         {
             // Still haven't found a way to poll audio devices so this will have to do
-
-            yield return new AudioDevice()
-            {
-                Name = "Default",
-                GUID = "ffffffff-ffff-ffff-ffff-ffffffffffff"
-            };
+            yield return new AudioDevice();
             yield return new AudioDevice()
             {
                 Name = "None",

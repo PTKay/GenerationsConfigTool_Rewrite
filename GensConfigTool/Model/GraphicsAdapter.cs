@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConfigurationTool.Settings.Model;
+using System;
 using System.Collections.Generic;
 
 namespace ConfigurationTool.Model

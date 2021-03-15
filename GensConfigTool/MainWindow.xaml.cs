@@ -1,4 +1,6 @@
-﻿using ConfigurationTool.Model;
+﻿using ConfigurationTool.Handlers;
+using ConfigurationTool.Model;
+using ConfigurationTool.Settings.Model;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -18,11 +20,12 @@ namespace ConfigurationTool
         public MainWindow()
         {
             InitializeComponent();
-            RegistryData reg = new RegistryData();
+            RegistryHandler reg = new RegistryHandler();
+            reg.LoadReg();
 
-            this.BasicConfiguration = FileHandler.LoadConfiguration();
+            this.BasicConfiguration = FileHandler.LoadBasicConfiguration();
 
-            DevicesFinder finder = new DevicesFinder();
+            DevicesHandler finder = new DevicesHandler();
             List<GraphicsAdapter> adapters = finder.GetGraphicsAdapters();
             this.GPUSelector.ItemsSource = adapters;
             this.ResSelector.ItemsSource = adapters[0].Resolutions;
@@ -46,13 +49,10 @@ namespace ConfigurationTool
 
         private void UpdateConfigView()
         {
-            if (this.BasicConfiguration.GraphicsAdapter != null)
+            if (this.BasicConfiguration.GraphicsAdapter != null && this.GPUSelector.Items.IndexOf(this.BasicConfiguration.GraphicsAdapter) >= 0)
             {
-                this.GPUSelector.Items.IndexOf(this.BasicConfiguration.GraphicsAdapter);
-
                 this.GPUSelector.SelectedItem = this.BasicConfiguration.GraphicsAdapter;
                 this.ResSelector.SelectedItem = this.BasicConfiguration.Resolution;
-
                 this.DepthSelector.SelectedItem = this.BasicConfiguration.DepthFormat;
             }
             else
@@ -71,20 +71,12 @@ namespace ConfigurationTool
             this.ShadowSelector.SelectedItem = this.BasicConfiguration.ShadowQuality;
             this.ReflectionSelector.SelectedItem = this.BasicConfiguration.ReflectionQuality;
 
-            if (this.BasicConfiguration.AudioDevice != null)
-            {
-                // Since we don't support audio device detection, we're gonna check if we have the configured device
-                int idx = this.AudioSelector.Items.IndexOf(this.BasicConfiguration.AudioDevice);
-                if (idx < 0)
-                    this.AudioSelector.SelectedIndex = 0;
-                else
-                    this.AudioSelector.SelectedIndex = idx;
-            }
-            else
-            {
+            // Since we don't support audio device detection, we're gonna check if we have the configured device
+            int idx = this.AudioSelector.Items.IndexOf(this.BasicConfiguration.AudioDevice);
+            if (idx < 0)
                 this.AudioSelector.SelectedIndex = 0;
-                this.BasicConfiguration.AudioDevice = (AudioDevice)this.AudioSelector.SelectedItem;
-            }
+            else
+                this.AudioSelector.SelectedIndex = idx;
 
             if (this.BasicConfiguration.Analytics.isOn)
             {
@@ -99,12 +91,12 @@ namespace ConfigurationTool
 
         private void UI_Save_Click(object sender, RoutedEventArgs e)
         {
-            FileHandler.SaveConfiguration(this.BasicConfiguration);
+            FileHandler.SaveBasicConfiguration(this.BasicConfiguration);
         }
 
         private void UI_SaveAndQuit_Click(object sender, RoutedEventArgs e)
         {
-            FileHandler.SaveConfiguration(this.BasicConfiguration);
+            FileHandler.SaveBasicConfiguration(this.BasicConfiguration);
             Application.Current.Shutdown();
         }
 

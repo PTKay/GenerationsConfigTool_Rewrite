@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 
-namespace ConfigurationTool.Model
+namespace ConfigurationTool.Settings.Model
 {
     class DisplayMode
     {

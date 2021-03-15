@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConfigurationTool.Model
+namespace ConfigurationTool.Settings.Model
 {
     public class DepthFormat
     {
