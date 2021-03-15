@@ -7,7 +7,7 @@ namespace ConfigurationTool.Handlers
 {
     class DevicesHandler
     {
-        public List<GraphicsAdapter> GetGraphicsAdapters()
+        public static List<GraphicsAdapter> GetGraphicsAdapters()
         {
             List<GraphicsAdapter> toReturn = new List<GraphicsAdapter>();
 
@@ -40,7 +40,7 @@ namespace ConfigurationTool.Handlers
             return toReturn;
         }
 
-        public IEnumerable<AudioDevice> GetAudioDevices()
+        public static IEnumerable<AudioDevice> GetAudioDevices()
         {
             // Still haven't found a way to poll audio devices so this will have to do
             yield return new AudioDevice();

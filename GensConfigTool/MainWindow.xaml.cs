@@ -25,14 +25,16 @@ namespace ConfigurationTool
 
             this.BasicConfiguration = FileHandler.LoadBasicConfiguration();
 
-            DevicesHandler finder = new DevicesHandler();
-            List<GraphicsAdapter> adapters = finder.GetGraphicsAdapters();
+            // Get Graphics Adapters
+            List<GraphicsAdapter> adapters = DevicesHandler.GetGraphicsAdapters();
             this.GPUSelector.ItemsSource = adapters;
             this.ResSelector.ItemsSource = adapters[0].Resolutions;
 
-            this.AudioSelector.ItemsSource = finder.GetAudioDevices();
+            // Get Audio Devices
+            this.AudioSelector.ItemsSource = DevicesHandler.GetAudioDevices();
             this.AudioSelector.SelectedIndex = 0;
 
+            // Fill combo boxes
             this.DepthSelector.ItemsSource = DepthFormat.GetAll();
 
             this.FxaaSelector.ItemsSource = OnOff.GetAll();
@@ -42,6 +44,10 @@ namespace ConfigurationTool
 
             this.ShadowSelector.ItemsSource = HighLow.GetAll();
             this.ReflectionSelector.ItemsSource = HighLow.GetAll();
+
+            // Fill Input Devices (TODO)
+            this.InputSelector.Items.Add("N/A");
+            this.InputSelector.SelectedIndex = 0;
 
             UpdateConfigView();
             isInitialized = true;

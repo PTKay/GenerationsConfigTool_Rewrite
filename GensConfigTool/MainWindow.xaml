@@ -50,7 +50,7 @@
                             <!-- Options -->
                             <TextBlock Grid.Row="0" Text="{StaticResource Graphics}" Opacity="0.5"/>
                             <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
-                            
+
                             <TextBlock Grid.Row="1" Margin="0 10 0 0" Text="{StaticResource GraphicsAdapter}" MouseEnter="GPUSelector_MouseEnter"/>
                             <ComboBox x:Name="GPUSelector" Grid.Row="2" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="GPUSelector_MouseEnter" SelectionChanged="GPUSelector_SelectionChanged"/>
 
@@ -107,11 +107,11 @@
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
-                                
+
                                 <TextBlock Grid.Row="0" Text="{StaticResource Analytics}" Opacity="0.5"/>
                                 <Separator Grid.Row="1" Margin="0 5 0 5"/>
                             </Grid>
-                            
+
                             <Grid Grid.Row="4" Margin="10 5 0 5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -125,12 +125,177 @@
                                 <RadioButton x:Name="Analytics_Disabled" GroupName="Analytics" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Analytics_Disabled_Click">
                                     <TextBlock Text="{StaticResource DisableAnalytics}" VerticalAlignment="Center"/>
                                 </RadioButton>
-                                </Grid>
+                            </Grid>
                             <Button x:Name="AnalyticsButton" Grid.Row="5" Margin="10 5 0 5" Content="{StaticResource AnalyticsInfo}" Click="AnalyticsButton_Click"/>
                         </Grid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="{StaticResource Input}" />
+                <TabItem Header="{StaticResource Input}" >
+                    <Grid Margin="10 10 10 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{StaticResource InputDevice}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" Margin="10 0 0 0" x:Name="InputSelector" VerticalContentAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0.3*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" Grid.Column="0"  Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/A.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/B.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="0" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/X.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="3" Grid.Column="0" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Y.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="4" Grid.Column="0" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/RB.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="5" Grid.Column="0" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/LB.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="6" Grid.Column="0" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/RT.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="7" Grid.Column="0" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/LT.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="0" Grid.Column="2" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Up.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="2" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Right.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="2" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Down.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="3" Grid.Column="2" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Left.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="4" Grid.Column="2" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Start.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+                            <Grid Grid.Row="5" Grid.Column="2" Margin="0 10 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Back.png" VerticalAlignment="Center"/>
+                                <Button Grid.Column="1" Margin="10 0 0 0" Content="{StaticResource Null}" />
+                            </Grid>
+
+                            <Separator Grid.Row="6" Grid.Column="2" VerticalAlignment="Center"/>
+                            <Button Grid.Row="7" Grid.Column="2" Content="Reset to Defaults" />
+                        </Grid>
+                    </Grid>
+                </TabItem>
             </TabControl>
 
             <!-- Bottom Buttons -->

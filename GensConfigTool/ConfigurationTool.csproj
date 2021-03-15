@@ -25,6 +25,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\Buttons\A.png" />
+    <None Remove="Resources\Images\Buttons\B.png" />
+    <None Remove="Resources\Images\Buttons\Back.png" />
+    <None Remove="Resources\Images\Buttons\LB.png" />
+    <None Remove="Resources\Images\Buttons\LT.png" />
+    <None Remove="Resources\Images\Buttons\RB.png" />
+    <None Remove="Resources\Images\Buttons\RT.png" />
+    <None Remove="Resources\Images\Buttons\Start.png" />
+    <None Remove="Resources\Images\Buttons\Stick.png" />
+    <None Remove="Resources\Images\Buttons\Stick_Down.png" />
+    <None Remove="Resources\Images\Buttons\Stick_Left.png" />
+    <None Remove="Resources\Images\Buttons\Stick_Right.png" />
+    <None Remove="Resources\Images\Buttons\Stick_Up.png" />
+    <None Remove="Resources\Images\Buttons\X.png" />
+    <None Remove="Resources\Images\Buttons\Y.png" />
     <None Remove="Resources\Images\Display.png" />
     <None Remove="Resources\Images\FXAA.png" />
     <None Remove="Resources\Images\Misc.png" />
@@ -40,6 +55,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\Buttons\A.png" />
+    <Resource Include="Resources\Images\Buttons\B.png" />
+    <Resource Include="Resources\Images\Buttons\Back.png" />
+    <Resource Include="Resources\Images\Buttons\LB.png" />
+    <Resource Include="Resources\Images\Buttons\LT.png" />
+    <Resource Include="Resources\Images\Buttons\RB.png" />
+    <Resource Include="Resources\Images\Buttons\RT.png" />
+    <Resource Include="Resources\Images\Buttons\Start.png" />
+    <Resource Include="Resources\Images\Buttons\Stick.png" />
+    <Resource Include="Resources\Images\Buttons\Stick_Down.png" />
+    <Resource Include="Resources\Images\Buttons\Stick_Left.png" />
+    <Resource Include="Resources\Images\Buttons\Stick_Right.png" />
+    <Resource Include="Resources\Images\Buttons\Stick_Up.png" />
+    <Resource Include="Resources\Images\Buttons\X.png" />
+    <Resource Include="Resources\Images\Buttons\Y.png" />
     <Resource Include="Resources\Images\Display.png" />
     <Resource Include="Resources\Images\FXAA.png" />
     <Resource Include="Resources\Images\Misc.png" />
