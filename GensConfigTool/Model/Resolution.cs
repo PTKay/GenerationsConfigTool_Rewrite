@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace GensConfigTool.Model
+namespace ConfigurationTool.Model
 {
     public class Resolution : IComparable<Resolution>
     {
@@ -27,6 +27,13 @@ namespace GensConfigTool.Model
             }
 
             return this.Width.CompareTo(other.Width);
+        }
+
+        public override bool Equals(object obj)
+        {
+            Resolution res = (Resolution)obj;
+
+            return Width == res.Width && Height == res.Height && Frequency == res.Frequency;
         }
 
         public override string ToString() => $"{Width} x {Height} ({Frequency} hz)";

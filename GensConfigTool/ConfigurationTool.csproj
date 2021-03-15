@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>ConfigurationTool.ico</ApplicationIcon>
+    <StartupObject>ConfigurationTool.Program</StartupObject>
+    <PackageId>Sonic Generations</PackageId>
+    <Product>Sonic Generations</Product>
+    <Description>Sonic Generations Configuration Tool</Description>
+    <Company />
+    <Authors>PTKickass</Authors>
+    <Platforms>AnyCPU</Platforms>
+    <AssemblyName>ConfigurationTool</AssemblyName>
+    <RootNamespace>ConfigurationTool</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\Display.png" />
+    <None Remove="Resources\Images\FXAA.png" />
+    <None Remove="Resources\Images\Misc.png" />
+    <None Remove="Resources\Images\None.png" />
+    <None Remove="Resources\Images\Res.png" />
+    <None Remove="Resources\Images\Shadows.png" />
+    <None Remove="Resources\Images\Vsync.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SharpDX.Direct3D9" Version="4.2.0" />
+    <PackageReference Include="System.Management" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\Display.png" />
+    <Resource Include="Resources\Images\FXAA.png" />
+    <Resource Include="Resources\Images\Misc.png" />
+    <Resource Include="Resources\Images\None.png" />
+    <Resource Include="Resources\Images\Res.png" />
+    <Resource Include="Resources\Images\Shadows.png" />
+    <Resource Include="Resources\Images\Vsync.png" />
+  </ItemGroup>
+
+</Project>

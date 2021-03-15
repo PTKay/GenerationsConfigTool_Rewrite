@@ -1,9 +1,8 @@
-﻿using GensConfigTool.Model;
+﻿using ConfigurationTool.Model;
 using SharpDX.Direct3D9;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace GensConfigTool
+namespace ConfigurationTool
 {
     class DevicesFinder
     {
@@ -20,11 +19,11 @@ namespace GensConfigTool
                     Description = adapter.Details.Description,
                     Name = adapter.Details.DeviceName,
                     GUID = adapter.Details.DeviceIdentifier.ToString(),
-                    Index = i + 1
+                    Index = i
                 };
                 toReturn.Add(currAdapter);
 
-
+                /*
                 // Adding the current resolution to avoid it not being detected in GetDisplayModes (yes, that happens).
                 // Also using HashSet just in case it appears again.
                 HashSet<Resolution> resolutions = new HashSet<Resolution>();
@@ -35,17 +34,19 @@ namespace GensConfigTool
                     Height = adapter.CurrentDisplayMode.Height,
                     Frequency = adapter.CurrentDisplayMode.RefreshRate
                 });
+                */
 
-                foreach (DisplayMode mode in adapter.GetDisplayModes(adapter.CurrentDisplayMode.Format))
+                foreach (SharpDX.Direct3D9.DisplayMode mode in adapter.GetDisplayModes(adapter.CurrentDisplayMode.Format))
                 {
-                    resolutions.Add(new Resolution()
+                    currAdapter.Resolutions.Add(new Resolution()
                     {
                         Width = mode.Width,
                         Height = mode.Height,
                         Frequency = mode.RefreshRate
                     });
                 }
-                currAdapter.Resolutions = resolutions.ToList();
+
+                //currAdapter.Resolutions = resolutions.ToList();
 
                 currAdapter.Resolutions.Sort((a, b) => b.CompareTo(a));
             }

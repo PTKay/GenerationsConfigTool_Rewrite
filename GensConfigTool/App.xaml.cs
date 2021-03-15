@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace GensConfigTool
+namespace ConfigurationTool
 {
     /// <summary>
     /// Interaction logic for App.xaml
