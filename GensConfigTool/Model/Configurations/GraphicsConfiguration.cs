@@ -1,11 +1,13 @@
 ﻿using ConfigurationTool.Settings.Model;
 using System;
 using System.IO;
+using System.Windows;
 
 namespace ConfigurationTool.Model.Configurations
 {
     class GraphicsConfiguration : IConfiguration
     {
+        private string FileWarning => Application.Current.TryFindResource("GraphicsFile_Warning").ToString();
         public string ConfigFile => "GraphicsConfig.cfg";
 
         public BasicConfiguration LoadConfiguration(BasicConfiguration config)
@@ -17,13 +19,14 @@ namespace ConfigurationTool.Model.Configurations
             {
                 using (StreamReader sr = new StreamReader(new BufferedStream(File.Open(ConfigFile, FileMode.Open))))
                 {
-                    sr.ReadLine(); // Skip first line
+                    sr.ReadLine(); // Skip warning line
                     string adapterDesc = sr.ReadLine();
                     string adapterName = sr.ReadLine();
                     if (String.IsNullOrEmpty(adapterName) || String.IsNullOrEmpty(adapterName))
                     {
                         return config;
                     }
+
                     string[] resString = sr.ReadLine().Split('.');
                     config.Resolution = new Resolution()
                     {
@@ -63,7 +66,7 @@ namespace ConfigurationTool.Model.Configurations
 
             using (StreamWriter writer = new StreamWriter(ConfigFile))
             {
-                writer.WriteLine(ConfigFile);
+                writer.WriteLine(FileWarning);
                 writer.WriteLine(config.GraphicsAdapter.Description);
                 writer.WriteLine(config.GraphicsAdapter.Name);
                 Resolution res = config.Resolution;
@@ -74,7 +77,7 @@ namespace ConfigurationTool.Model.Configurations
                 writer.WriteLine(config.ReflectionQuality == HighLow.High ? 1 : 0);
                 writer.WriteLine(config.DisplayMode == DisplayMode.Letterbox ? 1 : 0);
                 writer.WriteLine(config.GraphicsAdapter.GUID);
-                writer.WriteLine(""); // Empty line
+                writer.WriteLine(""); // Skip unused monitor line
                 writer.WriteLine(config.DepthFormat.GetFourCC());
             }
         }
