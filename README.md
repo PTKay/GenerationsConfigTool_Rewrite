@@ -1,6 +1,6 @@
 # Sonic Generations Configuration Tool (Rewrite)
 
-Rewriting Sonic Generations' Configuration Tool because why not.
+Rewriting Sonic Generations' Configuration Tool using WPF as a way to teach myself how to use it.
 
 Current features:
 
