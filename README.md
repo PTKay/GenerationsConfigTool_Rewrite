@@ -1,4 +1,4 @@
-# GenerationsConfigTool_Rewrite
+# Sonic Generations Configuration Tool (Rewrite)
 
 Rewriting Sonic Generations' Configuration Tool because why not.
 
