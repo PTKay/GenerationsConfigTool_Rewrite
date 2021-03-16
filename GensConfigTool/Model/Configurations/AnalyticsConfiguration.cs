@@ -31,7 +31,7 @@ namespace ConfigurationTool.Model.Configurations
         {
             using (StreamWriter writer = new StreamWriter(ConfigLocation))
             {
-                writer.WriteLine(config.Analytics);
+                writer.WriteLine((int)config.Analytics);
             }
         }
     }

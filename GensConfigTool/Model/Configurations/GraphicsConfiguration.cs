@@ -72,11 +72,11 @@ namespace ConfigurationTool.Model.Configurations
                 writer.WriteLine(config.GraphicsAdapter.Name);
                 Resolution res = config.Resolution;
                 writer.WriteLine($"{res.Width}.{res.Height}.{res.Frequency}");
-                writer.WriteLine(config.Antialiasing);
-                writer.WriteLine(config.VSync);
-                writer.WriteLine(config.ShadowQuality);
-                writer.WriteLine(config.ReflectionQuality);
-                writer.WriteLine(config.DisplayMode);
+                writer.WriteLine((int)config.Antialiasing);
+                writer.WriteLine((int)config.VSync);
+                writer.WriteLine((int)config.ShadowQuality);
+                writer.WriteLine((int)config.ReflectionQuality);
+                writer.WriteLine((int)config.DisplayMode);
                 writer.WriteLine(config.GraphicsAdapter.GUID);
                 writer.WriteLine(""); // Skip unused monitor line
                 writer.WriteLine(config.DepthFormat.GetFourCC());
