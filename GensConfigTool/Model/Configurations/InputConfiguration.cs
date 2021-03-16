@@ -11,11 +11,12 @@ namespace ConfigurationTool.Model.Configurations
         public Configuration LoadConfiguration(Configuration config)
         {
             if (config == null) config = new Configuration();
+            string path = $"{config.InputSaveLocation}\\{ConfigLocation}";
 
-            if (!File.Exists($"{config.InputSaveLocation}\\{ConfigLocation}")) return config;
+            if (!File.Exists(path)) return config;
             try
             {
-                using (StreamReader sr = new StreamReader(new BufferedStream(File.Open($"{config.InputSaveLocation}\\{ConfigLocation}", FileMode.Open))))
+                using (StreamReader sr = new StreamReader(new BufferedStream(File.Open(path, FileMode.Open))))
                 {
                     string name = sr.ReadLine();
                     string serialized = sr.ReadLine();
@@ -31,7 +32,10 @@ namespace ConfigurationTool.Model.Configurations
 
         public void SaveConfiguration(Configuration config)
         {
-            using (StreamWriter writer = new StreamWriter($"{config.InputSaveLocation}\\{ConfigLocation}"))
+            string path = $"{config.InputSaveLocation}\\{ConfigLocation}";
+
+            Directory.CreateDirectory(config.InputSaveLocation);
+            using (StreamWriter writer = new StreamWriter(File.Create(path)))
             {
                 writer.Write(config.Keyboard.Serialize());
             }

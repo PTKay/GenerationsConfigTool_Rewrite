@@ -23,7 +23,7 @@ namespace ConfigurationTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly FileHandler Files;
+        private readonly ConfigurationHandler Files;
 
         private readonly Configuration Configuration;
         private bool isInitialized = false;
@@ -31,7 +31,7 @@ namespace ConfigurationTool
         public MainWindow()
         {
             InitializeComponent();
-            this.Files = new FileHandler();
+            this.Files = new ConfigurationHandler();
             this.Configuration = Files.LoadConfiguration();
 
             // Get Graphics Adapters
@@ -41,12 +41,11 @@ namespace ConfigurationTool
 
             // Get Audio Devices
             this.AudioSelector.ItemsSource = DevicesHandler.GetAudioDevices();
-            this.AudioSelector.SelectedIndex = 0;
 
             this.FxaaSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
             this.VSyncSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
 
-            this.DispModeSelector.ItemsSource = Enum.GetValues(typeof(DisplayMode));
+            this.DispModeSelector.ItemsSource = EnumOrder<DisplayMode>.Values;
 
             this.ShadowSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
             this.ReflectionSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
@@ -84,21 +83,11 @@ namespace ConfigurationTool
             this.ShadowSelector.SelectedItem = this.Configuration.ShadowQuality;
             this.ReflectionSelector.SelectedItem = this.Configuration.ReflectionQuality;
 
-            // Since we don't support audio device detection, we're gonna check if we have the configured device
             int idx = this.AudioSelector.Items.IndexOf(this.Configuration.AudioDevice);
-            if (idx < 0)
-                this.AudioSelector.SelectedIndex = 0;
-            else
-                this.AudioSelector.SelectedIndex = idx;
+            this.AudioSelector.SelectedIndex = idx < 0 ? 0 : idx;
 
-            if (this.Configuration.Analytics == OnOff.On)
-            {
-                this.Analytics_Enabled.IsChecked = true;
-            }
-            else
-            {
-                this.Analytics_Disabled.IsChecked = true;
-            }
+            this.Analytics_Enabled.IsChecked = this.Configuration.Analytics == OnOff.On;
+
             this.LanguageSelector.SelectedItem = Configuration.Language;
 
             if (Configuration.ProcessIsElevated)
@@ -161,6 +150,38 @@ namespace ConfigurationTool
 
             this.Button_Start.Content = ((Key)this.Configuration.Keyboard.Buttons.Start).ToString();
             this.Button_Back.Content = ((Key)this.Configuration.Keyboard.Buttons.Back).ToString();
+        }
+
+        private async Task UpdateKeyboardKey(Button src)
+        {
+            int key = -1;
+
+            await Task.Run(() =>
+            {
+                SpinWait.SpinUntil(() =>
+                {
+                    key = this.Configuration.Keyboard.GetKey();
+                    return key != 0 && key != (int)Key.LeftWindowsKey && key != (int)Key.RightWindowsKey;
+                });
+            });
+
+            this.ParentGrid.IsEnabled = true;
+            if (key != -1)
+            {
+                FieldInfo targetProperty = null;
+                FieldInfo[] props = typeof(ButtonConfiguration).GetFields();
+
+                for (int i = 0; i < props.Length; ++i)
+                {
+                    if (props[i].Name.Equals(src.Tag.ToString()))
+                    {
+                        targetProperty = props[i];
+                        break;
+                    }
+                }
+                targetProperty?.SetValue(this.Configuration.Keyboard.Buttons, key);
+                src.Content = ((Key)key).ToString();
+            }
         }
 
         private void UI_Save_Click(object sender, RoutedEventArgs e)
@@ -327,38 +348,6 @@ namespace ConfigurationTool
             else
             {
                 this.InputButtons.IsEnabled = true;
-            }
-        }
-
-        private async Task UpdateKeyboardKey(Button src)
-        {
-            int key = -1;
-
-            await Task.Run(() =>
-            {
-                SpinWait.SpinUntil(() =>
-                {
-                    key = this.Configuration.Keyboard.GetKey();
-                    return key != 0 && key != (int)Key.LeftWindowsKey && key != (int)Key.RightWindowsKey;
-                });
-            });
-
-            this.ParentGrid.IsEnabled = true;
-            if (key != -1)
-            {
-                FieldInfo targetProperty = null;
-                FieldInfo[] props = typeof(ButtonConfiguration).GetFields();
-
-                for (int i = 0; i < props.Length; ++i)
-                {
-                    if (props[i].Name.Equals(src.Tag.ToString()))
-                    {
-                        targetProperty = props[i];
-                        break;
-                    }
-                }
-                targetProperty?.SetValue(this.Configuration.Keyboard.Buttons, key);
-                src.Content = ((Key)key).ToString();
             }
         }
 

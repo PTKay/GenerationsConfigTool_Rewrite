@@ -17,7 +17,7 @@
         public override bool Equals(object obj)
         {
             AudioDevice dev = (AudioDevice)obj;
-            return Name.Equals(dev.Name) && GUID.Equals(dev.GUID);
+            return GUID.Equals(dev.GUID);
         }
     }
 }

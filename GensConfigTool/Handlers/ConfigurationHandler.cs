@@ -1,10 +1,9 @@
 ﻿using ConfigurationTool.Model;
 using ConfigurationTool.Model.Configurations;
-using System;
 
 namespace ConfigurationTool.Handlers
 {
-    class FileHandler
+    class ConfigurationHandler
     {
         private readonly IConfiguration RegistryConfiguration;
         private readonly IConfiguration GraphicsConfiguration;
@@ -12,7 +11,7 @@ namespace ConfigurationTool.Handlers
         private readonly IConfiguration AnalyticsConfiguration;
         private readonly IConfiguration InputConfiguration;
 
-        public FileHandler()
+        public ConfigurationHandler()
         {
             RegistryConfiguration = new RegistryConfiguration();
             GraphicsConfiguration = new GraphicsConfiguration();
@@ -44,7 +43,7 @@ namespace ConfigurationTool.Handlers
                 AnalyticsConfiguration.SaveConfiguration(config);
                 InputConfiguration.SaveConfiguration(config);
             }
-            catch (Exception e)
+            catch
             {
                 return false;
             }

@@ -43,7 +43,6 @@ namespace ConfigurationTool.Handlers
 
         public static IEnumerable<AudioDevice> GetAudioDevices()
         {
-
             List<AudioDevice> toReturn = new List<AudioDevice>
             {
                 new AudioDevice(),
@@ -55,11 +54,17 @@ namespace ConfigurationTool.Handlers
             };
             foreach (DeviceInformation device in DirectSound.GetDevices())
             {
-                toReturn.Add(new AudioDevice()
+                AudioDevice toAdd = new AudioDevice()
                 {
                     Name = device.Description,
                     GUID = device.DriverGuid.ToString()
-                });
+                };
+
+                // Ignore repeated devices (will also skip default output due to having the same GUID as None)
+                if (!toReturn.Contains(toAdd))
+                {
+                    toReturn.Add(toAdd);
+                }
             }
             return toReturn;
         }
