@@ -12,7 +12,7 @@ Current features:
 - Includes settings descriptions and images to better visualize the impact of each one
 - Removes the need for DefaultInput.cfg in the game's directory
 - Ability to map keys that couldn't be mapped in the original config tool (e.g. TAB, Shift, CTRL...)
+- Proper Nvidia Optimus support, so the config tool will always detect your high performance Nvidia GPU
 
 Current drawbacks:
-- Still no proper Nvidia Optimus support, just like the original configuration tool
 - No Dinput devices support, but since Sonic Generations doesn't properly support Dinput to begin with, it shouldn't matter that much
