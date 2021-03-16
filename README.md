@@ -9,6 +9,7 @@ Current features:
 - Supports proper scaling
 - Includes settings descriptions and images to better visualize the impact of each one
 - Removes the need for DefaultInput.cfg in the game's directory
+- Ability to map keys that couldn't be mapped in the original config tool (e.g. TAB)
 
 Current drawbacks:
 - Still no proper Nvidia Optimus support, just like the original configuration tool
