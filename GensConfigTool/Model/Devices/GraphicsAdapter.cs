@@ -22,5 +22,10 @@ namespace ConfigurationTool.Model.Devices
                 GUID.Equals(adapter.GUID) &&
                 Index == adapter.Index;
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Description, Name, GUID, Index);
+        }
     }
 }

@@ -19,5 +19,10 @@
             AudioDevice dev = (AudioDevice)obj;
             return GUID.Equals(dev.GUID);
         }
+
+        public override int GetHashCode()
+        {
+            return GUID.GetHashCode();
+        }
     }
 }

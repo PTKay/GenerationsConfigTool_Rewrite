@@ -28,6 +28,7 @@ namespace ConfigurationTool.Settings.Model
 
             return this.Width.CompareTo(other.Width);
         }
+        public override string ToString() => $"{Width} x {Height} ({Frequency} hz)";
 
         public override bool Equals(object obj)
         {
@@ -36,6 +37,9 @@ namespace ConfigurationTool.Settings.Model
             return Width == res.Width && Height == res.Height && Frequency == res.Frequency;
         }
 
-        public override string ToString() => $"{Width} x {Height} ({Frequency} hz)";
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Width, Height, Frequency);
+        }
     }
 }

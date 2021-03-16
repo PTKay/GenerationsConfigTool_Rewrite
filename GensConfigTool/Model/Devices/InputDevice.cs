@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConfigurationTool.Model.Devices
 {
-    public enum DeviceType
-    {
-        XINPUT, DINPUT, KEYBOARD
-    }
+    public enum DeviceType { XINPUT, DINPUT, KEYBOARD }
 
     abstract class InputDevice
     {
@@ -24,25 +21,12 @@ namespace ConfigurationTool.Model.Devices
         public int Deadzone = 0;
 
         protected abstract int[] InvalidKeyCodes { get; }
+        protected abstract int GetCurrentKey();
 
         public string Serialize()
         {
             return $"{Name}\n$G:{GUID}$B:{Buttons}$A:{AxisMap}$D:{Deadzone}$";
         }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        public override bool Equals(object obj)
-        {
-            InputDevice device = (InputDevice)obj;
-
-            return GUID.Equals(device.GUID);
-        }
-
-        protected abstract int GetCurrentKey();
 
         public async Task SetKey(string keyName, InputDevice targetDevice, Action<int> keyConsumer)
         {
@@ -76,6 +60,22 @@ namespace ConfigurationTool.Model.Devices
             }
 
             keyConsumer(key);
+        }
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            InputDevice device = (InputDevice)obj;
+
+            return GUID.Equals(device.GUID);
+        }
+
+        public override int GetHashCode()
+        {
+            return GUID.GetHashCode();
         }
     }
 }

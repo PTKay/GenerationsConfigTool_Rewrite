@@ -46,5 +46,10 @@ namespace ConfigurationTool.Settings.Model
             DepthFormat df = (DepthFormat)obj;
             return Value.Equals(df.Value);
         }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
     }
 }
