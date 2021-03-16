@@ -27,22 +27,22 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="19*" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="19*" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="19*" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="19*" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="19*" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="19*" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="19*" />
                                 <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="13*" />
+                                <RowDefinition Height="19*" />
                             </Grid.RowDefinitions>
 
                             <!-- Options -->
@@ -140,7 +140,7 @@
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                
+
                                 <TextBlock Grid.Row="0" Text="{StaticResource ControllerInfo}" Opacity="0.5" HorizontalAlignment="Center"/>
                                 <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
                             </Grid>
@@ -154,7 +154,7 @@
                                 <TextBlock Grid.Column="0" Text="{StaticResource InputDevice}" VerticalAlignment="Center" />
                                 <ComboBox Grid.Column="1" Margin="10 0 0 0" x:Name="InputSelector" VerticalContentAlignment="Center" SelectionChanged="InputSelector_SelectionChanged" />
                             </Grid>
-                             </Grid>
+                        </Grid>
 
                         <Grid Grid.Row="1" x:Name="InputButtons">
                             <Grid.ColumnDefinitions>

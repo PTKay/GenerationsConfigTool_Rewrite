@@ -208,13 +208,6 @@ namespace ConfigurationTool
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Misc.png", UriKind.Relative));
         }
 
-        private void DepthSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-
-            this.Tooltip.Text = Application.Current.TryFindResource("DepthFormat_Desc").ToString();
-            this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Misc.png", UriKind.Relative));
-        }
-
         private void AnalyticsButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(
@@ -280,13 +273,6 @@ namespace ConfigurationTool
             if (!isInitialized) return;
 
             this.Configuration.AudioDevice = (AudioDevice)e.AddedItems[0];
-        }
-
-        private void DepthSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (!isInitialized) return;
-
-            this.Configuration.DepthFormat = (DepthFormat)e.AddedItems[0];
         }
 
         private void Analytics_Enabled_Click(object sender, RoutedEventArgs e)

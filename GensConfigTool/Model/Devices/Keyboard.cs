@@ -13,7 +13,7 @@ namespace ConfigurationTool.Model.Devices
         private string _guid = "00000001-0000-0000-0000-000000000000";
         public override string GUID { get => _guid; set => _guid = value; }
 
-        SharpDX.DirectInput.Keyboard keyboard = new SharpDX.DirectInput.Keyboard(new DirectInput());
+        readonly SharpDX.DirectInput.Keyboard keyboard = new SharpDX.DirectInput.Keyboard(new DirectInput());
 
         public override int GetKey()
         {

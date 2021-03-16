@@ -53,7 +53,7 @@ namespace ConfigurationTool.Handlers
                     GUID = "00000000-0000-0000-0000-000000000000"
                 }
             };
-            foreach(DeviceInformation device in DirectSound.GetDevices())
+            foreach (DeviceInformation device in DirectSound.GetDevices())
             {
                 toReturn.Add(new AudioDevice()
                 {

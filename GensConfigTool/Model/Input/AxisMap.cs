@@ -2,10 +2,10 @@
 {
     class AxisMap
     {
-        int Unknown0 = 0;
-        int Unknown1 = 0;
-        int Unknown2 = 0;
-        int Unknown3 = 0;
+        readonly int Unknown0 = 0;
+        readonly int Unknown1 = 0;
+        readonly int Unknown2 = 0;
+        readonly int Unknown3 = 0;
 
         public override string ToString()
         {
