@@ -5,16 +5,16 @@ namespace ConfigurationTool.Model.Configurations
 {
     class AudioConfiguration : IConfiguration
     {
-        public string ConfigFile => "AudioConfig.cfg";
+        public string ConfigLocation => "AudioConfig.cfg";
 
         public Configuration LoadConfiguration(Configuration config)
         {
             if (config == null) config = new Configuration();
 
-            if (!File.Exists(ConfigFile)) return config;
+            if (!File.Exists(ConfigLocation)) return config;
             try
             {
-                using (StreamReader sr = new StreamReader(new BufferedStream(File.Open(ConfigFile, FileMode.Open))))
+                using (StreamReader sr = new StreamReader(new BufferedStream(File.Open(ConfigLocation, FileMode.Open))))
                 {
                     string name = sr.ReadLine();
                     string guid = sr.ReadLine();
@@ -35,7 +35,7 @@ namespace ConfigurationTool.Model.Configurations
         public void SaveConfiguration(Configuration config)
         {
 
-            using (StreamWriter writer = new StreamWriter(ConfigFile))
+            using (StreamWriter writer = new StreamWriter(ConfigLocation))
             {
                 writer.WriteLine(config.AudioDevice.Name);
                 writer.WriteLine(config.AudioDevice.GUID);

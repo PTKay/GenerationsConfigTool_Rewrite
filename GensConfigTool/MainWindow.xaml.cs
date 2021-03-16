@@ -1,14 +1,19 @@
 ﻿using ConfigurationTool.Handlers;
+using ConfigurationTool.Helpers;
 using ConfigurationTool.Model;
 using ConfigurationTool.Model.Devices;
+using ConfigurationTool.Model.Input;
+using ConfigurationTool.Model.Settings;
 using ConfigurationTool.Settings.Model;
 using SharpDX.DirectInput;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace ConfigurationTool
@@ -26,7 +31,7 @@ namespace ConfigurationTool
         public MainWindow()
         {
             InitializeComponent();
-            this.Files = new FileHandler(RegistryHandler.LoadInputLocation());
+            this.Files = new FileHandler();
             this.Configuration = Files.LoadConfiguration();
 
             // Get Graphics Adapters
@@ -38,13 +43,15 @@ namespace ConfigurationTool
             this.AudioSelector.ItemsSource = DevicesHandler.GetAudioDevices();
             this.AudioSelector.SelectedIndex = 0;
 
-            this.FxaaSelector.ItemsSource = OnOff.GetAll();
-            this.VSyncSelector.ItemsSource = OnOff.GetAll();
+            this.FxaaSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
+            this.VSyncSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
 
-            this.DispModeSelector.ItemsSource = DisplayMode.GetAll();
+            this.DispModeSelector.ItemsSource = Enum.GetValues(typeof(DisplayMode));
 
-            this.ShadowSelector.ItemsSource = HighLow.GetAll();
-            this.ReflectionSelector.ItemsSource = HighLow.GetAll();
+            this.ShadowSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
+            this.ReflectionSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
+
+            this.LanguageSelector.ItemsSource = EnumOrder<Language>.Values;
 
             this.InputSelector.Items.Add(this.Configuration.Keyboard);
             bool observed = this.Configuration.XinputController.IsConnected;
@@ -84,7 +91,7 @@ namespace ConfigurationTool
             else
                 this.AudioSelector.SelectedIndex = idx;
 
-            if (this.Configuration.Analytics.isOn)
+            if (this.Configuration.Analytics == OnOff.On)
             {
                 this.Analytics_Enabled.IsChecked = true;
             }
@@ -92,6 +99,21 @@ namespace ConfigurationTool
             {
                 this.Analytics_Disabled.IsChecked = true;
             }
+            this.LanguageSelector.SelectedItem = Configuration.Language;
+
+            if (Configuration.ProcessIsElevated)
+            {
+                this.LanguageLabel.Opacity = 1;
+                this.AdminButton.Visibility = Configuration.ProcessIsElevated ? Visibility.Collapsed : Visibility.Visible;
+                this.AdminButtonCol.Width = GridLength.Auto;
+            }
+            else 
+            {
+                this.LanguageSelector.Foreground = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0));
+                this.LanguageSelector.IsEnabled = false;
+                this.AdminButtonImage.Source = UacHelper.GetUacIcon();
+            }
+
             isInitialized = true;
 
             // Fill the Input buttons
@@ -153,6 +175,7 @@ namespace ConfigurationTool
         }
 
         private void UI_Quit_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
+        private void AdminButton_Click(object sender, RoutedEventArgs e) => UacHelper.RestartAsAdmin();
 
         private void GPUSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -163,7 +186,6 @@ namespace ConfigurationTool
         private void ResSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             this.Tooltip.Text = Application.Current.TryFindResource("Resolution_Desc").ToString();
-
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Res.png", UriKind.Relative));
         }
 
@@ -175,36 +197,37 @@ namespace ConfigurationTool
 
         private void DispModeSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-
             this.Tooltip.Text = Application.Current.TryFindResource("DisplayMode_Desc").ToString();
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Display.png", UriKind.Relative));
         }
 
         private void ShadowSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-
             this.Tooltip.Text = Application.Current.TryFindResource("ShadowQuality_Desc").ToString();
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Shadows.png", UriKind.Relative));
         }
 
         private void ReflectionSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-
             this.Tooltip.Text = Application.Current.TryFindResource("ReflectionQuality_Desc").ToString();
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Misc.png", UriKind.Relative));
         }
 
         private void VSyncSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-
             this.Tooltip.Text = Application.Current.TryFindResource("VSync_Desc").ToString();
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/VSync.png", UriKind.Relative));
         }
 
         private void AudioSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-
             this.Tooltip.Text = Application.Current.TryFindResource("AudioDevice_Desc").ToString();
+            this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Misc.png", UriKind.Relative));
+        }
+
+        private void LanguageSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.Tooltip.Text = Application.Current.TryFindResource("Language_Desc").ToString();
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Misc.png", UriKind.Relative));
         }
 
@@ -219,7 +242,6 @@ namespace ConfigurationTool
         {
             if (!isInitialized) return;
 
-            // Used to keep the resolutions when they're not passed
             GraphicsAdapter adapter = (GraphicsAdapter)e.AddedItems[0];
             this.Configuration.GraphicsAdapter = adapter;
             this.ResSelector.ItemsSource = adapter.Resolutions;
@@ -284,9 +306,16 @@ namespace ConfigurationTool
 
         private void Analytics_Disabled_Click(object sender, RoutedEventArgs e)
         {
-            if (!isInitialized) return;
+            
 
             this.Configuration.Analytics = OnOff.Off;
+        }
+
+        private void LanguageSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!isInitialized) return;
+
+            this.Configuration.Language = (Language)e.AddedItems[0];
         }
 
         private void InputSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -301,10 +330,8 @@ namespace ConfigurationTool
             }
         }
 
-        private async Task GetKeyboardKey(Action<int> toUpdate)
+        private async Task UpdateKeyboardKey(Button src)
         {
-            this.ParentGrid.IsEnabled = false;
-
             int key = -1;
 
             await Task.Run(() =>
@@ -317,133 +344,30 @@ namespace ConfigurationTool
             });
 
             this.ParentGrid.IsEnabled = true;
-            if (key != -1) toUpdate(key);
+            if (key != -1)
+            {
+                FieldInfo targetProperty = null;
+                FieldInfo[] props = typeof(ButtonConfiguration).GetFields();
+
+                for (int i = 0; i < props.Length; ++i)
+                {
+                    if (props[i].Name.Equals(src.Tag.ToString()))
+                    {
+                        targetProperty = props[i];
+                        break;
+                    }
+                }
+                targetProperty?.SetValue(this.Configuration.Keyboard.Buttons, key);
+                src.Content = ((Key)key).ToString();
+            }
         }
 
-        private void Button_A_Click(object sender, RoutedEventArgs e)
+        private void InputButton_Click(object sender, RoutedEventArgs e)
         {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.A = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
+            this.ParentGrid.IsEnabled = false;
+            Button src = ((Button)e.Source);
 
-        private void Button_B_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.B = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_X_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.X = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_Y_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.Y = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_RB_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.RB = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_LB_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.LB = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_RT_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.RT = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_LT_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.LT = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_Up_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.Up = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_Right_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.Right = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_Down_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.Down = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_Left_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.Left = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_Start_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.Start = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
-        }
-
-        private void Button_Back_Click(object sender, RoutedEventArgs e)
-        {
-            GetKeyboardKey(key =>
-            {
-                this.Configuration.Keyboard.Buttons.Back = key;
-                ((Button)e.Source).Content = ((Key)key).ToString();
-            });
+            UpdateKeyboardKey(src);
         }
 
         private void ButtonDefault_Click(object sender, RoutedEventArgs e)

@@ -12,7 +12,7 @@ namespace ConfigurationTool.Model.Devices
         public int Index { get; set; }
         public List<Resolution> Resolutions = new List<Resolution>();
 
-        public override String ToString() => $"{Description} (Display {Index})";
+        public override String ToString() => $"{Description} (Display {Index + 1})";
 
         public override bool Equals(object obj)
         {

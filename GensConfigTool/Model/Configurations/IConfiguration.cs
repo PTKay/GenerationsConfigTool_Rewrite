@@ -3,7 +3,7 @@
     // Should be able to save and load configurations from a set place
     interface IConfiguration
     {
-        string ConfigFile { get; }
+        string ConfigLocation { get; }
         public Configuration LoadConfiguration(Configuration config);
         public void SaveConfiguration(Configuration config);
     }

@@ -5,16 +5,16 @@ namespace ConfigurationTool.Model.Configurations
 {
     class AnalyticsConfiguration : IConfiguration
     {
-        public string ConfigFile => "StatsConfig.cfg";
+        public string ConfigLocation => "StatsConfig.cfg";
 
         public Configuration LoadConfiguration(Configuration config)
         {
             if (config == null) config = new Configuration();
 
-            if (!File.Exists(ConfigFile)) return config;
+            if (!File.Exists(ConfigLocation)) return config;
             try
             {
-                using (StreamReader sr = new StreamReader(new BufferedStream(File.Open(ConfigFile, FileMode.Open))))
+                using (StreamReader sr = new StreamReader(new BufferedStream(File.Open(ConfigLocation, FileMode.Open))))
                 {
                     int value = int.Parse(sr.ReadLine());
                     config.Analytics = value > 0 ? OnOff.On : OnOff.Off;
@@ -29,9 +29,9 @@ namespace ConfigurationTool.Model.Configurations
 
         public void SaveConfiguration(Configuration config)
         {
-            using (StreamWriter writer = new StreamWriter(ConfigFile))
+            using (StreamWriter writer = new StreamWriter(ConfigLocation))
             {
-                writer.WriteLine(config.Analytics.isOn ? 1 : 0);
+                writer.WriteLine(config.Analytics);
             }
         }
     }

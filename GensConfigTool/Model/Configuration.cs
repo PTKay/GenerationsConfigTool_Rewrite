@@ -1,5 +1,7 @@
 ﻿using ConfigurationTool.Model.Devices;
+using ConfigurationTool.Model.Settings;
 using ConfigurationTool.Settings.Model;
+using System.Security.Principal;
 
 namespace ConfigurationTool.Model
 {
@@ -20,6 +22,19 @@ namespace ConfigurationTool.Model
         public HighLow ShadowQuality = HighLow.High;
         public HighLow ReflectionQuality = HighLow.High;
 
-        public DisplayMode DisplayMode = DisplayMode.Letterbox;
+        public DisplayMode DisplayMode = DisplayMode.Letterboxed;
+
+        public bool ProcessIsElevated
+        {
+            get
+            {
+                return WindowsIdentity.GetCurrent().Owner
+                    .IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid);
+            }
+        }
+
+        public Language Language = Language.English;
+        // Relative to user Documents folder
+        public string InputSaveLocation = "My Games\\Sonic Generations\\Saved Games";
     }
 }

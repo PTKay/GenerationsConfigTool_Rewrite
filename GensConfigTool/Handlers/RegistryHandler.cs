@@ -1,121 +1,37 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows;
+﻿using ConfigurationTool.Model;
+using ConfigurationTool.Model.Configurations;
+using ConfigurationTool.Model.Settings;
+using Microsoft.Win32;
 
 namespace ConfigurationTool.Handlers
 {
     class RegistryHandler
     {
-        // English, French, German, Italian, Spanish and Japanese
-        public static readonly HashSet<string> VALID_LOCALES = new HashSet<string>() { "1033", "1036", "1031", "1040", "3082", "0411" };
-
-        // English
-        public const int DEFAULT_LOCALE = 1033;
-        public static string DEFAULT_SAVELOCATION = "My Games\\Sonic Generations\\Saved Games";
-
-        public static string REGDATA_DIR = "SOFTWARE\\Sega\\Sonic Generations";
-
-        // The game boots fine without the install path and exe path
-        public const string REGDATA_INSTALLPATH = "install_path";
-        public const string REGDATA_EXEPATH = "exe_path";
-        public const string REGDATA_LOCALE = "locale";
-        public const string REGDATA_SAVELOCATION = "savelocation";
-
-        public static string LoadInputLocation()
-        {
-            // This actually does registry data checking besides just getting the input location
-
-            int fixRegistry = 0;
-
-            // Load Registry
-            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(REGDATA_DIR);
-            if (registryKey == null)
-            {
-                fixRegistry = -1;
-                registryKey = Registry.LocalMachine.OpenSubKey(REGDATA_DIR);
-            }
-
-            // Load Locale
-            object locale = registryKey?.GetValue(REGDATA_LOCALE);
-            if (locale != null)
-            {
-                string regLocale = locale.ToString();
-                if (VALID_LOCALES.Contains(regLocale)) LocaleID = int.Parse(regLocale);
-                else LocaleID = DEFAULT_LOCALE;
-            }
-            else
-            {
-                if (fixRegistry >= 0) fixRegistry = 1;
-                LocaleID = DEFAULT_LOCALE;
-            }
-
-            // Load Input Save Location
-            object saveLocation = registryKey?.GetValue(REGDATA_SAVELOCATION);
-            if (saveLocation == null)
-            {
-                if (fixRegistry >= 0) fixRegistry = 2;
-                saveLocation = DEFAULT_SAVELOCATION;
-            }
-            registryKey?.Close();
-            PromptToFix(fixRegistry);
-
-            return $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\{saveLocation}";
-        }
-
-        private static void PromptToFix(int fixType)
-        {
-            if (fixType != 0)
-            {
-                if (MessageBox.Show(Application.Current.TryFindResource("RegError").ToString(),
-                    Application.Current.TryFindResource("RegError_Title").ToString(),
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                {
-                    var psi = new ProcessStartInfo
-                    {
-                        UseShellExecute = true,
-                        FileName = Process.GetCurrentProcess().MainModule.FileName,
-                        Arguments = fixType.ToString(),
-                        Verb = "runas"
-                    };
-
-                    var process = new Process
-                    {
-                        StartInfo = psi
-                    };
-                    process.Start();
-                    process.WaitForExit();
-                }
-            }
-        }
-
         public static void FixRegistry(int fixtype)
         {
+            RegistryConfiguration reg = new RegistryConfiguration();
+            Configuration config = new Configuration();
+
             RegistryKey registryKey = null;
             bool fixAll = false;
 
             switch (fixtype)
             {
                 case -1:
-                    registryKey = Registry.LocalMachine.CreateSubKey(REGDATA_DIR);
+                    registryKey = Registry.LocalMachine.CreateSubKey(reg.ConfigLocation);
                     fixAll = true;
                     goto case 1;
                 case 1:
-                    registryKey ??= Registry.LocalMachine.OpenSubKey(REGDATA_DIR, true);
-                    registryKey.SetValue(REGDATA_LOCALE, DEFAULT_LOCALE.ToString());
+                    registryKey ??= Registry.LocalMachine.OpenSubKey(reg.ConfigLocation, true);
+                    registryKey.SetValue(RegistryConfiguration.REGDATA_LOCALE, ((int)Language.English).ToString());
                     if (fixAll) goto case 2;
                     break;
                 case 2:
-                    registryKey ??= Registry.LocalMachine.OpenSubKey(REGDATA_DIR, true);
-                    registryKey.SetValue(REGDATA_SAVELOCATION, DEFAULT_SAVELOCATION);
+                    registryKey ??= Registry.LocalMachine.OpenSubKey(reg.ConfigLocation, true);
+                    registryKey.SetValue(RegistryConfiguration.REGDATA_SAVELOCATION, config.InputSaveLocation);
                     break;
             }
             registryKey?.Close();
         }
-
-        // I swear this has no use, but the game cares about it
-        public static int LocaleID { get; set; }
     }
 }

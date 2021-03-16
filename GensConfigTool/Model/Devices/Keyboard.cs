@@ -17,6 +17,7 @@ namespace ConfigurationTool.Model.Devices
 
         public override int GetKey()
         {
+
             keyboard.Acquire();
             List<Key> keys = keyboard.GetCurrentState().PressedKeys;
             return keys.Count > 0 ? (int)keys[0] : 0;

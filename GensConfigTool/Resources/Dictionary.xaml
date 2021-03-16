@@ -10,8 +10,9 @@
     <system:String x:Key="Description">Description</system:String>
     <system:String x:Key="DefaultTooltip">Hover the cursor over an option to better understand its purpose</system:String>
 
-    <system:String x:Key="Audio">Audio</system:String>
     <system:String x:Key="Graphics">Graphics</system:String>
+    <system:String x:Key="Audio">Audio</system:String>
+    <system:String x:Key="Other">Other</system:String>
 
     <system:String x:Key="On">On</system:String>
     <system:String x:Key="Off">Off</system:String>
@@ -47,6 +48,7 @@ IncludeApp was discontinued, so no data is currently being sent, although the da
     <system:String x:Key="ReflectionQuality">Reflection Quality</system:String>
     <system:String x:Key="VSync">V-Sync</system:String>
     <system:String x:Key="AudioDevice">Audio Device</system:String>
+    <system:String x:Key="Language">Language</system:String>
 
     <system:String x:Key="GraphicsAdapter_Desc">Controls which graphics device and display to use to render the game</system:String>
     <system:String x:Key="Resolution_Desc">Sets the render resolution of the game</system:String>
@@ -56,7 +58,8 @@ IncludeApp was discontinued, so no data is currently being sent, although the da
     <system:String x:Key="ReflectionQuality_Desc">Controls the resolution of the game's reflections</system:String>
     <system:String x:Key="VSync_Desc">Locks the framerate at your display's refresh rate, eliminating screen tearing. Can increase input latency</system:String>
     <system:String x:Key="AudioDevice_Desc">Selects which audio device to use while in-game</system:String>
-
+    <system:String x:Key="Language_Desc">Sets the in-game language</system:String>
+    
     <system:String x:Key="RegError">The configuration tool detected an invalid registry configuration. Would you like to fix the registry? Pressing No may result in the game being unable to boot</system:String>
     <system:String x:Key="RegError_Title">Registry Error</system:String>
 

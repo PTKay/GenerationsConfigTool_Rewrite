@@ -9,16 +9,16 @@ namespace ConfigurationTool.Model.Configurations
     class GraphicsConfiguration : IConfiguration
     {
         private string FileWarning => Application.Current.TryFindResource("GraphicsFile_Warning").ToString();
-        public string ConfigFile => "GraphicsConfig.cfg";
+        public string ConfigLocation => "GraphicsConfig.cfg";
 
         public Configuration LoadConfiguration(Configuration config)
         {
             if (config == null) config = new Configuration();
 
-            if (!File.Exists(ConfigFile)) return config;
+            if (!File.Exists(ConfigLocation)) return config;
             try
             {
-                using (StreamReader sr = new StreamReader(new BufferedStream(File.Open(ConfigFile, FileMode.Open))))
+                using (StreamReader sr = new StreamReader(new BufferedStream(File.Open(ConfigLocation, FileMode.Open))))
                 {
                     sr.ReadLine(); // Skip warning line
                     string adapterDesc = sr.ReadLine();
@@ -42,7 +42,7 @@ namespace ConfigurationTool.Model.Configurations
                     config.ShadowQuality = int.Parse(sr.ReadLine()) > 0 ? HighLow.High : HighLow.Low;
                     config.ReflectionQuality = int.Parse(sr.ReadLine()) > 0 ? HighLow.High : HighLow.Low;
 
-                    config.DisplayMode = int.Parse(sr.ReadLine()) > 0 ? DisplayMode.Letterbox : DisplayMode.Widescreen;
+                    config.DisplayMode = int.Parse(sr.ReadLine()) > 0 ? DisplayMode.Letterboxed : DisplayMode.Widescreen;
 
                     config.GraphicsAdapter = new GraphicsAdapter()
                     {
@@ -65,18 +65,18 @@ namespace ConfigurationTool.Model.Configurations
         public void SaveConfiguration(Configuration config)
         {
 
-            using (StreamWriter writer = new StreamWriter(ConfigFile))
+            using (StreamWriter writer = new StreamWriter(ConfigLocation))
             {
                 writer.WriteLine(FileWarning);
                 writer.WriteLine(config.GraphicsAdapter.Description);
                 writer.WriteLine(config.GraphicsAdapter.Name);
                 Resolution res = config.Resolution;
                 writer.WriteLine($"{res.Width}.{res.Height}.{res.Frequency}");
-                writer.WriteLine(config.Antialiasing.isOn ? 1 : 0);
-                writer.WriteLine(config.VSync.isOn ? 1 : 0);
-                writer.WriteLine(config.ShadowQuality == HighLow.High ? 1 : 0);
-                writer.WriteLine(config.ReflectionQuality == HighLow.High ? 1 : 0);
-                writer.WriteLine(config.DisplayMode == DisplayMode.Letterbox ? 1 : 0);
+                writer.WriteLine(config.Antialiasing);
+                writer.WriteLine(config.VSync);
+                writer.WriteLine(config.ShadowQuality);
+                writer.WriteLine(config.ReflectionQuality);
+                writer.WriteLine(config.DisplayMode);
                 writer.WriteLine(config.GraphicsAdapter.GUID);
                 writer.WriteLine(""); // Skip unused monitor line
                 writer.WriteLine(config.DepthFormat.GetFourCC());
