@@ -16,3 +16,6 @@ Current features:
 
 Current drawbacks:
 - No Dinput devices support, but since Sonic Generations doesn't properly support Dinput devices to begin with, it shouldn't matter that much
+
+![Main Configuration](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/master/Images/Config.png)
+![Input Configuration](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/master/Images/InputConfig.png)
