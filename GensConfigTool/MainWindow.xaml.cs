@@ -251,7 +251,7 @@ namespace ConfigurationTool
             this.ResSelector.ItemsSource = adapter.Resolutions;
             
             IgnoreSelectionTriggers = false;
-            this.ResSelector.SelectedIndex = 0;
+            this.ResSelector.SelectedItem = adapter.Resolutions[0];
         }
 
         private void ResSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
