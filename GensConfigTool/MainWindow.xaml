@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="{StaticResource Title}" MinHeight="700" MinWidth="1000" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="{StaticResource Title}" MinHeight="650" MinWidth="1000" Height="650" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Border Padding="10">
 
@@ -43,9 +43,6 @@
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
                             <!-- Options -->
@@ -79,12 +76,6 @@
 
                             <TextBlock Grid.Row="16" Margin="0 10 0 0" Text="{StaticResource AudioDevice}" VerticalAlignment="Bottom" MouseEnter="AudioSelector_MouseEnter"/>
                             <ComboBox x:Name="AudioSelector" Grid.Row="17" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="AudioSelector_MouseEnter" SelectionChanged="AudioSelector_SelectionChanged"/>
-
-                            <TextBlock Grid.Row="18" Text="{StaticResource Advanced}" Opacity="0.5"/>
-                            <Separator Grid.Row="19" Margin="0 5 0 5" VerticalAlignment="Top"/>
-
-                            <TextBlock Grid.Row="19" Margin="0 10 0 0" Text="{StaticResource DepthFormat}" VerticalAlignment="Bottom" MouseEnter="DepthSelector_MouseEnter"/>
-                            <ComboBox x:Name="DepthSelector" Grid.Row="20" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="DepthSelector_MouseEnter" SelectionChanged="DepthSelector_SelectionChanged"/>
                         </Grid>
 
                         <Grid Grid.Column="1">

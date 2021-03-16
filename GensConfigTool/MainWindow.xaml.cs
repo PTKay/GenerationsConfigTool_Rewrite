@@ -38,9 +38,6 @@ namespace ConfigurationTool
             this.AudioSelector.ItemsSource = DevicesHandler.GetAudioDevices();
             this.AudioSelector.SelectedIndex = 0;
 
-            // Fill combo boxes
-            this.DepthSelector.ItemsSource = DepthFormat.GetAll();
-
             this.FxaaSelector.ItemsSource = OnOff.GetAll();
             this.VSyncSelector.ItemsSource = OnOff.GetAll();
 
@@ -64,7 +61,6 @@ namespace ConfigurationTool
             {
                 this.GPUSelector.SelectedItem = this.Configuration.GraphicsAdapter;
                 this.ResSelector.SelectedItem = this.Configuration.Resolution;
-                this.DepthSelector.SelectedItem = this.Configuration.DepthFormat;
             }
             else
             {
@@ -73,7 +69,6 @@ namespace ConfigurationTool
 
                 this.GPUSelector.SelectedIndex = 0;
                 this.ResSelector.SelectedIndex = 0;
-                this.DepthSelector.SelectedIndex = 0;
             }
 
             this.FxaaSelector.SelectedItem = this.Configuration.Antialiasing;
@@ -320,7 +315,7 @@ namespace ConfigurationTool
             }
         }
 
-        private async Task UpdateButton(Action<int> toUpdate)
+        private async Task GetKeyboardKey(Action<int> toUpdate)
         {
             this.ParentGrid.IsEnabled = false;
 
@@ -328,7 +323,11 @@ namespace ConfigurationTool
 
             await Task.Run(() =>
             {
-                SpinWait.SpinUntil(() => (key = this.Configuration.Keyboard.GetKey()) != 0);
+                SpinWait.SpinUntil(() =>
+                {
+                    key = this.Configuration.Keyboard.GetKey();
+                    return key != 0 && key != (int)Key.LeftWindowsKey && key != (int)Key.RightWindowsKey;
+                });
             });
 
             this.ParentGrid.IsEnabled = true;
@@ -337,7 +336,7 @@ namespace ConfigurationTool
 
         private void Button_A_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.A = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -346,7 +345,7 @@ namespace ConfigurationTool
 
         private void Button_B_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.B = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -355,7 +354,7 @@ namespace ConfigurationTool
 
         private void Button_X_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.X = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -364,7 +363,7 @@ namespace ConfigurationTool
 
         private void Button_Y_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.Y = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -373,7 +372,7 @@ namespace ConfigurationTool
 
         private void Button_RB_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.RB = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -382,7 +381,7 @@ namespace ConfigurationTool
 
         private void Button_LB_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.LB = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -391,7 +390,7 @@ namespace ConfigurationTool
 
         private void Button_RT_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.RT = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -400,7 +399,7 @@ namespace ConfigurationTool
 
         private void Button_LT_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.LT = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -409,7 +408,7 @@ namespace ConfigurationTool
 
         private void Button_Up_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.Up = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -418,7 +417,7 @@ namespace ConfigurationTool
 
         private void Button_Right_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.Right = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -427,7 +426,7 @@ namespace ConfigurationTool
 
         private void Button_Down_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.Down = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -436,7 +435,7 @@ namespace ConfigurationTool
 
         private void Button_Left_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.Left = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -445,7 +444,7 @@ namespace ConfigurationTool
 
         private void Button_Start_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.Start = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
@@ -454,7 +453,7 @@ namespace ConfigurationTool
 
         private void Button_Back_Click(object sender, RoutedEventArgs e)
         {
-            UpdateButton(key =>
+            GetKeyboardKey(key =>
             {
                 this.Configuration.Keyboard.Buttons.Back = key;
                 ((Button)e.Source).Content = ((Key)key).ToString();
