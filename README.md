@@ -6,7 +6,7 @@ Font images courtesy of [M&M](https://github.com/ActualMandM)
 
 Current features:
 
-- Supports Graphics, Audio and Analytics configuration
+- Supports Graphics, Audio and Analytics configuration, all in the same tab
 - Supports fixing the registry to avoid the `Game files either missing or corrupt please reinstall` issue
 - Supports proper scaling
 - Includes settings descriptions and images to better visualize the impact of each one
@@ -15,4 +15,4 @@ Current features:
 - Proper Nvidia Optimus support, so the config tool will always detect your high performance Nvidia GPU
 
 Current drawbacks:
-- No Dinput devices support, but since Sonic Generations doesn't properly support Dinput to begin with, it shouldn't matter that much
+- No Dinput devices support, but since Sonic Generations doesn't properly support Dinput devices to begin with, it shouldn't matter that much
