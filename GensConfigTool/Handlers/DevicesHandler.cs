@@ -1,6 +1,7 @@
 ﻿using ConfigurationTool.Model.Devices;
 using ConfigurationTool.Settings.Model;
 using SharpDX.Direct3D9;
+using SharpDX.DirectSound;
 using System.Collections.Generic;
 
 namespace ConfigurationTool.Handlers
@@ -42,13 +43,25 @@ namespace ConfigurationTool.Handlers
 
         public static IEnumerable<AudioDevice> GetAudioDevices()
         {
-            // Still haven't found a way to poll audio devices so this will have to do
-            yield return new AudioDevice();
-            yield return new AudioDevice()
+
+            List<AudioDevice> toReturn = new List<AudioDevice>
             {
-                Name = "None",
-                GUID = "00000000-0000-0000-0000-000000000000"
+                new AudioDevice(),
+                new AudioDevice()
+                {
+                    Name = "None",
+                    GUID = "00000000-0000-0000-0000-000000000000"
+                }
             };
+            foreach(DeviceInformation device in DirectSound.GetDevices())
+            {
+                toReturn.Add(new AudioDevice()
+                {
+                    Name = device.Description,
+                    GUID = device.DriverGuid.ToString()
+                });
+            }
+            return toReturn;
         }
     }
 }
