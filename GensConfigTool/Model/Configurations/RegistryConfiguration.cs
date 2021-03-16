@@ -1,15 +1,15 @@
 ﻿using ConfigurationTool.Handlers;
+using ConfigurationTool.Helpers;
 using ConfigurationTool.Model.Settings;
 using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.Windows;
 
 namespace ConfigurationTool.Model.Configurations
 {
     class RegistryConfiguration : IConfiguration
     {
-        public string ConfigLocation => "SOFTWARE\\Sega\\Sonic Generations";
+        public const string ConfigLocation = "SOFTWARE\\Sega\\Sonic Generations";
 
         // The game boots fine without the install path and exe path
         public const string REGDATA_INSTALLPATH = "install_path";
@@ -19,46 +19,43 @@ namespace ConfigurationTool.Model.Configurations
 
         public Configuration LoadConfiguration(Configuration config)
         {
-            int fixRegistry;
-            do
+            int fixRegistry = 0;
+
+            // Load Registry
+            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(ConfigLocation);
+            if (registryKey == null)
             {
-                fixRegistry = 0;
+                fixRegistry = -1;
+                registryKey = null;
+            }
 
-                // Load Registry
-                RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(ConfigLocation);
-                if (registryKey == null)
+            // Load Locale
+            object locale = registryKey?.GetValue(REGDATA_LOCALE);
+            if (locale != null)
+            {
+                int regLocale = int.Parse(locale.ToString());
+                if (Array.IndexOf(Enum.GetValues(typeof(Language)), regLocale) >= 0)
                 {
-                    fixRegistry = -1;
-                    registryKey = null;
+                    config.Language = (Language)regLocale;
                 }
+            }
+            else
+            {
+                fixRegistry = Math.Max(fixRegistry, 1);
+            }
 
-                // Load Locale
-                object locale = registryKey?.GetValue(REGDATA_LOCALE);
-                if (locale != null)
-                {
-                    int regLocale = int.Parse(locale.ToString());
-                    if (Array.IndexOf(Enum.GetValues(typeof(Language)), regLocale) >= 0)
-                    {
-                        config.Language = (Language)regLocale;
-                    }
-                }
-                else
-                {
-                    if (fixRegistry >= 0) fixRegistry = 1;
-                }
+            // Load Input Save Location
+            object saveLocation = registryKey?.GetValue(REGDATA_SAVELOCATION);
+            if (saveLocation == null)
+            {
+                fixRegistry = Math.Max(fixRegistry, 2);
+                saveLocation = config.InputSaveLocation;
+            }
+            registryKey?.Close();
 
-                // Load Input Save Location
-                object saveLocation = registryKey?.GetValue(REGDATA_SAVELOCATION);
-                if (saveLocation == null)
-                {
-                    if (fixRegistry >= 0) fixRegistry = 2;
-                    saveLocation = config.InputSaveLocation;
-                }
-                registryKey?.Close();
+            config.InputSaveLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\{saveLocation}";
 
-                config.InputSaveLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\{saveLocation}";
-            } while (TryFixRegInSameProcess(fixRegistry, config.ProcessIsElevated));
-
+            TryFixRegInSameProcess(fixRegistry, config.ProcessIsElevated);
             return config;
         }
 
@@ -74,14 +71,13 @@ namespace ConfigurationTool.Model.Configurations
             }
         }
 
-        private static bool TryFixRegInSameProcess(int fixType, bool isElevated)
+        private static void TryFixRegInSameProcess(int fixType, bool isElevated)
         {
             if (fixType != 0)
             {
                 if (isElevated)
                 {
                     RegistryHandler.FixRegistry(fixType);
-                    return true;
                 }
                 else
                 {
@@ -90,25 +86,10 @@ namespace ConfigurationTool.Model.Configurations
                         MessageBoxButton.YesNo,
                         MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        var psi = new ProcessStartInfo
-                        {
-                            UseShellExecute = true,
-                            FileName = Process.GetCurrentProcess().MainModule.FileName,
-                            Arguments = fixType.ToString(),
-                            Verb = "runas"
-                        };
-
-                        var process = new Process
-                        {
-                            StartInfo = psi
-                        };
-                        process.Start();
-                        process.WaitForExit();
-                        return false;
+                        UacHelper.RestartAsAdminAndWait(fixType.ToString());
                     }
                 }
             }
-            return false;
         }
     }
 }

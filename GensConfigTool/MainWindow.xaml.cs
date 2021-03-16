@@ -247,9 +247,9 @@ namespace ConfigurationTool
             GraphicsAdapter adapter = (GraphicsAdapter)e.AddedItems[0];
             this.Configuration.GraphicsAdapter = adapter;
             IgnoreSelectionTriggers = true;
-            
+
             this.ResSelector.ItemsSource = adapter.Resolutions;
-            
+
             IgnoreSelectionTriggers = false;
             this.ResSelector.SelectedItem = adapter.Resolutions[0];
         }

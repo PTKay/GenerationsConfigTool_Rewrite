@@ -5,7 +5,7 @@ namespace ConfigurationTool.Model.Configurations
 {
     class InputConfiguration : IConfiguration
     {
-        public string ConfigLocation => "PlayerInput.cfg";
+        public const string ConfigLocation = "PlayerInput.cfg";
         public string DefaultConfig => "DefaultConfig.cfg";
 
         public Configuration LoadConfiguration(Configuration config)

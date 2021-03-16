@@ -1,6 +1,7 @@
 ﻿using ConfigurationTool.Model.Input;
 using SharpDX.DirectInput;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace ConfigurationTool.Model.Devices
 {
@@ -17,7 +18,7 @@ namespace ConfigurationTool.Model.Devices
 
         public Keyboard()
         {
-            this.Name = "Keyboard";
+            this.Name = Application.Current.TryFindResource("Keyboard").ToString();
             this.GUID = "00000001-0000-0000-0000-000000000000";
             this.DeviceType = DeviceType.KEYBOARD;
         }

@@ -5,7 +5,7 @@ namespace ConfigurationTool.Model.Configurations
 {
     class AnalyticsConfiguration : IConfiguration
     {
-        public string ConfigLocation => "StatsConfig.cfg";
+        public const string ConfigLocation = "StatsConfig.cfg";
 
         public Configuration LoadConfiguration(Configuration config)
         {

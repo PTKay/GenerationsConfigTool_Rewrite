@@ -168,7 +168,7 @@ namespace ConfigurationTool.Helpers
             return shieldSource;
         }
 
-        internal static void RestartAsAdmin()
+        public static void RestartAsAdmin(string args = null)
         {
             var psi = new ProcessStartInfo
             {
@@ -176,6 +176,7 @@ namespace ConfigurationTool.Helpers
                 FileName = Process.GetCurrentProcess().MainModule.FileName,
                 Verb = "runas"
             };
+            if (args != null) psi.Arguments = args;
 
             var process = new Process
             {
@@ -185,6 +186,31 @@ namespace ConfigurationTool.Helpers
             {
                 process.Start();
                 Application.Current.Shutdown();
+            }
+            catch
+            {
+
+            }
+        }
+
+        public static void RestartAsAdminAndWait(string args = null)
+        {
+            var psi = new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                FileName = Process.GetCurrentProcess().MainModule.FileName,
+                Verb = "runas"
+            };
+            if (args != null) psi.Arguments = args;
+
+            var process = new Process
+            {
+                StartInfo = psi
+            };
+            try
+            {
+                process.Start();
+                process.WaitForExit();
             }
             catch
             {

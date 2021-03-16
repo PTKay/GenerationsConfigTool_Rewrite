@@ -5,7 +5,7 @@ namespace ConfigurationTool.Model.Configurations
 {
     class AudioConfiguration : IConfiguration
     {
-        public string ConfigLocation => "AudioConfig.cfg";
+        public const string ConfigLocation = "AudioConfig.cfg";
 
         public Configuration LoadConfiguration(Configuration config)
         {

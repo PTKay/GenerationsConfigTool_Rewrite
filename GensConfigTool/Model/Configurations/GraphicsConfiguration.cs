@@ -9,7 +9,7 @@ namespace ConfigurationTool.Model.Configurations
     class GraphicsConfiguration : IConfiguration
     {
         private string FileWarning => Application.Current.TryFindResource("GraphicsFile_Warning").ToString();
-        public string ConfigLocation => "GraphicsConfig.cfg";
+        public const string ConfigLocation = "GraphicsConfig.cfg";
 
         public Configuration LoadConfiguration(Configuration config)
         {

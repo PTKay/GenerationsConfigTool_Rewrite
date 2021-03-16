@@ -68,4 +68,5 @@ IncludeApp was discontinued, so no data is currently being sent, although the da
     <system:String x:Key="InputDevice">Input Device</system:String>
     <system:String x:Key="ControllerInfo">Press any controller's Start button during play to switch to that controller</system:String>
     <system:String x:Key="XinputDevice">Xinput Device</system:String>
+    <system:String x:Key="Keyboard">Keyboard</system:String>
 </ResourceDictionary>
