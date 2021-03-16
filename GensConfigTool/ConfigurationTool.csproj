@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>ConfigurationTool.ico</ApplicationIcon>
-    <StartupObject>ConfigurationTool.Program</StartupObject>
+    <StartupObject>ConfigurationTool.App</StartupObject>
     <PackageId>Sonic Generations</PackageId>
     <Product>Sonic Generations</Product>
     <Description>Sonic Generations Configuration Tool</Description>
