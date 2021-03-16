@@ -1,4 +1,4 @@
-﻿using ConfigurationTool.Model;
+﻿using ConfigurationTool.Model.Devices;
 using ConfigurationTool.Settings.Model;
 using SharpDX.Direct3D9;
 using System.Collections.Generic;
@@ -49,7 +49,6 @@ namespace ConfigurationTool.Handlers
                 Name = "None",
                 GUID = "00000000-0000-0000-0000-000000000000"
             };
-
         }
     }
 }

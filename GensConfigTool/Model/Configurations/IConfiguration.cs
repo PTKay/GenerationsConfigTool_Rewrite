@@ -4,7 +4,7 @@
     interface IConfiguration
     {
         string ConfigFile { get; }
-        public BasicConfiguration LoadConfiguration(BasicConfiguration config);
-        public void SaveConfiguration(BasicConfiguration config);
+        public Configuration LoadConfiguration(Configuration config);
+        public void SaveConfiguration(Configuration config);
     }
 }

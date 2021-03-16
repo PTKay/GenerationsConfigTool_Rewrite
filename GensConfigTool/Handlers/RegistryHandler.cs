@@ -9,7 +9,7 @@ namespace ConfigurationTool.Handlers
     class RegistryHandler
     {
         // English, French, German, Italian, Spanish and Japanese
-        public readonly HashSet<string> VALID_LOCALES = new HashSet<string>() { "1033", "1036", "1031", "1040", "3082", "0411" };
+        public static readonly HashSet<string> VALID_LOCALES = new HashSet<string>() { "1033", "1036", "1031", "1040", "3082", "0411" };
 
         // English
         public const int DEFAULT_LOCALE = 1033;
@@ -23,8 +23,10 @@ namespace ConfigurationTool.Handlers
         public const string REGDATA_LOCALE = "locale";
         public const string REGDATA_SAVELOCATION = "savelocation";
 
-        public void LoadReg()
+        public static string LoadInputLocation()
         {
+            // This actually does registry data checking besides just getting the input location
+
             int fixRegistry = 0;
 
             // Load Registry
@@ -40,13 +42,13 @@ namespace ConfigurationTool.Handlers
             if (locale != null)
             {
                 string regLocale = locale.ToString();
-                if (VALID_LOCALES.Contains(regLocale)) this.LocaleID = int.Parse(regLocale);
-                else this.LocaleID = DEFAULT_LOCALE;
+                if (VALID_LOCALES.Contains(regLocale)) LocaleID = int.Parse(regLocale);
+                else LocaleID = DEFAULT_LOCALE;
             }
             else
             {
                 if (fixRegistry >= 0) fixRegistry = 1;
-                this.LocaleID = DEFAULT_LOCALE;
+                LocaleID = DEFAULT_LOCALE;
             }
 
             // Load Input Save Location
@@ -56,13 +58,13 @@ namespace ConfigurationTool.Handlers
                 if (fixRegistry >= 0) fixRegistry = 2;
                 saveLocation = DEFAULT_SAVELOCATION;
             }
-            this.InputSaveLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\{saveLocation}";
-
             registryKey?.Close();
             PromptToFix(fixRegistry);
+
+            return $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\{saveLocation}";
         }
 
-        private void PromptToFix(int fixType)
+        private static void PromptToFix(int fixType)
         {
             if (fixType != 0)
             {
@@ -89,7 +91,7 @@ namespace ConfigurationTool.Handlers
             }
         }
 
-        public void FixRegistry(int fixtype)
+        public static void FixRegistry(int fixtype)
         {
             RegistryKey registryKey = null;
             bool fixAll = false;
@@ -114,9 +116,6 @@ namespace ConfigurationTool.Handlers
         }
 
         // I swear this has no use, but the game cares about it
-        public int LocaleID { get; set; }
-
-        // Used for Input config
-        public string InputSaveLocation { get; set; }
+        public static int LocaleID { get; set; }
     }
 }

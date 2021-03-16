@@ -10,8 +10,7 @@ namespace ConfigurationTool
         {
             if (args.Length > 0)
             {
-                RegistryHandler reg = new RegistryHandler();
-                reg.FixRegistry(int.Parse(args[0]));
+                RegistryHandler.FixRegistry(int.Parse(args[0]));
                 return;
             }
             App.Main();

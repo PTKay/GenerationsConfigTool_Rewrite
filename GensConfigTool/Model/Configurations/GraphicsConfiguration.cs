@@ -1,4 +1,5 @@
-﻿using ConfigurationTool.Settings.Model;
+﻿using ConfigurationTool.Model.Devices;
+using ConfigurationTool.Settings.Model;
 using System;
 using System.IO;
 using System.Windows;
@@ -10,9 +11,9 @@ namespace ConfigurationTool.Model.Configurations
         private string FileWarning => Application.Current.TryFindResource("GraphicsFile_Warning").ToString();
         public string ConfigFile => "GraphicsConfig.cfg";
 
-        public BasicConfiguration LoadConfiguration(BasicConfiguration config)
+        public Configuration LoadConfiguration(Configuration config)
         {
-            if (config == null) config = new BasicConfiguration();
+            if (config == null) config = new Configuration();
 
             if (!File.Exists(ConfigFile)) return config;
             try
@@ -57,11 +58,11 @@ namespace ConfigurationTool.Model.Configurations
             }
             catch
             {
-                return new BasicConfiguration();
+                return new Configuration();
             }
         }
 
-        public void SaveConfiguration(BasicConfiguration config)
+        public void SaveConfiguration(Configuration config)
         {
 
             using (StreamWriter writer = new StreamWriter(ConfigFile))

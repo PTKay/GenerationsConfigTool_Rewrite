@@ -5,28 +5,39 @@ namespace ConfigurationTool.Handlers
 {
     class FileHandler
     {
-        private static readonly IConfiguration GraphicsConfiguration = new GraphicsConfiguration();
-        private static readonly IConfiguration AudioConfiguration = new AudioConfiguration();
-        private static readonly IConfiguration AnalyticsConfiguration = new AnalyticsConfiguration();
+        private readonly IConfiguration GraphicsConfiguration;
+        private readonly IConfiguration AudioConfiguration;
+        private readonly IConfiguration AnalyticsConfiguration;
+        private readonly IConfiguration InputConfiguration;
 
-        public static BasicConfiguration LoadBasicConfiguration()
+        public FileHandler(string inputLocation)
         {
-            BasicConfiguration config = new BasicConfiguration();
+            GraphicsConfiguration = new GraphicsConfiguration();
+            AudioConfiguration = new AudioConfiguration();
+            AnalyticsConfiguration = new AnalyticsConfiguration();
+            InputConfiguration = new InputConfiguration(inputLocation);
+        }
+
+        public Configuration LoadConfiguration()
+        {
+            Configuration config = new Configuration();
 
             GraphicsConfiguration.LoadConfiguration(config);
             AudioConfiguration.LoadConfiguration(config);
             AnalyticsConfiguration.LoadConfiguration(config);
+            InputConfiguration.LoadConfiguration(config);
 
             return config;
         }
 
-        public static bool SaveBasicConfiguration(BasicConfiguration config)
+        public bool SaveConfiguration(Configuration config)
         {
             try
             {
                 GraphicsConfiguration.SaveConfiguration(config);
                 AudioConfiguration.SaveConfiguration(config);
                 AnalyticsConfiguration.SaveConfiguration(config);
+                InputConfiguration.SaveConfiguration(config);
             }
             catch
             {
