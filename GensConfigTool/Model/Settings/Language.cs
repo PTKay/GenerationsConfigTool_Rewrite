@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ConfigurationTool.Model.Settings
+﻿namespace ConfigurationTool.Model.Settings
 {
     enum Language
     {

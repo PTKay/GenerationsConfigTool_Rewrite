@@ -20,7 +20,7 @@ namespace ConfigurationTool.Model.Configurations
         public Configuration LoadConfiguration(Configuration config)
         {
             int fixRegistry;
-            do 
+            do
             {
                 fixRegistry = 0;
 

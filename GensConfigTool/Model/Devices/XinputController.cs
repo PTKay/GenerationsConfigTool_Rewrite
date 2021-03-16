@@ -1,4 +1,5 @@
 ﻿using SharpDX.XInput;
+using System.Reflection;
 using System.Windows;
 
 namespace ConfigurationTool.Model.Devices
@@ -6,23 +7,23 @@ namespace ConfigurationTool.Model.Devices
     class XinputController : InputDevice
     {
         public override bool IsConnected => Controller.IsConnected;
-        public override DeviceType DeviceType => DeviceType.XINPUT;
-
-        public override string Name => Application.Current.TryFindResource("XinputDevice").ToString();
-
-        private string _guid = "00000000-0000-0000-0000-000000000000";
-        public override string GUID { get => _guid; set => _guid = value; }
+        protected override int[] InvalidKeyCodes => new int[] { };
 
         private readonly Controller Controller;
 
         public XinputController(UserIndex port)
         {
+            this.Name = Application.Current.TryFindResource("XinputDevice").ToString();
+            this.GUID = "00000000-0000-0000-0000-000000000000";
+            this.DeviceType = DeviceType.XINPUT;
             Controller = new Controller(port);
+
+            foreach (FieldInfo field in Buttons.GetType().GetFields())
+            {
+                field.SetValue(Buttons, -1);
+            }
         }
 
-        public override int GetKey()
-        {
-            return -1;
-        }
+        protected override int GetCurrentKey() => -1;
     }
 }

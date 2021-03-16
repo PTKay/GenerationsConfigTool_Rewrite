@@ -7,20 +7,19 @@ namespace ConfigurationTool.Model.Devices
     class Keyboard : InputDevice
     {
         public override bool IsConnected => true;
-        public override DeviceType DeviceType => DeviceType.KEYBOARD;
-        public override string Name => "Keyboard";
-
-        private string _guid = "00000001-0000-0000-0000-000000000000";
-        public override string GUID { get => _guid; set => _guid = value; }
 
         readonly SharpDX.DirectInput.Keyboard keyboard = new SharpDX.DirectInput.Keyboard(new DirectInput());
 
-        public override int GetKey()
-        {
+        protected override int[] InvalidKeyCodes => new int[] {
+            (int)Key.LeftWindowsKey,
+            (int)Key.RightWindowsKey
+        };
 
-            keyboard.Acquire();
-            List<Key> keys = keyboard.GetCurrentState().PressedKeys;
-            return keys.Count > 0 ? (int)keys[0] : 0;
+        public Keyboard()
+        {
+            this.Name = "Keyboard";
+            this.GUID = "00000001-0000-0000-0000-000000000000";
+            this.DeviceType = DeviceType.KEYBOARD;
         }
 
         public static Keyboard DeSerialize(string serialized)
@@ -38,6 +37,13 @@ namespace ConfigurationTool.Model.Devices
             toReturn.AxisMap = new AxisMap(); // It's all unknown so we force the default
             toReturn.Deadzone = int.Parse(split[4]);
             return toReturn;
+        }
+
+        protected override int GetCurrentKey()
+        {
+            keyboard.Acquire();
+            List<Key> keys = keyboard.GetCurrentState().PressedKeys;
+            return keys.Count > 0 ? (int)keys[0] : 0;
         }
     }
 }

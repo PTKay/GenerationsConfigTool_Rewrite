@@ -1,26 +1,29 @@
 ﻿using ConfigurationTool.Model.Input;
+using System;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ConfigurationTool.Model.Devices
 {
     public enum DeviceType
     {
-        XINPUT, KEYBOARD
+        XINPUT, DINPUT, KEYBOARD
     }
 
     abstract class InputDevice
     {
-        public abstract DeviceType DeviceType { get; }
+        public DeviceType DeviceType;
         public abstract bool IsConnected { get; }
 
-        public abstract string Name { get; }
-        public abstract string GUID { get; set; }
+        public string Name;
+        public string GUID;
 
         public ButtonConfiguration Buttons = new ButtonConfiguration();
-
-        // Apparently unused outside DInput devices
-        public AxisMap AxisMap = new AxisMap();
-
+        public AxisMap AxisMap = new AxisMap(); // Apparently unused outside DInput devices
         public int Deadzone = 0;
+
+        protected abstract int[] InvalidKeyCodes { get; }
 
         public string Serialize()
         {
@@ -39,6 +42,40 @@ namespace ConfigurationTool.Model.Devices
             return GUID.Equals(device.GUID);
         }
 
-        public abstract int GetKey();
+        protected abstract int GetCurrentKey();
+
+        public async Task SetKey(string keyName, InputDevice targetDevice, Action<int> keyConsumer)
+        {
+            int key = -1;
+
+            await Task.Run(() =>
+            {
+                SpinWait.SpinUntil(() =>
+                {
+                    key = GetCurrentKey();
+                    return key != 0 && !Array.Exists(InvalidKeyCodes, elem => elem == key);
+                });
+            });
+
+            if (key != -1)
+            {
+                FieldInfo targetProperty = null;
+                FieldInfo[] props = typeof(ButtonConfiguration).GetFields();
+
+                for (int i = 0; i < props.Length; ++i)
+                {
+                    if (props[i].Name.Equals(keyName))
+                    {
+                        targetProperty = props[i];
+                        break;
+                    }
+                }
+
+                // Change when implementing Dinput
+                targetProperty?.SetValue(targetDevice.Buttons, key);
+            }
+
+            keyConsumer(key);
+        }
     }
 }

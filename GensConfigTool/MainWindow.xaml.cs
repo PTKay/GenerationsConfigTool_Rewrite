@@ -2,13 +2,11 @@
 using ConfigurationTool.Helpers;
 using ConfigurationTool.Model;
 using ConfigurationTool.Model.Devices;
-using ConfigurationTool.Model.Input;
 using ConfigurationTool.Model.Settings;
 using ConfigurationTool.Settings.Model;
 using SharpDX.DirectInput;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -58,10 +56,12 @@ namespace ConfigurationTool
 
             this.InputSelector.SelectedIndex = 0;
 
-            UpdateConfigView(observed, this.Configuration.XinputController);
+            UpdateConfigView();
+            UpdateInputView();
+            PollXinput(observed, this.Configuration.XinputController);
         }
 
-        private async Task UpdateConfigView(bool isConnected, InputDevice xinput)
+        private void UpdateConfigView()
         {
             if (this.Configuration.GraphicsAdapter != null && this.GPUSelector.Items.IndexOf(this.Configuration.GraphicsAdapter) >= 0)
             {
@@ -96,7 +96,7 @@ namespace ConfigurationTool
                 this.AdminButton.Visibility = Configuration.ProcessIsElevated ? Visibility.Collapsed : Visibility.Visible;
                 this.AdminButtonCol.Width = GridLength.Auto;
             }
-            else 
+            else
             {
                 this.LanguageSelector.Foreground = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0));
                 this.LanguageSelector.IsEnabled = false;
@@ -104,9 +104,35 @@ namespace ConfigurationTool
             }
 
             isInitialized = true;
+        }
 
-            // Fill the Input buttons
-            FillButtons();
+        private void UpdateInputView()
+        {
+            InputDevice device = (InputDevice)this.InputSelector.SelectedItem;
+
+            this.Button_A.Content = ((Key)device.Buttons.A).GetStringValue();
+            this.Button_B.Content = ((Key)device.Buttons.B).GetStringValue();
+            this.Button_X.Content = ((Key)device.Buttons.X).GetStringValue();
+            this.Button_Y.Content = ((Key)device.Buttons.Y).GetStringValue();
+
+            this.Button_RB.Content = ((Key)device.Buttons.RB).GetStringValue();
+            this.Button_LB.Content = ((Key)device.Buttons.LB).GetStringValue();
+
+            this.Button_RT.Content = ((Key)device.Buttons.RT).GetStringValue();
+            this.Button_LT.Content = ((Key)device.Buttons.LT).GetStringValue();
+
+            this.Button_Up.Content = ((Key)device.Buttons.Up).GetStringValue();
+            this.Button_Down.Content = ((Key)device.Buttons.Down).GetStringValue();
+            this.Button_Left.Content = ((Key)device.Buttons.Left).GetStringValue();
+            this.Button_Right.Content = ((Key)device.Buttons.Right).GetStringValue();
+
+            this.Button_Start.Content = ((Key)device.Buttons.Start).GetStringValue();
+            this.Button_Back.Content = ((Key)device.Buttons.Back).GetStringValue();
+        }
+
+        private async Task PollXinput(bool initialConnectionState, InputDevice xinput)
+        {
+            bool isConnected = initialConnectionState;
 
             // Poll the Xbox controller port
             while (true)
@@ -114,7 +140,6 @@ namespace ConfigurationTool
                 await Task.Run(() =>
                 {
                     SpinWait.SpinUntil(() => isConnected != xinput.IsConnected);
-
                     isConnected = !isConnected;
                 });
 
@@ -127,60 +152,6 @@ namespace ConfigurationTool
                     this.InputSelector.SelectedIndex = 0;
                     this.InputSelector.Items.Remove(xinput);
                 }
-            }
-        }
-
-        private void FillButtons()
-        {
-            this.Button_A.Content = ((Key)this.Configuration.Keyboard.Buttons.A).ToString();
-            this.Button_B.Content = ((Key)this.Configuration.Keyboard.Buttons.B).ToString();
-            this.Button_X.Content = ((Key)this.Configuration.Keyboard.Buttons.X).ToString();
-            this.Button_Y.Content = ((Key)this.Configuration.Keyboard.Buttons.Y).ToString();
-
-            this.Button_RB.Content = ((Key)this.Configuration.Keyboard.Buttons.RB).ToString();
-            this.Button_LB.Content = ((Key)this.Configuration.Keyboard.Buttons.LB).ToString();
-
-            this.Button_RT.Content = ((Key)this.Configuration.Keyboard.Buttons.RT).ToString();
-            this.Button_LT.Content = ((Key)this.Configuration.Keyboard.Buttons.LT).ToString();
-
-            this.Button_Up.Content = ((Key)this.Configuration.Keyboard.Buttons.Up).ToString();
-            this.Button_Down.Content = ((Key)this.Configuration.Keyboard.Buttons.Down).ToString();
-            this.Button_Left.Content = ((Key)this.Configuration.Keyboard.Buttons.Left).ToString();
-            this.Button_Right.Content = ((Key)this.Configuration.Keyboard.Buttons.Right).ToString();
-
-            this.Button_Start.Content = ((Key)this.Configuration.Keyboard.Buttons.Start).ToString();
-            this.Button_Back.Content = ((Key)this.Configuration.Keyboard.Buttons.Back).ToString();
-        }
-
-        private async Task UpdateKeyboardKey(Button src)
-        {
-            int key = -1;
-
-            await Task.Run(() =>
-            {
-                SpinWait.SpinUntil(() =>
-                {
-                    key = this.Configuration.Keyboard.GetKey();
-                    return key != 0 && key != (int)Key.LeftWindowsKey && key != (int)Key.RightWindowsKey;
-                });
-            });
-
-            this.ParentGrid.IsEnabled = true;
-            if (key != -1)
-            {
-                FieldInfo targetProperty = null;
-                FieldInfo[] props = typeof(ButtonConfiguration).GetFields();
-
-                for (int i = 0; i < props.Length; ++i)
-                {
-                    if (props[i].Name.Equals(src.Tag.ToString()))
-                    {
-                        targetProperty = props[i];
-                        break;
-                    }
-                }
-                targetProperty?.SetValue(this.Configuration.Keyboard.Buttons, key);
-                src.Content = ((Key)key).ToString();
             }
         }
 
@@ -259,6 +230,16 @@ namespace ConfigurationTool
                 Application.Current.TryFindResource("AnalyticsInfo").ToString());
         }
 
+        private void Analytics_Enabled_Click(object sender, RoutedEventArgs e)
+        {
+            this.Configuration.Analytics = OnOff.On;
+        }
+
+        private void Analytics_Disabled_Click(object sender, RoutedEventArgs e)
+        {
+            this.Configuration.Analytics = OnOff.Off;
+        }
+
         private void GPUSelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (!isInitialized) return;
@@ -318,20 +299,6 @@ namespace ConfigurationTool
             this.Configuration.AudioDevice = (AudioDevice)e.AddedItems[0];
         }
 
-        private void Analytics_Enabled_Click(object sender, RoutedEventArgs e)
-        {
-            if (!isInitialized) return;
-
-            this.Configuration.Analytics = OnOff.On;
-        }
-
-        private void Analytics_Disabled_Click(object sender, RoutedEventArgs e)
-        {
-            
-
-            this.Configuration.Analytics = OnOff.Off;
-        }
-
         private void LanguageSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!isInitialized) return;
@@ -341,28 +308,30 @@ namespace ConfigurationTool
 
         private void InputSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (((InputDevice)e.AddedItems[0]).DeviceType == Model.Devices.DeviceType.XINPUT)
-            {
-                this.InputButtons.IsEnabled = false;
-            }
-            else
-            {
-                this.InputButtons.IsEnabled = true;
-            }
+            if (!isInitialized) return;
+
+            Model.Devices.DeviceType type = ((InputDevice)e.AddedItems[0]).DeviceType;
+            this.InputButtons.IsEnabled = type != Model.Devices.DeviceType.XINPUT;
+            UpdateInputView();
         }
 
         private void InputButton_Click(object sender, RoutedEventArgs e)
         {
+            Button src = (Button)e.Source;
             this.ParentGrid.IsEnabled = false;
-            Button src = ((Button)e.Source);
 
-            UpdateKeyboardKey(src);
+            // Can be changed to use currently selected device when implementing Dinput
+            this.Configuration.Keyboard.SetKey(src.Tag.ToString(), this.Configuration.Keyboard, key =>
+            {
+                if (key != -1) src.Content = ((Key)key).GetStringValue();
+                this.ParentGrid.IsEnabled = true;
+            });
         }
 
         private void ButtonDefault_Click(object sender, RoutedEventArgs e)
         {
             this.Configuration.Keyboard.Buttons = new Model.Input.ButtonConfiguration();
-            FillButtons();
+            UpdateInputView();
         }
     }
 }
