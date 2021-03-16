@@ -24,7 +24,7 @@ namespace ConfigurationTool
         private readonly ConfigurationHandler Files;
 
         private readonly Configuration Configuration;
-        private bool isInitialized = false;
+        private bool IgnoreSelectionTriggers = true;
 
         public MainWindow()
         {
@@ -103,7 +103,7 @@ namespace ConfigurationTool
                 this.AdminButtonImage.Source = UacHelper.GetUacIcon();
             }
 
-            isInitialized = true;
+            IgnoreSelectionTriggers = false;
         }
 
         private void UpdateInputView()
@@ -242,73 +242,77 @@ namespace ConfigurationTool
 
         private void GPUSelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             GraphicsAdapter adapter = (GraphicsAdapter)e.AddedItems[0];
             this.Configuration.GraphicsAdapter = adapter;
+            IgnoreSelectionTriggers = true;
+            
             this.ResSelector.ItemsSource = adapter.Resolutions;
+            
+            IgnoreSelectionTriggers = false;
             this.ResSelector.SelectedIndex = 0;
         }
 
         private void ResSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             this.Configuration.Resolution = (Resolution)e.AddedItems[0];
         }
 
         private void FxaaSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             this.Configuration.Antialiasing = (OnOff)e.AddedItems[0];
         }
 
         private void DispModeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             this.Configuration.DisplayMode = (DisplayMode)e.AddedItems[0];
         }
 
         private void ShadowSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             this.Configuration.ShadowQuality = (HighLow)e.AddedItems[0];
         }
 
         private void ReflectionSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             this.Configuration.ReflectionQuality = (HighLow)e.AddedItems[0];
         }
 
         private void VSyncSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             this.Configuration.VSync = (OnOff)e.AddedItems[0];
         }
 
         private void AudioSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             this.Configuration.AudioDevice = (AudioDevice)e.AddedItems[0];
         }
 
         private void LanguageSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             this.Configuration.Language = (Language)e.AddedItems[0];
         }
 
         private void InputSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInitialized) return;
+            if (IgnoreSelectionTriggers) return;
 
             Model.Devices.DeviceType type = ((InputDevice)e.AddedItems[0]).DeviceType;
             this.InputButtons.IsEnabled = type != Model.Devices.DeviceType.XINPUT;
