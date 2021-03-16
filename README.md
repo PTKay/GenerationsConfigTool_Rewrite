@@ -1,6 +1,7 @@
 # Sonic Generations Configuration Tool (Rewrite)
 
 Rewriting Sonic Generations' Configuration Tool using WPF as a way to teach myself how to use it.
+
 Font images courtesy of [M&M](https://github.com/ActualMandM)
 
 Current features:
