@@ -13,7 +13,8 @@ Current features:
 - Removes the need for DefaultInput.cfg in the game's directory
 - Ability to map keys that couldn't be mapped in the original config tool (e.g. TAB, Shift, CTRL...)
 - Proper Nvidia Optimus support, so the config tool will always detect your high performance Nvidia GPU
-- Significantly smaller file size compared to the original configuration tool (~7MB vs ~28MB)
+- Supports changing the in-game language (requires admin rights because they store it in LOCAL_MACHINE for some reason)
+- Significantly smaller file size compared to the original configuration tool (~8MB vs ~28MB)
 
 Current drawbacks:
 - No Dinput devices support, but since Sonic Generations doesn't properly support Dinput devices to begin with, it shouldn't matter that much
