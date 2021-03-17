@@ -151,8 +151,8 @@
               BorderBrush="{DynamicResource ButtonOutline}" 
               CornerRadius="3" BorderThickness="1, 1, 1, 1" 
               Background="{DynamicResource Button}" />
-            <Border Grid.Column="1" Margin="1, 1, 1, 1" BorderBrush="{DynamicResource ButtonOutline}" Name="ButtonBorder"
-              CornerRadius="0 3 3 0" BorderThickness="0, 0, 0, 0" 
+            <Border Grid.Column="1" Margin="1, 1, 1, 1" Name="ButtonBorder"
+              CornerRadius="0 3 3 0" BorderThickness="0" 
               Background="{DynamicResource Button}" />
 
             <Path Name="Arrow" Grid.Column="1" 
@@ -162,16 +162,16 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="UIElement.IsMouseOver" Value="True">
-                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{DynamicResource Button_Hover}"/>
+                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{DynamicResource Button_Hover}" />
                 <Setter Property="Panel.Background" TargetName="Border" Value="{DynamicResource Button_Hover}"/>
             </Trigger>
             <Trigger Property="ToggleButton.IsChecked" Value="True">
-                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{DynamicResource Button_Click}"/>
+                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="Transparent"/>
                 <Setter Property="Panel.Background" TargetName="Border" Value="{DynamicResource Button_Click}"/>
             </Trigger>
             <Trigger Property="UIElement.IsEnabled" Value="False">
                 <Setter Property="Panel.Background" TargetName="Border" Value="{DynamicResource Button_Disabled}"/>
-                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{DynamicResource Button_Disabled}"/>
+                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="Transparent"/>
                 <Setter Property="Border.BorderBrush" TargetName="ButtonBorder" Value="{DynamicResource ButtonOutline_Disabled}"/>
                 <Setter Property="Border.BorderBrush" TargetName="Border" Value="{DynamicResource ButtonOutline_Disabled}"/>
                 <Setter Property="TextElement.Foreground" Value="{DynamicResource Foreground_Disabled}"/>
