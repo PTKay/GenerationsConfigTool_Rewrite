@@ -20,8 +20,10 @@ Rewriting Sonic Generations' Configuration Tool using WPF as a way to teach myse
 - No proper 32-bit support if you have GCL (Generations Code Loader, included with HedgeModManager) installed
 
 ## Images
-![Main Configuration](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/master/Images/Config.png)
-![Input Configuration](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/master/Images/InputConfig.png)
+Light Theme            |  Dark Theme
+:-------------------------:|:-------------------------:
+![](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/main/Images/Config.png)  |  ![](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/main/Images/Config_Dark.png)
+![](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/main/Images/Input.png)  |  ![](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/main/Images/Input_Dark.png)
 
 ## Credits
 - [PTKickass](https://github.com/PTKickass) - Code and UI
