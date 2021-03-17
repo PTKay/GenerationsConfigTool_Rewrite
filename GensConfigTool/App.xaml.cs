@@ -16,7 +16,6 @@ namespace ConfigurationTool
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {
-                MessageBox.Show(args[1]);
                 RegistryHandler.FixRegistry(int.Parse(args[1]));
                 Application.Current.Shutdown();
             }

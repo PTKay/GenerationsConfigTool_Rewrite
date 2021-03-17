@@ -3,6 +3,7 @@ using ConfigurationTool.Helpers;
 using ConfigurationTool.Model.Settings;
 using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Windows;
 
 namespace ConfigurationTool.Model.Configurations
@@ -34,26 +35,40 @@ namespace ConfigurationTool.Model.Configurations
             if (locale != null)
             {
                 int regLocale = int.Parse(locale.ToString());
-                if (Array.IndexOf(Enum.GetValues(typeof(Language)), regLocale) >= 0)
+                if (Array.IndexOf((int[])Enum.GetValues(typeof(Language)), regLocale) >= 0)
                 {
                     config.Language = (Language)regLocale;
+                }
+                else
+                {
+                    // Locale in registry was invalid
+                    fixRegistry = fixRegistry >= 0 ? 1 : fixRegistry;
                 }
             }
             else
             {
-                fixRegistry = Math.Max(fixRegistry, 1);
+                fixRegistry = fixRegistry >= 0 ? 1 : fixRegistry;
             }
 
             // Load Input Save Location
             object saveLocation = registryKey?.GetValue(REGDATA_SAVELOCATION);
             if (saveLocation == null)
             {
-                fixRegistry = Math.Max(fixRegistry, 2);
+                fixRegistry = fixRegistry >= 0 ? 2 : fixRegistry;
                 saveLocation = config.InputSaveLocation;
             }
             registryKey?.Close();
 
             config.InputSaveLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\{saveLocation}";
+            try
+            {
+                Directory.CreateDirectory(config.InputSaveLocation);
+            } 
+            catch
+            {
+                // Directory in registry was invalid
+                fixRegistry = fixRegistry >= 0 ? 2 : fixRegistry;
+            }
 
             TryFixRegInSameProcess(fixRegistry, config.ProcessIsElevated);
             return config;
