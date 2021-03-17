@@ -28,7 +28,7 @@ namespace ConfigurationTool.Settings.Model
 
             return this.Width.CompareTo(other.Width);
         }
-        public override string ToString() => $"{Width} x {Height} ({Frequency} hz)";
+        public override string ToString() => $"{Width} x {Height} ({Frequency}Hz)";
 
         public override bool Equals(object obj)
         {

@@ -1,0 +1,253 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Button}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="Border" Background="{TemplateBinding Background}" BorderBrush="{DynamicResource ButtonOutline}" BorderThickness="1" CornerRadius="5">
+                        <ContentPresenter x:Name="Content" 
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          Focusable="False"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource Button_Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource Button_Click}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" Value="{DynamicResource Button_Disabled}" />
+                            <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource ButtonOutline_Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type Grid}">
+        <Setter Property="Background" Value="{DynamicResource Background}" />
+    </Style>
+
+    <Style TargetType="{x:Type TabControl}">
+        <Setter Property="Background" Value="{DynamicResource Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+    </Style>
+
+    <Style TargetType="{x:Type RadioButton}" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <BulletDecorator Background="Transparent">
+                        <BulletDecorator.Bullet>
+                            <Grid Height="16" Width="16">
+                                <!--Define size of the Bullet-->
+                                <!--The two borders-->
+                                <Border Name="RadioOuter" Background="Transparent" BorderBrush="{DynamicResource RadioButton_Outline}" BorderThickness="2" CornerRadius="2" />
+                                <Border CornerRadius="1" Margin="4" Name="RadioMark" Background="{DynamicResource RadioButton_Inner}" Visibility="Hidden" />
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                        <!--Text element-->
+                        <TextBlock Margin="3,1,0,0" Foreground="White" FontFamily="Calibri" FontSize="12" VerticalAlignment="Center">
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </TextBlock>
+                    </BulletDecorator>
+                    <!--If item is checked, trigger the visibility of the mark-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
+                            <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RadioOuter" Property="BorderBrush" Value="{DynamicResource RadioButton_Clicked}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
+                            <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RadioOuter" Property="BorderBrush" Value="{DynamicResource RadioButton_Hover}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="Border" Background="{DynamicResource TabHeader}" BorderBrush="{DynamicResource TabHeader_Outline}" BorderThickness="1 1 1 0" CornerRadius="5 5 0 0">
+                            <ContentPresenter x:Name="ContentSite"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    ContentSource="Header"
+                                    Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True" SourceName="Border">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource TabHeader_Hover}" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource TabHeader_Selected}" />
+                                <Setter Property="Margin" TargetName="Border" Value="0 0 0 -1" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource TabHeader_Disabled}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="{DynamicResource Foreground_Disabled}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{DynamicResource Background}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border Background="{TemplateBinding Background}" VerticalAlignment="Center">
+                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5 2 0 2"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource Button_Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource Button_Disabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Foreground_Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.ColumnSpan="2" Name="Border"
+              BorderBrush="{DynamicResource ButtonOutline}" 
+              CornerRadius="3" BorderThickness="1, 1, 1, 1" 
+              Background="{DynamicResource Button}" />
+            <Border Grid.Column="1" Margin="1, 1, 1, 1" BorderBrush="{DynamicResource ButtonOutline}" Name="ButtonBorder"
+              CornerRadius="0 3 3 0" BorderThickness="0, 0, 0, 0" 
+              Background="{DynamicResource Button}" />
+
+            <Path Name="Arrow" Grid.Column="1" 
+            Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+            HorizontalAlignment="Center" Fill="{DynamicResource Foreground}"
+            VerticalAlignment="Center" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="True">
+                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{DynamicResource Button_Hover}"/>
+                <Setter Property="Panel.Background" TargetName="Border" Value="{DynamicResource Button_Hover}"/>
+            </Trigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{DynamicResource Button_Click}"/>
+                <Setter Property="Panel.Background" TargetName="Border" Value="{DynamicResource Button_Click}"/>
+            </Trigger>
+            <Trigger Property="UIElement.IsEnabled" Value="False">
+                <Setter Property="Panel.Background" TargetName="Border" Value="{DynamicResource Button_Disabled}"/>
+                <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{DynamicResource Button_Disabled}"/>
+                <Setter Property="Border.BorderBrush" TargetName="ButtonBorder" Value="{DynamicResource ButtonOutline_Disabled}"/>
+                <Setter Property="Border.BorderBrush" TargetName="Border" Value="{DynamicResource ButtonOutline_Disabled}"/>
+                <Setter Property="TextElement.Foreground" Value="{DynamicResource Foreground_Disabled}"/>
+                <Setter Property="Shape.Fill" TargetName="Arrow" Value="{DynamicResource Foreground_Disabled}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type ComboBox}">
+        <Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource Foreground}"/>
+        <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton Name="ToggleButton" Grid.Column="2"
+                ClickMode="Press" Focusable="False"
+                IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                Template="{StaticResource ComboBoxToggleButtonTemplate}"/>
+
+                        <ContentPresenter Name="ContentSite" Margin="5, 3, 23, 3" IsHitTestVisible="False"
+                              HorizontalAlignment="Left" VerticalAlignment="Center"                              
+                              Content="{TemplateBinding ComboBox.SelectionBoxItem}" 
+                              ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
+                        <TextBox Name="PART_EditableTextBox" Margin="3, 3, 23, 3"                     
+                     IsReadOnly="{TemplateBinding IsReadOnly}"
+                     Visibility="Hidden" Background="Transparent"
+                     HorizontalAlignment="Left" VerticalAlignment="Center"
+                     Focusable="True" >
+                            <TextBox.Template>
+                                <ControlTemplate TargetType="TextBox" >
+                                    <Border Name="PART_ContentHost" Focusable="False" />
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                        <!-- Popup showing items -->
+                        <Popup Name="Popup" Placement="Bottom"
+                   Focusable="False" AllowsTransparency="True"
+                   IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}"
+                   PopupAnimation="Slide">
+                            <Grid Name="DropDown" SnapsToDevicePixels="True"
+                    MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
+                    MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
+                                <Border Name="DropDownBorder" Background="{DynamicResource Background}" Margin="0, 1, 0, 0"
+                        CornerRadius="0" BorderThickness="1,1,1,1" 
+                        BorderBrush="{DynamicResource ButtonOutline}"/>
+                                <ScrollViewer Margin="1" SnapsToDevicePixels="True" VerticalContentAlignment="Center" VerticalAlignment="Center">
+                                    <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" VerticalAlignment="Center"/>
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ItemsControl.HasItems" Value="False">
+                            <Setter Property="FrameworkElement.MinHeight" TargetName="DropDownBorder" Value="95"/>
+                        </Trigger>
+                        <Trigger Property="UIElement.IsEnabled" Value="False">
+                            <Setter Property="TextElement.Foreground" Value="{DynamicResource Foreground_Disabled}"/>
+                        </Trigger>
+                        <Trigger Property="ItemsControl.IsGrouping" Value="True">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                        </Trigger>
+                        <Trigger Property="ComboBox.IsEditable" Value="True">
+                            <Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
+                            <Setter Property="UIElement.Visibility" TargetName="PART_EditableTextBox" Value="Visible"/>
+                            <Setter Property="UIElement.Visibility" TargetName="ContentSite" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

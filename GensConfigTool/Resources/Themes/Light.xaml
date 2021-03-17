@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="Background" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Border" Color="#60000000" />
+
+    <SolidColorBrush x:Key="TabHeader" Color="#10000000" />
+    <SolidColorBrush x:Key="TabHeader_Hover" Color="#40666666" />
+    <SolidColorBrush x:Key="TabHeader_Selected" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="TabHeader_Outline" Color="#60000000" />
+    <SolidColorBrush x:Key="TabHeader_Disabled" Color="#40000000" />
+
+    <SolidColorBrush x:Key="Foreground" Color="#000000" />
+    <SolidColorBrush x:Key="Foreground_Disabled" Color="#7E000000" />
+
+    <SolidColorBrush x:Key="Button" Color="#DDDDDD" />
+    <SolidColorBrush x:Key="Button_Hover" Color="#BEE6FD" />
+    <SolidColorBrush x:Key="Button_Click" Color="#C4E5F6" />
+    <SolidColorBrush x:Key="Button_Disabled" Color="#7EDDDDDD" />
+
+    <SolidColorBrush x:Key="RadioButton_Clicked" Color="#60000000" />
+    <SolidColorBrush x:Key="RadioButton_Outline" Color="#60000000" />
+    <SolidColorBrush x:Key="RadioButton_Inner" Color="#000000" />
+    <SolidColorBrush x:Key="RadioButton_Hover" Color="#80000000" />
+
+    <SolidColorBrush x:Key="ButtonOutline" Color="#60000000" />
+    <SolidColorBrush x:Key="ButtonOutline_Disabled" Color="#40000000" />
+</ResourceDictionary>

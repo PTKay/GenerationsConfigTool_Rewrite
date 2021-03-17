@@ -83,4 +83,16 @@
     <Resource Include="Resources\Images\Vsync.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Resources\Themes\Dark.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="Resources\Themes\Light.xaml">
+      <Generator></Generator>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+
 </Project>

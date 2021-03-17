@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static ConfigurationTool.Helpers.ThemeHelper;
 
 namespace ConfigurationTool
 {
@@ -29,6 +30,7 @@ namespace ConfigurationTool
         public MainWindow()
         {
             InitializeComponent();
+
             this.Files = new ConfigurationHandler();
             this.Configuration = Files.LoadConfiguration();
 
@@ -58,6 +60,15 @@ namespace ConfigurationTool
 
             UpdateConfigView();
             UpdateInputView();
+
+            ThemeHelper winTheme = new ThemeHelper(theme => 
+            {
+                Application.Current.Resources.MergedDictionaries[0].Source = new Uri("/Resources/Themes/" +
+                (theme == WindowsTheme.Light ? "Light.xaml" : "Dark.xaml"),
+                UriKind.Relative);
+            });
+            winTheme.WatchTheme();
+
             PollXinput(observed, this.Configuration.XinputController);
         }
 

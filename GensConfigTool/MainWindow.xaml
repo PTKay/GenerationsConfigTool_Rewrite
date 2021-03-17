@@ -4,146 +4,151 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="{StaticResource Title}" MinHeight="700" MinWidth="1000" Height="700" Width="1000" WindowStartupLocation="CenterScreen">
+        Background="{DynamicResource Background}"
+        Title="{StaticResource Title}" MinHeight="750" MinWidth="1000" Height="750" Width="1000" WindowStartupLocation="CenterScreen">
 
-    <Border Padding="10">
+    <Grid x:Name="ParentGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.15*" />
+        </Grid.RowDefinitions>
 
-        <Grid x:Name="ParentGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="0.15*" />
-            </Grid.RowDefinitions>
+        <TabControl Margin="0 10 0 0" x:Name="Tabs" Grid.Row="0" BorderThickness="0 1 0 1">
+            <TabItem Header="{StaticResource Settings}">
+                <!-- Graphics Settings Window -->
+                <Grid Margin="15 15 15 15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <TabControl x:Name="Tabs" Grid.Row="0">
-                <TabItem Header="{StaticResource Settings}">
-                    <!-- Graphics Settings Window -->
-                    <Grid Margin="10 10 10 10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                        <!-- Options -->
+                        <TextBlock Grid.Row="0" Text="{StaticResource Graphics}" Opacity="0.5"/>
+                        <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
 
-                            <!-- Options -->
-                            <TextBlock Grid.Row="0" Text="{StaticResource Graphics}" Opacity="0.5"/>
-                            <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
+                        <TextBlock Grid.Row="1" Margin="0 10 0 0" Text="{StaticResource GraphicsAdapter}" MouseEnter="GPUSelector_MouseEnter"/>
+                        <ComboBox x:Name="GPUSelector" Grid.Row="2" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="GPUSelector_MouseEnter" SelectionChanged="GPUSelector_SelectionChanged"/>
 
-                            <TextBlock Grid.Row="1" Margin="0 10 0 0" Text="{StaticResource GraphicsAdapter}" MouseEnter="GPUSelector_MouseEnter"/>
-                            <ComboBox x:Name="GPUSelector" Grid.Row="2" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="GPUSelector_MouseEnter" SelectionChanged="GPUSelector_SelectionChanged"/>
+                        <TextBlock Grid.Row="3" Text="{StaticResource Resolution}" MouseEnter="ResSelector_MouseEnter"/>
+                        <ComboBox x:Name="ResSelector" Grid.Row="4" Margin="0 5 0 5" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="False" MouseEnter="ResSelector_MouseEnter" SelectionChanged="ResSelector_SelectionChanged"/>
 
-                            <TextBlock Grid.Row="3" Text="{StaticResource Resolution}" MouseEnter="ResSelector_MouseEnter"/>
-                            <ComboBox x:Name="ResSelector" Grid.Row="4" Margin="0 5 0 5" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="False" MouseEnter="ResSelector_MouseEnter" SelectionChanged="ResSelector_SelectionChanged"/>
+                        <TextBlock Grid.Row="5" Text="{StaticResource Antialiasing}" MouseEnter="FxaaSelector_MouseEnter"/>
+                        <ComboBox x:Name="FxaaSelector" Grid.Row="6" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="FxaaSelector_MouseEnter" SelectionChanged="FxaaSelector_SelectionChanged" />
 
-                            <TextBlock Grid.Row="5" Text="{StaticResource Antialiasing}" MouseEnter="FxaaSelector_MouseEnter"/>
-                            <ComboBox x:Name="FxaaSelector" Grid.Row="6" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="FxaaSelector_MouseEnter" SelectionChanged="FxaaSelector_SelectionChanged" />
+                        <TextBlock Grid.Row="7" Text="{StaticResource DisplayMode}" MouseEnter="DispModeSelector_MouseEnter"/>
+                        <ComboBox x:Name="DispModeSelector" Grid.Row="8" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="DispModeSelector_MouseEnter" SelectionChanged="DispModeSelector_SelectionChanged" />
 
-                            <TextBlock Grid.Row="7" Text="{StaticResource DisplayMode}" MouseEnter="DispModeSelector_MouseEnter"/>
-                            <ComboBox x:Name="DispModeSelector" Grid.Row="8" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="DispModeSelector_MouseEnter" SelectionChanged="DispModeSelector_SelectionChanged" />
+                        <TextBlock Grid.Row="9" Text="{StaticResource ShadowQuality}" MouseEnter="ShadowSelector_MouseEnter"/>
+                        <ComboBox x:Name="ShadowSelector" Grid.Row="10" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="ShadowSelector_MouseEnter" SelectionChanged="ShadowSelector_SelectionChanged" />
 
-                            <TextBlock Grid.Row="9" Text="{StaticResource ShadowQuality}" MouseEnter="ShadowSelector_MouseEnter"/>
-                            <ComboBox x:Name="ShadowSelector" Grid.Row="10" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="ShadowSelector_MouseEnter" SelectionChanged="ShadowSelector_SelectionChanged" />
+                        <TextBlock Grid.Row="11" Text="{StaticResource ReflectionQuality}" MouseEnter="ReflectionSelector_MouseEnter"/>
+                        <ComboBox x:Name="ReflectionSelector" Grid.Row="12" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="ReflectionSelector_MouseEnter" SelectionChanged="ReflectionSelector_SelectionChanged" />
 
-                            <TextBlock Grid.Row="11" Text="{StaticResource ReflectionQuality}" MouseEnter="ReflectionSelector_MouseEnter"/>
-                            <ComboBox x:Name="ReflectionSelector" Grid.Row="12" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="ReflectionSelector_MouseEnter" SelectionChanged="ReflectionSelector_SelectionChanged" />
-
-                            <TextBlock Grid.Row="13" Text="{StaticResource VSync}" MouseEnter="VSyncSelector_MouseEnter"/>
-                            <ComboBox x:Name="VSyncSelector" Grid.Row="14" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="VSyncSelector_MouseEnter" SelectionChanged="VSyncSelector_SelectionChanged" />
+                        <TextBlock Grid.Row="13" Text="{StaticResource VSync}" MouseEnter="VSyncSelector_MouseEnter"/>
+                        <ComboBox x:Name="VSyncSelector" Grid.Row="14" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="VSyncSelector_MouseEnter" SelectionChanged="VSyncSelector_SelectionChanged" />
 
 
-                            <TextBlock Grid.Row="15" Text="{StaticResource Audio}" Opacity="0.5"/>
-                            <Separator Grid.Row="16" Margin="0 5 0 5" VerticalAlignment="Top"/>
+                        <TextBlock Grid.Row="15" Text="{StaticResource Audio}" Opacity="0.5"/>
+                        <Separator Grid.Row="16" Margin="0 5 0 5" VerticalAlignment="Top"/>
 
-                            <TextBlock Grid.Row="16" Margin="0 10 0 0" Text="{StaticResource AudioDevice}" VerticalAlignment="Bottom" MouseEnter="AudioSelector_MouseEnter"/>
-                            <ComboBox x:Name="AudioSelector" Grid.Row="17" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="AudioSelector_MouseEnter" SelectionChanged="AudioSelector_SelectionChanged"/>
+                        <TextBlock Grid.Row="16" Margin="0 10 0 0" Text="{StaticResource AudioDevice}" VerticalAlignment="Bottom" MouseEnter="AudioSelector_MouseEnter"/>
+                        <ComboBox x:Name="AudioSelector" Grid.Row="17" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="AudioSelector_MouseEnter" SelectionChanged="AudioSelector_SelectionChanged"/>
 
-                            <TextBlock Grid.Row="18" Text="{StaticResource Other}" Opacity="0.5" />
-                            <Separator Grid.Row="19" Margin="0 5 0 5" VerticalAlignment="Top"/>
+                        <TextBlock Grid.Row="18" Text="{StaticResource Other}" Opacity="0.5" />
+                        <Separator Grid.Row="19" Margin="0 5 0 5" VerticalAlignment="Top"/>
 
-                            <TextBlock x:Name="LanguageLabel"  Grid.Row="19" Margin="0 10 0 0" Text="{StaticResource Language}" VerticalAlignment="Bottom" Opacity="0.5" MouseEnter="LanguageSelector_MouseEnter"/>
-                            <Grid Grid.Row="20" Margin="0 5 0 5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition x:Name="AdminButtonCol"  Width="0.1*" />
-                                </Grid.ColumnDefinitions>
-                                <ComboBox x:Name="LanguageSelector" Grid.Column="0" VerticalContentAlignment="Center" SelectionChanged="LanguageSelector_SelectionChanged" MouseEnter="LanguageSelector_MouseEnter"/>
-                                <Button Grid.Column="1" Margin="5 0 0 0" x:Name="AdminButton" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AdminButton_Click">
-                                    <Image x:Name="AdminButtonImage" Stretch="Uniform" />
-                                </Button>
-                            </Grid>
-                        </Grid>
-
-                        <Grid Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="0.30*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="0.15*" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0" Margin="10 0 0 0" Text="{StaticResource Description}" Opacity="0.5"/>
-
-                            <Separator Grid.Row="1" Margin="10 5 0 5" VerticalAlignment="Top"/>
-                            <TextBlock Grid.Row="1" x:Name="Tooltip" Margin="10 10 0 0" Text="{StaticResource DefaultTooltip}" TextWrapping="Wrap"/>
-                            <Image x:Name="TooltipImage" Grid.Row="2" Margin="10 2 0 5" Source="/Resources/Images/None.png" />
-
-                            <Grid Grid.Row="3" Margin="10 0 0 0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Text="{StaticResource Analytics}" Opacity="0.5"/>
-                                <Separator Grid.Row="1" Margin="0 5 0 5"/>
-                            </Grid>
-
-                            <Grid Grid.Row="4" Margin="10 5 0 5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <RadioButton x:Name="Analytics_Enabled" GroupName="Analytics" IsChecked="True" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Analytics_Enabled_Click">
-                                    <TextBlock Text="{StaticResource EnableAnalytics}" VerticalAlignment="Center"/>
-                                </RadioButton>
-
-                                <RadioButton x:Name="Analytics_Disabled" GroupName="Analytics" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Analytics_Disabled_Click">
-                                    <TextBlock Text="{StaticResource DisableAnalytics}" VerticalAlignment="Center"/>
-                                </RadioButton>
-                            </Grid>
-                            <Button x:Name="AnalyticsButton" Grid.Row="5" Margin="10 5 0 5" Content="{StaticResource AnalyticsInfo}" Click="AnalyticsButton_Click"/>
+                        <TextBlock x:Name="LanguageLabel"  Grid.Row="19" Margin="0 10 0 0" Text="{StaticResource Language}" VerticalAlignment="Bottom" Opacity="0.5" MouseEnter="LanguageSelector_MouseEnter"/>
+                        <Grid Grid.Row="20" Margin="0 5 0 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition x:Name="AdminButtonCol"  Width="0.1*" />
+                            </Grid.ColumnDefinitions>
+                            <ComboBox x:Name="LanguageSelector" Grid.Column="0" VerticalContentAlignment="Center" SelectionChanged="LanguageSelector_SelectionChanged" MouseEnter="LanguageSelector_MouseEnter"/>
+                            <Button Grid.Column="1" Margin="5 0 0 0" x:Name="AdminButton" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AdminButton_Click">
+                                <Image x:Name="AdminButtonImage" Stretch="Uniform" Margin="2 2 2 2" />
+                            </Button>
                         </Grid>
                     </Grid>
-                </TabItem>
-                <TabItem Header="{StaticResource Input}" >
-                    <Grid Margin="10 10 10 10">
+
+                    <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="0.30*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="0.15*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Margin="10 0 0 0" Text="{StaticResource Description}" Opacity="0.5"/>
+
+                        <Separator Grid.Row="1" Margin="10 5 0 5" VerticalAlignment="Top"/>
+                        <TextBlock Grid.Row="1" x:Name="Tooltip" Margin="10 10 0 0" Text="{StaticResource DefaultTooltip}" TextWrapping="Wrap"/>
+                        <Image x:Name="TooltipImage" Grid.Row="2" Margin="10 2 0 5" Source="/Resources/Images/None.png" />
+
+                        <Grid Grid.Row="3" Margin="10 0 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Text="{StaticResource Analytics}" Opacity="0.5"/>
+                            <Separator Grid.Row="1" Margin="0 5 0 5"/>
+                        </Grid>
+
+                        <Grid Grid.Row="4" Margin="10 5 0 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <RadioButton x:Name="Analytics_Enabled" GroupName="Analytics" IsChecked="True" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Analytics_Enabled_Click">
+                                <TextBlock Text="{StaticResource EnableAnalytics}" VerticalAlignment="Center"/>
+                            </RadioButton>
+
+                            <RadioButton x:Name="Analytics_Disabled" GroupName="Analytics" IsChecked="False" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Analytics_Disabled_Click">
+                                <TextBlock Text="{StaticResource DisableAnalytics}" VerticalAlignment="Center"/>
+                            </RadioButton>
+                        </Grid>
+                        <Button x:Name="AnalyticsButton" Grid.Row="5" Margin="10 5 0 5" Content="{StaticResource AnalyticsInfo}" Click="AnalyticsButton_Click"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="{StaticResource Input}">
+                <Grid Margin="15 15 15 15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
@@ -153,192 +158,185 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-
-                                <TextBlock Grid.Row="0" Text="{StaticResource ControllerInfo}" Opacity="0.5" HorizontalAlignment="Center"/>
-                                <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
-                            </Grid>
-
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Column="0" Text="{StaticResource InputDevice}" VerticalAlignment="Center" />
-                                <ComboBox Grid.Column="1" Margin="10 0 0 0" x:Name="InputSelector" VerticalContentAlignment="Center" SelectionChanged="InputSelector_SelectionChanged" />
-                            </Grid>
+                            <TextBlock Grid.Row="0" Text="{StaticResource ControllerInfo}" Opacity="0.5" HorizontalAlignment="Center"/>
+                            <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
                         </Grid>
 
-                        <Grid Grid.Row="1" x:Name="InputButtons">
+                        <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="0.3*" />
+                                <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0" Grid.Column="0"  Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/A.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_A" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="A"/>
-                            </Grid>
-                            <Grid Grid.Row="1" Grid.Column="0" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/B.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_B" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="B"/>
-                            </Grid>
-                            <Grid Grid.Row="2" Grid.Column="0" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/X.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_X" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="X" />
-                            </Grid>
-                            <Grid Grid.Row="3" Grid.Column="0" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Y.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_Y" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Y"/>
-                            </Grid>
-                            <Grid Grid.Row="4" Grid.Column="0" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/RB.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_RB" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="RB"/>
-                            </Grid>
-                            <Grid Grid.Row="5" Grid.Column="0" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/LB.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_LB" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="LB"/>
-                            </Grid>
-                            <Grid Grid.Row="6" Grid.Column="0" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/RT.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_RT" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="RT"/>
-                            </Grid>
-                            <Grid Grid.Row="7" Grid.Column="0" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/LT.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_LT" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="LT"/>
-                            </Grid>
-                            <Grid Grid.Row="0" Grid.Column="2" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Up.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_Up" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Up"/>
-                            </Grid>
-                            <Grid Grid.Row="1" Grid.Column="2" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Right.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_Right" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Right"/>
-                            </Grid>
-                            <Grid Grid.Row="2" Grid.Column="2" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Down.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_Down" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Down"/>
-                            </Grid>
-                            <Grid Grid.Row="3" Grid.Column="2" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Left.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_Left" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Left"/>
-                            </Grid>
-                            <Grid Grid.Row="4" Grid.Column="2" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Start.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_Start" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Start"/>
-                            </Grid>
-                            <Grid Grid.Row="5" Grid.Column="2" Margin="0 10 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image Grid.Column="0" Source="Resources/Images/Buttons/Back.png" VerticalAlignment="Center"/>
-                                <Button x:Name="Button_Back" Grid.Column="1" Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Back"/>
-                            </Grid>
-
-                            <Separator Grid.Row="6" Grid.Column="2" VerticalAlignment="Center"/>
-                            <Button x:Name="ButtonDefault" Grid.Row="7" Grid.Column="2" Content="Reset to Defaults" Click="ButtonDefault_Click"/>
+                            <TextBlock Grid.Column="0" Text="{StaticResource InputDevice}" VerticalAlignment="Center" />
+                            <ComboBox Grid.Column="1" Margin="10 0 0 0" x:Name="InputSelector" VerticalContentAlignment="Center" SelectionChanged="InputSelector_SelectionChanged" />
                         </Grid>
                     </Grid>
-                </TabItem>
-            </TabControl>
 
-            <!-- Bottom Buttons -->
-            <DockPanel Grid.Row="1">
-                <Grid Margin="0 10 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1" x:Name="InputButtons">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
 
-                    <Button x:Name="SaveButton" Click="UI_Save_Click" Grid.Column="0" Margin="0 0 10 0" Content="{StaticResource Save}" />
-                    <Button x:Name="SaveAndQuitButton" Click="UI_SaveAndQuit_Click" Grid.Column="1" Margin="0 0 0 0" Content="{StaticResource SaveQuit}" />
-                    <Button x:Name="QuitButton" Click="UI_Quit_Click" Grid.Column="2" Margin="10 0 0 0" Content="{StaticResource Quit}" />
+                        <Grid Grid.Row="0" Grid.Column="0"  Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/A.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_A" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="A"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="0" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/B.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_B" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="B"/>
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="0" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/X.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_X" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="X" />
+                        </Grid>
+                        <Grid Grid.Row="3" Grid.Column="0" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/Y.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_Y" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Y"/>
+                        </Grid>
+                        <Grid Grid.Row="4" Grid.Column="0" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/RB.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_RB" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="RB"/>
+                        </Grid>
+                        <Grid Grid.Row="5" Grid.Column="0" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/LB.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_LB" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="LB"/>
+                        </Grid>
+                        <Grid Grid.Row="6" Grid.Column="0" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/RT.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_RT" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="RT"/>
+                        </Grid>
+                        <Grid Grid.Row="7" Grid.Column="0" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/LT.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_LT" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="LT"/>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="2" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Up.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_Up" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Up"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="2" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Right.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_Right" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Right"/>
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="2" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Down.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_Down" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Down"/>
+                        </Grid>
+                        <Grid Grid.Row="3" Grid.Column="2" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/Stick_Left.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_Left" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Left"/>
+                        </Grid>
+                        <Grid Grid.Row="4" Grid.Column="2" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/Start.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_Start" Grid.Column="1"  Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Start"/>
+                        </Grid>
+                        <Grid Grid.Row="5" Grid.Column="2" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="Resources/Images/Buttons/Back.png" VerticalAlignment="Center"/>
+                            <Button x:Name="Button_Back" Grid.Column="1" Margin="10 0 0 0" Content="{StaticResource Null}" Click="InputButton_Click" Tag="Back"/>
+                        </Grid>
+
+                        <Separator Grid.Row="6" Grid.Column="2" VerticalAlignment="Center"/>
+                        <Button x:Name="ButtonDefault" Grid.Row="7" Grid.Column="2" Content="Reset to Defaults" Click="ButtonDefault_Click"/>
+                    </Grid>
                 </Grid>
-            </DockPanel>
-        </Grid>
-    </Border>
+            </TabItem>
+        </TabControl>
+
+        <!-- Bottom Buttons -->
+        <DockPanel Grid.Row="1">
+            <Grid Margin="15 10 15 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="SaveButton" Click="UI_Save_Click" Grid.Column="0" Margin="0 0 10 0" Content="{StaticResource Save}" />
+                <Button x:Name="SaveAndQuitButton" Click="UI_SaveAndQuit_Click" Grid.Column="1" Margin="0 0 0 0" Content="{StaticResource SaveQuit}" />
+                <Button x:Name="QuitButton" Click="UI_Quit_Click" Grid.Column="2" Margin="10 0 0 0" Content="{StaticResource Quit}" />
+            </Grid>
+        </DockPanel>
+    </Grid>
 </Window>
