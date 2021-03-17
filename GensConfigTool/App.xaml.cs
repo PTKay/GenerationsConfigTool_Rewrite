@@ -1,9 +1,7 @@
 ﻿using ConfigurationTool.Handlers;
-using ConfigurationTool.Helpers;
 using System;
 using System.Globalization;
 using System.Windows;
-using static ConfigurationTool.Helpers.ThemeHelper;
 
 namespace ConfigurationTool
 {

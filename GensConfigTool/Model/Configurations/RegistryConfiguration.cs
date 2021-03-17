@@ -63,7 +63,7 @@ namespace ConfigurationTool.Model.Configurations
             try
             {
                 Directory.CreateDirectory(config.InputSaveLocation);
-            } 
+            }
             catch
             {
                 // Directory in registry was invalid

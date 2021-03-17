@@ -61,7 +61,7 @@ namespace ConfigurationTool
             UpdateConfigView();
             UpdateInputView();
 
-            ThemeHelper winTheme = new ThemeHelper(theme => 
+            ThemeHelper winTheme = new ThemeHelper(theme =>
             {
                 Application.Current.Resources.MergedDictionaries[0].Source = new Uri("/Resources/Themes/" +
                 (theme == WindowsTheme.Light ? "Light.xaml" : "Dark.xaml"),
@@ -100,7 +100,7 @@ namespace ConfigurationTool
             if (this.Configuration.Analytics == OnOff.On)
             {
                 this.Analytics_Enabled.IsChecked = true;
-            } 
+            }
             else
             {
                 this.Analytics_Disabled.IsChecked = true;
