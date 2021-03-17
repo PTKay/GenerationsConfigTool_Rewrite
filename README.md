@@ -23,7 +23,7 @@ Rewriting Sonic Generations' Configuration Tool using WPF as a way to teach myse
 ![Main Configuration](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/master/Images/Config.png)
 ![Input Configuration](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/master/Images/InputConfig.png)
 
-Credits
+## Credits
 - [PTKickass](https://github.com/PTKickass) - Code and UI
 - [M&M](https://github.com/ActualMandM) - Font images
 - [Hyper](https://github.com/HyperBE32) - Settings descriptions
