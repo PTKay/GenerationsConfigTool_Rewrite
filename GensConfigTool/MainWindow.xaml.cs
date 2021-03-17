@@ -41,18 +41,21 @@ namespace ConfigurationTool
 
             // Get Audio Devices
             this.AudioSelector.ItemsSource = DevicesHandler.GetAudioDevices();
+            
+            OnOff[] onOff = EnumOrder<OnOff>.Values;
+            HighLow[] highLow = EnumOrder<HighLow>.Values;
 
-            this.AntiAliasingSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
-            this.VSyncSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
+            this.AntiAliasingSelector.ItemsSource = onOff;
+            this.VSyncSelector.ItemsSource = onOff;
+            this.AnalyticsSelector.ItemsSource = onOff;
 
             this.DispModeSelector.ItemsSource = Enum.GetValues(typeof(DisplayMode));
 
-            this.ShadowSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
-            this.ReflectionSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
+            this.ShadowSelector.ItemsSource = highLow;
+            this.ReflectionSelector.ItemsSource = highLow;
 
             this.LanguageSelector.ItemsSource = EnumOrder<Language>.Values;
 
-            this.AnalyticsSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
 
             this.InputSelector.Items.Add(this.Configuration.Keyboard);
             bool observed = this.Configuration.XinputController.IsConnected;

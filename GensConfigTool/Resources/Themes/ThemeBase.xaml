@@ -115,15 +115,14 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style TargetType="{x:Type ComboBoxItem}">
-        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="{DynamicResource Background}" />
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                    <Border Background="{TemplateBinding Background}" VerticalAlignment="Center">
+                    <Border Background="{TemplateBinding Background}" VerticalAlignment="Center" CornerRadius="2">
                         <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5 2 0 2"/>
                     </Border>
 
@@ -134,6 +133,9 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource Button_Disabled}" />
                             <Setter Property="Foreground" Value="{DynamicResource Foreground_Disabled}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource ComboBoxItem_Selected}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -149,9 +151,9 @@
             </Grid.ColumnDefinitions>
             <Border Grid.ColumnSpan="2" Name="Border"
               BorderBrush="{DynamicResource ButtonOutline}" 
-              CornerRadius="3" BorderThickness="1, 1, 1, 1" 
+              CornerRadius="3" BorderThickness="1" 
               Background="{DynamicResource Button}" />
-            <Border Grid.Column="1" Margin="1, 1, 1, 1" Name="ButtonBorder"
+            <Border Grid.Column="1" Margin="1" Name="ButtonBorder"
               CornerRadius="0 3 3 0" BorderThickness="0" 
               Background="{DynamicResource Button}" />
 
@@ -221,10 +223,10 @@
                             <Grid Name="DropDown" SnapsToDevicePixels="True"
                     MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
                     MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
-                                <Border Name="DropDownBorder" Background="{DynamicResource Background}" Margin="0, 1, 0, 0"
-                        CornerRadius="0" BorderThickness="1,1,1,1" 
-                        BorderBrush="{DynamicResource ButtonOutline}"/>
-                                <ScrollViewer Margin="1" SnapsToDevicePixels="True" VerticalContentAlignment="Center" VerticalAlignment="Center">
+                                <Border Name="DropDownBorder" Background="Transparent" Margin="0, 0, 0, 0"
+                        CornerRadius="3" BorderThickness="1" 
+                        BorderBrush="{DynamicResource ButtonOutline}" />
+                                <ScrollViewer Margin="1 1 1 1" SnapsToDevicePixels="True" VerticalContentAlignment="Center" VerticalAlignment="Center">
                                     <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" VerticalAlignment="Center"/>
                                 </ScrollViewer>
                             </Grid>
@@ -250,4 +252,72 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Grid x:Name="Grid">
+                        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="{DynamicResource ScrollBar_Background}" />
+                        <Border x:Name="ScrollBarRectangle" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Background="{DynamicResource ScrollBar_Thumb}" Margin="2 1 2 1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Tag" Value="Horizontal">
+                            <Setter TargetName="ScrollBarRectangle" Property="Width" Value="Auto" />
+                            <Setter TargetName="ScrollBarRectangle" Property="Height" Value="7" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type ScrollBar}">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource ScrollBar_Thumb}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid x:Name="GridRoot" Width="15" Background="{DynamicResource ScrollBar_Background}">
+                            <Track x:Name="PART_Track" IsDirectionReversed="true" Focusable="false">
+                                <Track.Thumb>
+                                    <Thumb x:Name="ScrollBarThumb" Style="{StaticResource ScrollThumbs}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
+                                </Track.DecreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="ScrollBarThumb" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="GridRoot" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="PART_Track" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Width" Value="Auto" />
+                            <Setter Property="Height" Value="8" />
+                            <Setter TargetName="ScrollBarThumb" Property="Tag" Value="Horizontal" />
+                            <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
+                            <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
+    

@@ -23,6 +23,10 @@
     <SolidColorBrush x:Key="RadioButton_Clicked" Color="#AFABAF" />
     <SolidColorBrush x:Key="RadioButton_Hover" Color="#686868" />
 
-    <SolidColorBrush x:Key="ButtonOutline" Color="#60666666" />
-    <SolidColorBrush x:Key="ButtonOutline_Disabled" Color="#60666666" />
+    <SolidColorBrush x:Key="ButtonOutline" Color="#22FFFFFF" />
+    <SolidColorBrush x:Key="ButtonOutline_Disabled" Color="#10FFFFFF" />
+
+    <SolidColorBrush x:Key="ComboBoxItem_Selected" Color="#15FFFFFF" />
+    <SolidColorBrush x:Key="ScrollBar_Thumb" Color="#BBAFABAF" />
+    <SolidColorBrush x:Key="ScrollBar_Background" Color="#50AFABAF" />
 </ResourceDictionary>
