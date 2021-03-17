@@ -42,7 +42,7 @@ namespace ConfigurationTool.Model.Configurations
                     config.ShadowQuality = int.Parse(sr.ReadLine()) > 0 ? HighLow.High : HighLow.Low;
                     config.ReflectionQuality = int.Parse(sr.ReadLine()) > 0 ? HighLow.High : HighLow.Low;
 
-                    config.DisplayMode = int.Parse(sr.ReadLine()) > 0 ? DisplayMode.Letterboxed : DisplayMode.Widescreen;
+                    config.DisplayMode = int.Parse(sr.ReadLine()) > 0 ? DisplayMode.Letterbox : DisplayMode.Widescreen;
 
                     config.GraphicsAdapter = new GraphicsAdapter()
                     {

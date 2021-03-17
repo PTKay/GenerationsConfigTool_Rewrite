@@ -22,7 +22,7 @@ namespace ConfigurationTool.Model
         public HighLow ShadowQuality = HighLow.High;
         public HighLow ReflectionQuality = HighLow.High;
 
-        public DisplayMode DisplayMode = DisplayMode.Letterboxed;
+        public DisplayMode DisplayMode = DisplayMode.Letterbox;
 
         public bool ProcessIsElevated
         {

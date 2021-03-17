@@ -2,7 +2,7 @@
 {
     enum DisplayMode
     {
-        Letterboxed = 1,
-        Widescreen = 0
+        Widescreen = 0,
+        Letterbox = 1
     }
 }

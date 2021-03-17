@@ -45,7 +45,7 @@ namespace ConfigurationTool
             this.FxaaSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
             this.VSyncSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
 
-            this.DispModeSelector.ItemsSource = EnumOrder<DisplayMode>.Values;
+            this.DispModeSelector.ItemsSource = Enum.GetValues(typeof(DisplayMode));
 
             this.ShadowSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
             this.ReflectionSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
@@ -97,7 +97,14 @@ namespace ConfigurationTool
             int idx = this.AudioSelector.Items.IndexOf(this.Configuration.AudioDevice);
             this.AudioSelector.SelectedIndex = idx < 0 ? 0 : idx;
 
-            this.Analytics_Enabled.IsChecked = this.Configuration.Analytics == OnOff.On;
+            if (this.Configuration.Analytics == OnOff.On)
+            {
+                this.Analytics_Enabled.IsChecked = true;
+            } 
+            else
+            {
+                this.Analytics_Disabled.IsChecked = true;
+            }
 
             this.LanguageSelector.SelectedItem = Configuration.Language;
 
