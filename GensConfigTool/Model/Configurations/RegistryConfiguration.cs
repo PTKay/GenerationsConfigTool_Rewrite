@@ -3,6 +3,7 @@ using ConfigurationTool.Helpers;
 using ConfigurationTool.Model.Settings;
 using Microsoft.Win32;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 
@@ -31,23 +32,36 @@ namespace ConfigurationTool.Model.Configurations
             }
 
             // Load Locale
-            object locale = registryKey?.GetValue(REGDATA_LOCALE);
-            if (locale != null)
+            try
             {
-                int regLocale = int.Parse(locale.ToString());
-                if (Array.IndexOf((int[])Enum.GetValues(typeof(Language)), regLocale) >= 0)
+                object locale = registryKey?.GetValue(REGDATA_LOCALE);
+                if (locale != null)
                 {
-                    config.Language = (Language)regLocale;
+                    // Try parsing the locale
+                    if (!int.TryParse(locale.ToString(), out int regLocale))
+                    {
+                        CultureInfo culture = new CultureInfo(locale.ToString(), false);
+                        regLocale = culture.LCID;
+                    }
+
+                    if (Array.IndexOf((int[])Enum.GetValues(typeof(Language)), regLocale) >= 0)
+                    {
+                        config.Language = (Language)regLocale;
+                    }
+                    else
+                    {
+                        // Locale in registry was invalid
+                        fixRegistry = fixRegistry >= 0 ? 1 : fixRegistry;
+                    }
                 }
                 else
                 {
-                    // Locale in registry was invalid
                     fixRegistry = fixRegistry >= 0 ? 1 : fixRegistry;
                 }
             }
-            else
+            catch
             {
-                fixRegistry = fixRegistry >= 0 ? 1 : fixRegistry;
+
             }
 
             // Load Input Save Location
