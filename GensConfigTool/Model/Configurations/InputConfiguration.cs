@@ -6,7 +6,7 @@ namespace ConfigurationTool.Model.Configurations
     class InputConfiguration : IConfiguration
     {
         public const string ConfigLocation = "PlayerInput.cfg";
-        public string DefaultConfig => "DefaultConfig.cfg";
+        public string DefaultConfig => "DefaultInput.cfg";
 
         public Configuration LoadConfiguration(Configuration config)
         {
@@ -38,6 +38,10 @@ namespace ConfigurationTool.Model.Configurations
             using (StreamWriter writer = new StreamWriter(File.Create(path)))
             {
                 writer.Write(config.Keyboard.Serialize());
+            }
+            using (StreamWriter writer = new StreamWriter(File.Create(DefaultConfig)))
+            {
+                writer.Write(new Keyboard().Serialize());
             }
         }
     }

@@ -9,7 +9,7 @@ namespace ConfigurationTool.Settings.Model
         public int Height { get; set; }
         public int Frequency { get; set; }
 
-        public int CompareTo([AllowNull] Resolution other)
+        public int CompareTo(Resolution other)
         {
             if (other == null)
             {
@@ -39,7 +39,7 @@ namespace ConfigurationTool.Settings.Model
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Width, Height, Frequency);
+            return Tuple.Create(Width, Height, Frequency).GetHashCode();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace ConfigurationTool.Model.Devices
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Description, Name, GUID, Index);
+            return Tuple.Create(Description, Name, GUID, Index).GetHashCode();
         }
     }
 }

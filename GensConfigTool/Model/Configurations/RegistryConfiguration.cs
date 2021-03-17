@@ -23,7 +23,7 @@ namespace ConfigurationTool.Model.Configurations
             int fixRegistry = 0;
 
             // Load Registry
-            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(ConfigLocation);
+            RegistryKey registryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(ConfigLocation);
             if (registryKey == null)
             {
                 fixRegistry = -1;
@@ -78,12 +78,13 @@ namespace ConfigurationTool.Model.Configurations
         {
             if (!config.ProcessIsElevated) return;
 
-            RegistryKey registryKey = Registry.LocalMachine.OpenSubKey(ConfigLocation, true);
+            RegistryKey registryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(ConfigLocation, true);
             if (registryKey != null)
             {
                 registryKey.SetValue(REGDATA_LOCALE, ((int)config.Language).ToString());
-                registryKey.SetValue(REGDATA_SAVELOCATION, config.InputSaveLocation);
+                // Could save input location too but no need
             }
+            registryKey?.Close();
         }
 
         private static void TryFixRegInSameProcess(int fixType, bool isElevated)

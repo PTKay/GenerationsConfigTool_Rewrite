@@ -14,16 +14,16 @@ namespace ConfigurationTool.Handlers
             switch (fixtype)
             {
                 case -1:
-                    registryKey = Registry.LocalMachine.CreateSubKey(RegistryConfiguration.ConfigLocation);
+                    registryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).CreateSubKey(RegistryConfiguration.ConfigLocation);
                     fixAll = true;
                     goto case 1;
                 case 1:
-                    registryKey ??= Registry.LocalMachine.OpenSubKey(RegistryConfiguration.ConfigLocation, true);
+                    registryKey = registryKey ?? RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(RegistryConfiguration.ConfigLocation, true);
                     registryKey.SetValue(RegistryConfiguration.REGDATA_LOCALE, ((int)Language.English).ToString());
                     if (fixAll) goto case 2;
                     break;
                 case 2:
-                    registryKey ??= Registry.LocalMachine.OpenSubKey(RegistryConfiguration.ConfigLocation, true);
+                    registryKey = registryKey ?? RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(RegistryConfiguration.ConfigLocation, true);
                     registryKey.SetValue(RegistryConfiguration.REGDATA_SAVELOCATION, "My Games\\Sonic Generations\\Saved Games");
                     break;
             }

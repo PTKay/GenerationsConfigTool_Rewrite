@@ -1,6 +1,7 @@
 ﻿using ConfigurationTool.Handlers;
 using ConfigurationTool.Helpers;
 using System;
+using System.Globalization;
 using System.Windows;
 using static ConfigurationTool.Helpers.ThemeHelper;
 
@@ -13,6 +14,7 @@ namespace ConfigurationTool
     {
         public App()
         {
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {

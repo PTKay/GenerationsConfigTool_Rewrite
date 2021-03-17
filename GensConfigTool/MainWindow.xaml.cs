@@ -241,6 +241,12 @@ namespace ConfigurationTool
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Misc.png", UriKind.Relative));
         }
 
+        private void AnalyticsZone_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            this.Tooltip.Text = Application.Current.TryFindResource("AnalyticsText").ToString();
+            this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Misc.png", UriKind.Relative));
+        }
+
         private void AnalyticsButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(

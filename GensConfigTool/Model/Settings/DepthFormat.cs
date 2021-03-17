@@ -27,7 +27,7 @@ namespace ConfigurationTool.Settings.Model
         public uint GetFourCC()
         {
             //return (uint)((Value[3] << 24) + (Value[2] << 16) + (Value[1] << 8) + Value[0]);
-            return BitConverter.ToUInt32(Encoding.ASCII.GetBytes(Value));
+            return BitConverter.ToUInt32(Encoding.ASCII.GetBytes(Value), 0);
         }
 
         public static DepthFormat FromFourCC(int fourcc)

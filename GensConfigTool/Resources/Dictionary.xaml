@@ -6,7 +6,7 @@
     <system:String x:Key="Null">N/A</system:String>
     
     <system:String x:Key="Settings">Settings</system:String>
-    <system:String x:Key="Input">Input Config</system:String>
+    <system:String x:Key="Input">Input</system:String>
     <system:String x:Key="Description">Description</system:String>
     <system:String x:Key="DefaultTooltip">Hover the cursor over an option to better understand its purpose</system:String>
 
@@ -28,45 +28,43 @@
 
     <system:String x:Key="Save">Save</system:String>
     <system:String x:Key="Quit">Quit</system:String>
-    <system:String x:Key="SaveQuit">Save And Quit</system:String>
+    <system:String x:Key="SaveQuit">Save and Quit</system:String>
 
     <system:String x:Key="Analytics">Analytics</system:String>
     <system:String x:Key="AnalyticsInfo">Analytics Info</system:String>
     <system:String x:Key="AnalyticsText" xml:space="preserve">Sonic Generations is supported by IncludeApp.
         
-IncludeApp was a game monitoring system that provided developers with detailed information regarding how their games were played.
-        
-If you agreed to activate this feature, your game would upload data that could be used to analyse your game-play experience.
+IncludeApp was a game monitoring system that provided developers with detailed information regarding how their games were played. If you agreed to activate this feature, your game would upload data that could be used to analyse your game-play experience.
         
 IncludeApp was discontinued, so no data is currently being sent, although the data is still being collected from the game offline if you opt into the service.</system:String>
 
-    <system:String x:Key="GraphicsAdapter">Graphics Adapter</system:String>
+    <system:String x:Key="GraphicsAdapter">Adapter</system:String>
     <system:String x:Key="Resolution">Resolution</system:String>
-    <system:String x:Key="Antialiasing">Antialiasing (FXAA)</system:String>
+    <system:String x:Key="Antialiasing">Anti-Aliasing (FXAA)</system:String>
     <system:String x:Key="DisplayMode">Display Mode</system:String>
     <system:String x:Key="ShadowQuality">Shadow Quality</system:String>
     <system:String x:Key="ReflectionQuality">Reflection Quality</system:String>
     <system:String x:Key="VSync">V-Sync</system:String>
-    <system:String x:Key="AudioDevice">Audio Device</system:String>
+    <system:String x:Key="AudioDevice">Device</system:String>
     <system:String x:Key="Language">Language</system:String>
 
-    <system:String x:Key="GraphicsAdapter_Desc">Controls which graphics device and display to use to render the game</system:String>
-    <system:String x:Key="Resolution_Desc">Sets the render resolution of the game</system:String>
-    <system:String x:Key="Antialiasing_Desc">Reduces aliasing at a small cost in performance and visual clarity</system:String>
-    <system:String x:Key="DisplayMode_Desc">Controls whether the game is stretched or not in 4:3 screen resolutions. Only works if your monitor is running at a 4:3 aspect ratio</system:String>
-    <system:String x:Key="ShadowQuality_Desc">Controls the resolution of the real-time shadows</system:String>
-    <system:String x:Key="ReflectionQuality_Desc">Controls the resolution of the game's reflections</system:String>
-    <system:String x:Key="VSync_Desc">Locks the framerate at your display's refresh rate, eliminating screen tearing. Can increase input latency</system:String>
-    <system:String x:Key="AudioDevice_Desc">Selects which audio device to use while in-game</system:String>
-    <system:String x:Key="Language_Desc">Sets the in-game language</system:String>
+    <system:String x:Key="GraphicsAdapter_Desc">Controls which graphics device and display to use to render the game.</system:String>
+    <system:String x:Key="Resolution_Desc">Sets the render resolution of the game.</system:String>
+    <system:String x:Key="Antialiasing_Desc">Reduces aliasing at a small cost in performance and visual clarity.</system:String>
+    <system:String x:Key="DisplayMode_Desc">Controls whether the game is stretched or not in 4:3 screen resolutions. Only works if your monitor is running at a 4:3 aspect ratio.</system:String>
+    <system:String x:Key="ShadowQuality_Desc">Controls the resolution of the real-time shadows.</system:String>
+    <system:String x:Key="ReflectionQuality_Desc">Controls the resolution of the game's reflections.</system:String>
+    <system:String x:Key="VSync_Desc">Locks the framerate at your display's refresh rate, eliminating screen tearing. Can increase input latency.</system:String>
+    <system:String x:Key="AudioDevice_Desc">Selects which audio device to use while in-game.</system:String>
+    <system:String x:Key="Language_Desc">Sets the in-game language.</system:String>
     
-    <system:String x:Key="RegError">The configuration tool detected an invalid registry configuration. Would you like to fix the registry? Pressing No may result in the game being unable to boot</system:String>
+    <system:String x:Key="RegError">The configuration tool detected an invalid registry configuration. Would you like to fix the registry? Pressing No may result in the game being unable to boot.</system:String>
     <system:String x:Key="RegError_Title">Registry Error</system:String>
 
     <system:String x:Key="GraphicsFile_Warning">Do not edit this file manually unless you know what you're doing</system:String>
 
-    <system:String x:Key="InputDevice">Input Device</system:String>
+    <system:String x:Key="InputDevice">Device</system:String>
     <system:String x:Key="ControllerInfo">Press any controller's Start button during play to switch to that controller</system:String>
-    <system:String x:Key="XinputDevice">Xinput Device</system:String>
+    <system:String x:Key="XinputDevice">XInput Device</system:String>
     <system:String x:Key="Keyboard">Keyboard</system:String>
 </ResourceDictionary>
