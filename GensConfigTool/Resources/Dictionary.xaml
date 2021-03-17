@@ -48,15 +48,15 @@ IncludeApp was discontinued, so no data is currently being sent, although the da
     <system:String x:Key="AudioDevice">Device</system:String>
     <system:String x:Key="Language">Language</system:String>
 
-    <system:String x:Key="GraphicsAdapter_Desc">Controls which graphics device and display to use to render the game.</system:String>
-    <system:String x:Key="Resolution_Desc">Sets the render resolution of the game.</system:String>
-    <system:String x:Key="Antialiasing_Desc">Reduces aliasing at a small cost in performance and visual clarity.</system:String>
-    <system:String x:Key="DisplayMode_Desc">Controls whether the game is stretched or not in 4:3 screen resolutions. Only works if your monitor is running at a 4:3 aspect ratio.</system:String>
-    <system:String x:Key="ShadowQuality_Desc">Controls the resolution of the real-time shadows.</system:String>
-    <system:String x:Key="ReflectionQuality_Desc">Controls the resolution of the game's reflections.</system:String>
-    <system:String x:Key="VSync_Desc">Locks the framerate at your display's refresh rate, eliminating screen tearing. Can increase input latency.</system:String>
-    <system:String x:Key="AudioDevice_Desc">Selects which audio device to use while in-game.</system:String>
-    <system:String x:Key="Language_Desc">Sets the in-game language.</system:String>
+    <system:String x:Key="GraphicsAdapter_Desc">Sets the adapter and display to use to display the game.</system:String>
+    <system:String x:Key="Resolution_Desc">Sets the resolution to display the game at.</system:String>
+    <system:String x:Key="Antialiasing_Desc">Reduces aliasing on sharp edges for visual clarity.</system:String>
+    <system:String x:Key="DisplayMode_Desc">Determines how the game should be displayed at non-wide resolutions.</system:String>
+    <system:String x:Key="ShadowQuality_Desc">Sets the resolution of the real-time shadows.</system:String>
+    <system:String x:Key="ReflectionQuality_Desc">Sets the resolution of the real-time reflections.</system:String>
+    <system:String x:Key="VSync_Desc">Reduces screen tearing by locking the games frame rate at your monitor's refresh rate. This may impact latency for inputs.</system:String>
+    <system:String x:Key="AudioDevice_Desc">Sets the device to use to play back audio for the game.</system:String>
+    <system:String x:Key="Language_Desc">Determines what language to use for the game.</system:String>
     
     <system:String x:Key="RegError">The configuration tool detected an invalid registry configuration. Would you like to fix the registry? Pressing No may result in the game being unable to boot.</system:String>
     <system:String x:Key="RegError_Title">Registry Error</system:String>

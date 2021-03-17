@@ -42,7 +42,7 @@ namespace ConfigurationTool
             // Get Audio Devices
             this.AudioSelector.ItemsSource = DevicesHandler.GetAudioDevices();
 
-            this.FxaaSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
+            this.AntiAliasingSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
             this.VSyncSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
 
             this.DispModeSelector.ItemsSource = Enum.GetValues(typeof(DisplayMode));
@@ -51,6 +51,8 @@ namespace ConfigurationTool
             this.ReflectionSelector.ItemsSource = Enum.GetValues(typeof(HighLow));
 
             this.LanguageSelector.ItemsSource = EnumOrder<Language>.Values;
+
+            this.AnalyticsSelector.ItemsSource = Enum.GetValues(typeof(OnOff));
 
             this.InputSelector.Items.Add(this.Configuration.Keyboard);
             bool observed = this.Configuration.XinputController.IsConnected;
@@ -88,7 +90,7 @@ namespace ConfigurationTool
                 this.ResSelector.SelectedIndex = 0;
             }
 
-            this.FxaaSelector.SelectedItem = this.Configuration.Antialiasing;
+            this.AntiAliasingSelector.SelectedItem = this.Configuration.Antialiasing;
             this.VSyncSelector.SelectedItem = this.Configuration.VSync;
             this.DispModeSelector.SelectedItem = this.Configuration.DisplayMode;
             this.ShadowSelector.SelectedItem = this.Configuration.ShadowQuality;
@@ -97,16 +99,8 @@ namespace ConfigurationTool
             int idx = this.AudioSelector.Items.IndexOf(this.Configuration.AudioDevice);
             this.AudioSelector.SelectedIndex = idx < 0 ? 0 : idx;
 
-            if (this.Configuration.Analytics == OnOff.On)
-            {
-                this.Analytics_Enabled.IsChecked = true;
-            }
-            else
-            {
-                this.Analytics_Disabled.IsChecked = true;
-            }
-
-            this.LanguageSelector.SelectedItem = Configuration.Language;
+            this.AnalyticsSelector.SelectedItem = this.Configuration.Analytics;
+            this.LanguageSelector.SelectedItem = this.Configuration.Language;
 
             if (Configuration.ProcessIsElevated)
             {
@@ -199,7 +193,7 @@ namespace ConfigurationTool
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/Res.png", UriKind.Relative));
         }
 
-        private void FxaaSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void AntiAliasingSelector_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             this.Tooltip.Text = Application.Current.TryFindResource("Antialiasing_Desc").ToString();
             this.TooltipImage.Source = new BitmapImage(new Uri("Resources/Images/FXAA.png", UriKind.Relative));
@@ -254,16 +248,6 @@ namespace ConfigurationTool
                 Application.Current.TryFindResource("AnalyticsInfo").ToString());
         }
 
-        private void Analytics_Enabled_Click(object sender, RoutedEventArgs e)
-        {
-            this.Configuration.Analytics = OnOff.On;
-        }
-
-        private void Analytics_Disabled_Click(object sender, RoutedEventArgs e)
-        {
-            this.Configuration.Analytics = OnOff.Off;
-        }
-
         private void GPUSelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (IgnoreSelectionTriggers) return;
@@ -285,7 +269,7 @@ namespace ConfigurationTool
             this.Configuration.Resolution = (Resolution)e.AddedItems[0];
         }
 
-        private void FxaaSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AntiAliasingSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (IgnoreSelectionTriggers) return;
 
@@ -341,6 +325,12 @@ namespace ConfigurationTool
             Model.Devices.DeviceType type = ((InputDevice)e.AddedItems[0]).DeviceType;
             this.InputButtons.IsEnabled = type != Model.Devices.DeviceType.XINPUT;
             UpdateInputView();
+        }
+        private void AnalyticsSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IgnoreSelectionTriggers) return;
+
+            this.Configuration.Analytics = (OnOff)e.AddedItems[0];
         }
 
         private void InputButton_Click(object sender, RoutedEventArgs e)

@@ -4,7 +4,7 @@
     <SolidColorBrush x:Key="Background" Color="#2D2D30" />
     <SolidColorBrush x:Key="Border" Color="#50FFFFFF" />
 
-    <SolidColorBrush x:Key="TabHeader" Color="#000000" />
+    <SolidColorBrush x:Key="TabHeader" Color="#50000000" />
     <SolidColorBrush x:Key="TabHeader_Hover" Color="#4D4D50" />
     <SolidColorBrush x:Key="TabHeader_Selected" Color="#2D2D30" />
     <SolidColorBrush x:Key="TabHeader_Outline" Color="#50FFFFFF" />

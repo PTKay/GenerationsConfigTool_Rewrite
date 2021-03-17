@@ -57,8 +57,8 @@
                         <TextBlock Grid.Row="3" Text="{StaticResource Resolution}" MouseEnter="ResSelector_MouseEnter"/>
                         <ComboBox x:Name="ResSelector" Grid.Row="4" Margin="0 5 0 5" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="False" MouseEnter="ResSelector_MouseEnter" SelectionChanged="ResSelector_SelectionChanged"/>
 
-                        <TextBlock Grid.Row="5" Text="{StaticResource Antialiasing}" MouseEnter="FxaaSelector_MouseEnter"/>
-                        <ComboBox x:Name="FxaaSelector" Grid.Row="6" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="FxaaSelector_MouseEnter" SelectionChanged="FxaaSelector_SelectionChanged" />
+                        <TextBlock Grid.Row="5" Text="{StaticResource Antialiasing}" MouseEnter="AntiAliasingSelector_MouseEnter"/>
+                        <ComboBox x:Name="AntiAliasingSelector" Grid.Row="6" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="AntiAliasingSelector_MouseEnter" SelectionChanged="AntiAliasingSelector_SelectionChanged" />
 
                         <TextBlock Grid.Row="7" Text="{StaticResource DisplayMode}" MouseEnter="DispModeSelector_MouseEnter"/>
                         <ComboBox x:Name="DispModeSelector" Grid.Row="8" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="DispModeSelector_MouseEnter" SelectionChanged="DispModeSelector_SelectionChanged" />
@@ -95,52 +95,32 @@
                         </Grid>
                     </Grid>
 
-                    <Grid Grid.Column="1">
+                    <Grid Grid.Column="1" Margin="10 0 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="0.5*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
+                            <RowDefinition Height="0.15*" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Margin="10 0 0 0" Text="{StaticResource Description}" Opacity="0.5"/>
-
-                        <Separator Grid.Row="1" Margin="10 5 0 5" VerticalAlignment="Top"/>
-                        <TextBlock Grid.Row="1" x:Name="Tooltip" Margin="10 10 0 0" Text="{StaticResource DefaultTooltip}" TextWrapping="Wrap"/>
-                        <Image x:Name="TooltipImage" Grid.Row="2" Margin="10 2 0 5" Source="/Resources/Images/None.png" />
-
-                        <Grid Grid.Row="3" Margin="10 0 0 0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0" Text="{StaticResource Analytics}" Opacity="0.5"/>
-                            <Separator Grid.Row="1" Margin="0 5 0 5"/>
-                        </Grid>
-
-                        <Grid x:Name="AnalyticsZone" Grid.Row="4" Margin="10 5 0 5" MouseEnter="AnalyticsZone_MouseEnter">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <RadioButton x:Name="Analytics_Enabled" GroupName="Analytics" IsChecked="True" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Analytics_Enabled_Click">
-                                <TextBlock Text="{StaticResource EnableAnalytics}" VerticalAlignment="Center"/>
-                            </RadioButton>
-
-                            <RadioButton x:Name="Analytics_Disabled" GroupName="Analytics" IsChecked="False" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Analytics_Disabled_Click">
-                                <TextBlock Text="{StaticResource DisableAnalytics}" VerticalAlignment="Center"/>
-                            </RadioButton>
-                        </Grid>
+                        <TextBlock Grid.Row="0" Margin="0 0 0 0" Text="{StaticResource Description}" Opacity="0.5"/>
+                        
+                        <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
+                        <TextBlock Grid.Row="1" x:Name="Tooltip" Margin="0 10 0 0" Text="{StaticResource DefaultTooltip}" TextWrapping="Wrap"/>
+                        <Image x:Name="TooltipImage" Grid.Row="2" Margin="0 2 0 5" Source="/Resources/Images/None.png" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                        
+                        <Separator Grid.Row="3" Margin="0 5 0 5" VerticalAlignment="Top"/>
+                        <TextBlock Grid.Row="4" Text="{StaticResource Analytics}" MouseEnter="AnalyticsZone_MouseEnter"/>
+                        <ComboBox x:Name="AnalyticsSelector" Grid.Row="5" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="AnalyticsZone_MouseEnter" SelectionChanged="AnalyticsSelector_SelectionChanged"/>
                     </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="{StaticResource Input}">
                 <Grid Margin="15 15 15 15">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="0.12*"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
