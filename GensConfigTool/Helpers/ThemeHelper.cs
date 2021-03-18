@@ -10,7 +10,7 @@ namespace ConfigurationTool.Helpers
     {
         private const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
         private const string RegistryValueName = "AppsUseLightTheme";
-        private string Query = String.Format(
+        private readonly string Query = String.Format(
                 CultureInfo.InvariantCulture,
                 @"SELECT * FROM RegistryValueChangeEvent WHERE Hive = 'HKEY_USERS' AND KeyPath = '{0}\\{1}' AND ValueName = '{2}'",
                 WindowsIdentity.GetCurrent().User.Value,
@@ -23,7 +23,7 @@ namespace ConfigurationTool.Helpers
             Dark
         }
 
-        private Action<WindowsTheme> ThemeListener;
+        private readonly Action<WindowsTheme> ThemeListener;
 
         public ThemeHelper(Action<WindowsTheme> themeListener)
         {
