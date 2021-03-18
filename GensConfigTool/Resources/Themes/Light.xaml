@@ -28,5 +28,5 @@
 
     <SolidColorBrush x:Key="ComboBoxItem_Selected" Color="#BEE6FD" />
     <SolidColorBrush x:Key="ScrollBar_Thumb" Color="#60000000" />
-    <SolidColorBrush x:Key="ScrollBar_Background" Color="#20000000" />
+    <SolidColorBrush x:Key="ScrollBar_Background" Color="#FFFFFF" />
 </ResourceDictionary>
