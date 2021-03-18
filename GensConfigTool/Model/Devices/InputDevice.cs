@@ -44,15 +44,20 @@ namespace ConfigurationTool.Model.Devices
             if (key != -1)
             {
                 FieldInfo targetProperty = null;
-                FieldInfo[] props = typeof(ButtonConfiguration).GetFields();
+                FieldInfo[] fields = typeof(ButtonConfiguration).GetFields();
 
-                for (int i = 0; i < props.Length; ++i)
+                for (int i = 0; i < fields.Length; ++i)
                 {
-                    if (props[i].Name.Equals(keyName))
+                    FieldInfo currField = fields[i];
+                    if (currField.Name.Equals(keyName))
                     {
-                        targetProperty = props[i];
-                        break;
+                        targetProperty = currField;
                     }
+                    if ((int)currField.GetValue(targetDevice.Buttons) == key)
+                    {
+                        currField.SetValue(targetDevice.Buttons, 0);
+                    }
+
                 }
 
                 // Change when implementing Dinput

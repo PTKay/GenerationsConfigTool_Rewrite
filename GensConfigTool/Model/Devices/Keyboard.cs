@@ -13,7 +13,19 @@ namespace ConfigurationTool.Model.Devices
 
         protected override int[] InvalidKeyCodes => new int[] {
             (int)Key.LeftWindowsKey,
-            (int)Key.RightWindowsKey
+            (int)Key.RightWindowsKey,
+            (int)Key.LeftControl,
+            (int)Key.RightControl,
+            (int)Key.LeftAlt,
+            (int)Key.RightAlt,
+            (int)Key.LeftShift,
+            (int)Key.RightShift,
+            (int)Key.Applications,
+            (int)Key.PrintScreen,
+            (int)Key.Oem102,
+            (int)Key.Apostrophe,
+            (int)Key.Backslash,
+            (int)Key.Grave
         };
 
         public Keyboard()
@@ -44,7 +56,20 @@ namespace ConfigurationTool.Model.Devices
         {
             keyboard.Acquire();
             List<Key> keys = keyboard.GetCurrentState().PressedKeys;
-            return keys.Count > 0 ? (int)keys[0] : 0;
+            
+            if (keys.Count > 0)
+            {
+                Key key = keys[0];
+                if (key == Key.LeftControl || key == Key.RightControl)
+                {
+                    return -1;
+                } 
+                else
+                {
+                    return (int)key;
+                }
+            }
+            return 0;
         }
     }
 }

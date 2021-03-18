@@ -4,7 +4,8 @@
 
     <system:String x:Key="Title">Sonic Generations - Configuration</system:String>
     <system:String x:Key="Null">N/A</system:String>
-    
+    <system:String x:Key="Undefined">Undefined</system:String>
+
     <system:String x:Key="Settings">Settings</system:String>
     <system:String x:Key="Input">Input</system:String>
     <system:String x:Key="Description">Description</system:String>
@@ -67,4 +68,8 @@ IncludeApp was discontinued, so no data is currently being sent, although the da
     <system:String x:Key="ControllerInfo">Press any controller's Start button during play to switch to that controller</system:String>
     <system:String x:Key="XinputDevice">XInput Device</system:String>
     <system:String x:Key="Keyboard">Keyboard</system:String>
+
+    <system:String x:Key="InputTooltip">Press any valid key to map this button. Press CTRL to cancel.</system:String>
+    <system:String x:Key="InputCancel">Cancel Mapping</system:String>
+    <system:String x:Key="InputReset">Reset to Defaults</system:String>
 </ResourceDictionary>

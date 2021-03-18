@@ -340,17 +340,27 @@ namespace ConfigurationTool
         {
             Button src = (Button)e.Source;
             this.ParentGrid.IsEnabled = false;
+            string orig = src.Content.ToString();
+
+            src.Content = Application.Current.TryFindResource("InputTooltip");
 
             // Can be changed to use currently selected device when implementing Dinput
             this.Configuration.Keyboard.SetKey(src.Tag.ToString(), this.Configuration.Keyboard, key =>
             {
-                if (key != -1) src.Content = ((Key)key).GetStringValue();
+                /*
+                if (key != -1)
+                    src.Content = ((Key)key).GetStringValue();
+                else
+                    src.Content = orig;
+                */
+                UpdateInputView();
                 this.ParentGrid.IsEnabled = true;
             });
         }
 
         private void ButtonDefault_Click(object sender, RoutedEventArgs e)
         {
+            Button src = (Button)e.Source;
             this.Configuration.Keyboard.Buttons = new Model.Input.ButtonConfiguration();
             UpdateInputView();
         }

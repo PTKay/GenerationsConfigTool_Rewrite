@@ -7,9 +7,15 @@ namespace ConfigurationTool.Helpers
     {
         public static string GetStringValue(this Key value)
         {
-            return (int)value == -1 ?
-                Application.Current.TryFindResource("Null").ToString() :
-                value.ToString();
+            switch((int)value)
+            {
+                case -1:
+                    return Application.Current.TryFindResource("Null").ToString();
+                case 0:
+                    return Application.Current.TryFindResource("Undefined").ToString();
+                default:
+                    return value.ToString();
+            }
         }
     }
 }

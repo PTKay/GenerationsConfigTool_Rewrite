@@ -296,7 +296,8 @@
                         </Grid>
 
                         <Separator Grid.Row="6" Grid.Column="2" VerticalAlignment="Center"/>
-                        <Button x:Name="ButtonDefault" Grid.Row="7" Grid.Column="2" Content="Reset to Defaults" Click="ButtonDefault_Click"/>
+                        <Button x:Name="ButtonDefault" Grid.Row="7" Grid.Column="2" Content="{StaticResource InputReset}" Click="ButtonDefault_Click" Tag="0"/>
+
                     </Grid>
                 </Grid>
             </TabItem>
