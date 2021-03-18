@@ -3,6 +3,9 @@
     
     <Style TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{DynamicResource Button}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="4" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -37,7 +40,11 @@
     <Style TargetType="{x:Type Grid}">
         <Setter Property="Background" Value="{DynamicResource Background}" />
     </Style>
-
+    
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="Background" Value="{DynamicResource Background}" />
+    </Style>
+    
     <Style TargetType="{x:Type TabControl}">
         <Setter Property="Background" Value="{DynamicResource Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
@@ -80,35 +87,36 @@
     </Style>
 
     <Style TargetType="{x:Type TabItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TabItem">
-                        <Border Name="Border" Background="{DynamicResource TabHeader}" BorderBrush="{DynamicResource TabHeader_Outline}" BorderThickness="1 1 1 0" CornerRadius="5 5 0 0">
-                            <ContentPresenter x:Name="ContentSite"
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border" Background="{DynamicResource TabHeader}" BorderBrush="{DynamicResource TabHeader_Outline}" BorderThickness="1 1 1 0" CornerRadius="5 5 0 0">
+                        <ContentPresenter x:Name="ContentSite"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
                                     ContentSource="Header"
                                     Margin="10,2"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True" SourceName="Border">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource TabHeader_Hover}" />
-                            </Trigger>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource TabHeader_Selected}" />
-                                <Setter Property="Margin" TargetName="Border" Value="0 0 0 -1" />
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource TabHeader_Disabled}" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="Border">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TabHeader_Hover}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource TabHeader_Selected}" />
+                            <Setter Property="Margin" TargetName="Border" Value="0 0 0 -1" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource TabHeader_Disabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{DynamicResource Foreground}" />
+        <Setter Property="TextWrapping" Value="Wrap"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Foreground" Value="{DynamicResource Foreground_Disabled}"/>
@@ -123,19 +131,19 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                     <Border Background="{TemplateBinding Background}" VerticalAlignment="Center" CornerRadius="2">
-                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5 2 0 2"/>
+                        <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="6 6 0 6"/>
                     </Border>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{DynamicResource Button_Hover}" />
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource Button_Disabled}" />
                             <Setter Property="Foreground" Value="{DynamicResource Foreground_Disabled}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="{DynamicResource ComboBoxItem_Selected}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource Button_Hover}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

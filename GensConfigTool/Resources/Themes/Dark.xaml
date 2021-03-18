@@ -10,8 +10,8 @@
     <SolidColorBrush x:Key="TabHeader_Outline" Color="#50FFFFFF" />
     <SolidColorBrush x:Key="TabHeader_Disabled" Color="#60666666" />
 
-    <SolidColorBrush x:Key="Foreground" Color="#E5E5E5" />
-    <SolidColorBrush x:Key="Foreground_Disabled" Color="#60E5E5E5" />
+    <SolidColorBrush x:Key="Foreground" Color="#dcddde" />
+    <SolidColorBrush x:Key="Foreground_Disabled" Color="#60dcddde" />
 
     <SolidColorBrush x:Key="Button" Color="#3F3F46" />
     <SolidColorBrush x:Key="Button_Hover" Color="#686868" />

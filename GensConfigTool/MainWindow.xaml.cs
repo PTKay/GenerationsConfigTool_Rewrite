@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static ConfigurationTool.Helpers.ThemeHelper;
@@ -347,12 +348,6 @@ namespace ConfigurationTool
             // Can be changed to use currently selected device when implementing Dinput
             this.Configuration.Keyboard.SetKey(src.Tag.ToString(), this.Configuration.Keyboard, key =>
             {
-                /*
-                if (key != -1)
-                    src.Content = ((Key)key).GetStringValue();
-                else
-                    src.Content = orig;
-                */
                 UpdateInputView();
                 this.ParentGrid.IsEnabled = true;
             });

@@ -69,7 +69,6 @@ IncludeApp was discontinued, so no data is currently being sent, although the da
     <system:String x:Key="XinputDevice">XInput Device</system:String>
     <system:String x:Key="Keyboard">Keyboard</system:String>
 
-    <system:String x:Key="InputTooltip">Press any valid key to map this button. Press CTRL to cancel.</system:String>
-    <system:String x:Key="InputCancel">Cancel Mapping</system:String>
+    <system:String x:Key="InputTooltip">Press a key to map this button. Press CTRL to cancel.</system:String>
     <system:String x:Key="InputReset">Reset to Defaults</system:String>
 </ResourceDictionary>

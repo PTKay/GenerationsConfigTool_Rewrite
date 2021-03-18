@@ -4,19 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Background="{DynamicResource Background}"
-        Title="{StaticResource Title}" MinHeight="750" MinWidth="1000" Height="750" Width="1000" WindowStartupLocation="CenterScreen">
+        FontSize="13"
+        Title="{StaticResource Title}" MinHeight="760" MinWidth="1000" Height="760" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid x:Name="ParentGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="0.14*" />
+            <RowDefinition Height="0.15*" />
         </Grid.RowDefinitions>
 
         <TabControl Margin="0 10 0 0" x:Name="Tabs" Grid.Row="0" BorderThickness="0 1 0 1">
             <TabItem Header="{StaticResource Settings}">
                 <!-- Graphics Settings Window -->
-                <Grid Margin="15 15 15 15">
+                <Grid Margin="10 10 10 10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -51,7 +51,7 @@
                         <TextBlock Grid.Row="0" Text="{StaticResource Graphics}" Opacity="0.5"/>
                         <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
 
-                        <TextBlock Grid.Row="1" Margin="0 10 0 0" Text="{StaticResource GraphicsAdapter}" MouseEnter="GPUSelector_MouseEnter"/>
+                        <TextBlock Grid.Row="1" Margin="0 10 0 0" Text="{StaticResource GraphicsAdapter}" MouseEnter="GPUSelector_MouseEnter" />
                         <ComboBox x:Name="GPUSelector" Grid.Row="2" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="GPUSelector_MouseEnter" SelectionChanged="GPUSelector_SelectionChanged"/>
 
                         <TextBlock Grid.Row="3" Text="{StaticResource Resolution}" MouseEnter="ResSelector_MouseEnter"/>
@@ -72,13 +72,14 @@
                         <TextBlock Grid.Row="13" Text="{StaticResource VSync}" MouseEnter="VSyncSelector_MouseEnter"/>
                         <ComboBox x:Name="VSyncSelector" Grid.Row="14" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="VSyncSelector_MouseEnter" SelectionChanged="VSyncSelector_SelectionChanged" />
 
-
+                        
                         <TextBlock Grid.Row="15" Text="{StaticResource Audio}" Opacity="0.5"/>
                         <Separator Grid.Row="16" Margin="0 5 0 5" VerticalAlignment="Top"/>
 
                         <TextBlock Grid.Row="16" Margin="0 10 0 0" Text="{StaticResource AudioDevice}" VerticalAlignment="Bottom" MouseEnter="AudioSelector_MouseEnter"/>
                         <ComboBox x:Name="AudioSelector" Grid.Row="17" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="AudioSelector_MouseEnter" SelectionChanged="AudioSelector_SelectionChanged"/>
 
+                        
                         <TextBlock Grid.Row="18" Text="{StaticResource Other}" Opacity="0.5" />
                         <Separator Grid.Row="19" Margin="0 5 0 5" VerticalAlignment="Top"/>
 
@@ -90,7 +91,7 @@
                             </Grid.ColumnDefinitions>
                             <ComboBox x:Name="LanguageSelector" Grid.Column="0" VerticalContentAlignment="Center" SelectionChanged="LanguageSelector_SelectionChanged" MouseEnter="LanguageSelector_MouseEnter"/>
                             <Button Grid.Column="1" Margin="5 0 0 0" x:Name="AdminButton" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="AdminButton_Click">
-                                <Image x:Name="AdminButtonImage" Stretch="Uniform" Margin="2 2 2 2" />
+                                <Image x:Name="AdminButtonImage" Stretch="Uniform" />
                             </Button>
                         </Grid>
                     </Grid>
@@ -98,7 +99,7 @@
                     <Grid Grid.Column="1" Margin="10 0 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
-                            <RowDefinition Height="0.5*" />
+                            <RowDefinition Height="0.6*" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
@@ -123,7 +124,7 @@
                         <RowDefinition Height="0.12*"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-
+                    
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
