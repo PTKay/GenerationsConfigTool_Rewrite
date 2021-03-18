@@ -56,14 +56,14 @@ namespace ConfigurationTool.Model.Devices
         {
             keyboard.Acquire();
             List<Key> keys = keyboard.GetCurrentState().PressedKeys;
-            
+
             if (keys.Count > 0)
             {
                 Key key = keys[0];
                 if (key == Key.LeftControl || key == Key.RightControl)
                 {
                     return -1;
-                } 
+                }
                 else
                 {
                     return (int)key;

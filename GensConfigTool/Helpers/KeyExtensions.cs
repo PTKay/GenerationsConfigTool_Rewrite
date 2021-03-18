@@ -7,7 +7,7 @@ namespace ConfigurationTool.Helpers
     {
         public static string GetStringValue(this Key value)
         {
-            switch((int)value)
+            switch ((int)value)
             {
                 case -1:
                     return Application.Current.TryFindResource("Null").ToString();

@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static ConfigurationTool.Helpers.ThemeHelper;
@@ -42,7 +41,7 @@ namespace ConfigurationTool
 
             // Get Audio Devices
             this.AudioSelector.ItemsSource = DevicesHandler.GetAudioDevices();
-            
+
             OnOff[] onOff = EnumOrder<OnOff>.Values;
             HighLow[] highLow = EnumOrder<HighLow>.Values;
 
