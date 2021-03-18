@@ -7,7 +7,7 @@
         FontSize="13"
         Title="{StaticResource Title}" MinHeight="760" MinWidth="1000" Height="760" Width="1000" WindowStartupLocation="CenterScreen">
 
-    <Grid x:Name="ParentGrid">
+    <Grid x:Name="ParentGrid" Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="0.15*" />
@@ -72,18 +72,18 @@
                         <TextBlock Grid.Row="13" Text="{StaticResource VSync}" MouseEnter="VSyncSelector_MouseEnter"/>
                         <ComboBox x:Name="VSyncSelector" Grid.Row="14" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="VSyncSelector_MouseEnter" SelectionChanged="VSyncSelector_SelectionChanged" />
 
-                        
+
                         <TextBlock Grid.Row="15" Text="{StaticResource Audio}" Opacity="0.5"/>
                         <Separator Grid.Row="16" Margin="0 5 0 5" VerticalAlignment="Top"/>
 
                         <TextBlock Grid.Row="16" Margin="0 10 0 0" Text="{StaticResource AudioDevice}" VerticalAlignment="Bottom" MouseEnter="AudioSelector_MouseEnter"/>
                         <ComboBox x:Name="AudioSelector" Grid.Row="17" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="AudioSelector_MouseEnter" SelectionChanged="AudioSelector_SelectionChanged"/>
 
-                        
+
                         <TextBlock Grid.Row="18" Text="{StaticResource Other}" Opacity="0.5" />
                         <Separator Grid.Row="19" Margin="0 5 0 5" VerticalAlignment="Top"/>
 
-                        <TextBlock x:Name="LanguageLabel"  Grid.Row="19" Margin="0 10 0 0" Text="{StaticResource Language}" VerticalAlignment="Bottom" Opacity="0.5" MouseEnter="LanguageSelector_MouseEnter"/>
+                        <TextBlock x:Name="LanguageLabel" Grid.Row="19" Margin="0 10 0 0" Text="{StaticResource Language}" VerticalAlignment="Bottom" Opacity="0.5" MouseEnter="LanguageSelector_MouseEnter"/>
                         <Grid Grid.Row="20" Margin="0 5 0 5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -107,7 +107,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Grid.Row="0" Margin="0 0 0 0" Text="{StaticResource Description}" Opacity="0.5"/>
-                        
+
                         <Separator Grid.Row="1" Margin="0 5 0 5" VerticalAlignment="Top"/>
                         <TextBlock Grid.Row="1" x:Name="Tooltip" Margin="0 10 0 0" Text="{StaticResource DefaultTooltip}" TextWrapping="Wrap"/>
                         <Image x:Name="TooltipImage" Grid.Row="2" Margin="0 2 0 5" Source="/Resources/Images/None.png" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
@@ -119,12 +119,13 @@
                 </Grid>
             </TabItem>
             <TabItem Header="{StaticResource Input}">
-                <Grid Margin="15 15 15 15">
+                <!-- Input Settings Window -->
+                <Grid Margin="10 10 10 10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.12*"/>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    
+
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />

@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="Background" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="Border" Color="#60000000" />
+    <SolidColorBrush x:Key="Border" Color="#808080" />
 
     <SolidColorBrush x:Key="TabHeader" Color="#10000000" />
     <SolidColorBrush x:Key="TabHeader_Hover" Color="#BEE6FD" />
@@ -29,4 +29,6 @@
     <SolidColorBrush x:Key="ComboBoxItem_Selected" Color="#BEE6FD" />
     <SolidColorBrush x:Key="ScrollBar_Thumb" Color="#60000000" />
     <SolidColorBrush x:Key="ScrollBar_Background" Color="#FFFFFF" />
+
+    <SolidColorBrush x:Key="Window_Border" Color="#90000000" />
 </ResourceDictionary>

@@ -49,6 +49,7 @@
     <None Remove="Resources\Images\Buttons\Y.png" />
     <None Remove="Resources\Images\Display.png" />
     <None Remove="Resources\Images\FXAA.png" />
+    <None Remove="Resources\Images\Icon.png" />
     <None Remove="Resources\Images\Misc.png" />
     <None Remove="Resources\Images\None.png" />
     <None Remove="Resources\Images\Res.png" />
@@ -87,6 +88,7 @@
     <Resource Include="Resources\Images\Buttons\Y.png" />
     <Resource Include="Resources\Images\Display.png" />
     <Resource Include="Resources\Images\FXAA.png" />
+    <Resource Include="Resources\Images\Icon.png" />
     <Resource Include="Resources\Images\Misc.png" />
     <Resource Include="Resources\Images\None.png" />
     <Resource Include="Resources\Images\Res.png" />
