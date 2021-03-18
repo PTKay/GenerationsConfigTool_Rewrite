@@ -8,8 +8,6 @@ Rewriting Sonic Generations' Configuration Tool using WPF as a way to teach myse
 - Supports fixing the registry to avoid the `Game files either missing or corrupt please reinstall` issue
 - Supports proper scaling
 - Includes settings descriptions and images to better visualize the impact of each one
-- Removes the need for DefaultInput.cfg in the game's directory
-- Ability to map keys that couldn't be mapped in the original config tool (e.g. TAB, Shift, CTRL...)
 - Proper Nvidia Optimus support, so the config tool will always detect your high performance Nvidia GPU
 - Supports changing the in-game language (requires admin rights because they store it in LOCAL_MACHINE for some reason)
 - Supports Dark Theme
@@ -20,8 +18,10 @@ Rewriting Sonic Generations' Configuration Tool using WPF as a way to teach myse
 - No proper 32-bit support if you have GCL (Generations Code Loader, included with HedgeModManager) installed
 
 ## Images
-![Main Configuration](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/master/Images/Config.png)
-![Input Configuration](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/master/Images/InputConfig.png)
+Light Theme            |  Dark Theme
+:-------------------------:|:-------------------------:
+![](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/main/Images/Config.png)  |  ![](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/main/Images/Config_Dark.png)
+![](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/main/Images/Input.png)  |  ![](https://raw.githubusercontent.com/PTKickass/GenerationsConfigTool_Rewrite/main/Images/Input_Dark.png)
 
 ## Credits
 - [PTKickass](https://github.com/PTKickass) - Code and UI
