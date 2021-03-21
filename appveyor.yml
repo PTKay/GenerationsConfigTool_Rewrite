@@ -1,0 +1,25 @@
+version: '1.0-dev_r{build}'
+
+environment:
+  matrix:
+    - appveyor_build_worker_image: Visual Studio 2019
+      configuration: Debug
+      platform: Any CPU
+    - appveyor_build_worker_image: Visual Studio 2019
+      configuration: Release
+      platform: Any CPU
+
+before_build:
+  - nuget restore
+
+build:
+  verbosity: minimal
+  
+artifacts:
+ - path: 'GensConfigTool\bin\Debug'
+   name: '$(appveyor_project_name) $(appveyor_build_version) [Debug]'
+   type: exe
+ - path: 'GensConfigTool\bin\Release'
+   name: '$(appveyor_project_name) $(appveyor_build_version) [Release]'
+   type: exe
+   
