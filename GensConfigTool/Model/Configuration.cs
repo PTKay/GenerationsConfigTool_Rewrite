@@ -8,6 +8,8 @@ namespace ConfigurationTool.Model
     class Configuration
     {
         public Resolution Resolution;
+        public RefreshRate RefreshRate;
+
         public GraphicsAdapter GraphicsAdapter;
         public DepthFormat DepthFormat = DepthFormat.INTZ;
         public AudioDevice AudioDevice = new AudioDevice();

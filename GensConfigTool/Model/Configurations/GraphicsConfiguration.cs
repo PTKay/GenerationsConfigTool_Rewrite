@@ -1,4 +1,5 @@
 ﻿using ConfigurationTool.Model.Devices;
+using ConfigurationTool.Model.Settings;
 using ConfigurationTool.Settings.Model;
 using System;
 using System.IO;
@@ -33,8 +34,8 @@ namespace ConfigurationTool.Model.Configurations
                     {
                         Width = int.Parse(resString[0]),
                         Height = int.Parse(resString[1]),
-                        Frequency = int.Parse(resString[2])
                     };
+                    config.RefreshRate = new RefreshRate(int.Parse(resString[2]));
 
                     config.Antialiasing = int.Parse(sr.ReadLine()) > 0 ? OnOff.On : OnOff.Off;
                     config.VSync = int.Parse(sr.ReadLine()) > 0 ? OnOff.On : OnOff.Off;
@@ -71,7 +72,7 @@ namespace ConfigurationTool.Model.Configurations
                 writer.WriteLine(config.GraphicsAdapter.Description);
                 writer.WriteLine(config.GraphicsAdapter.Name);
                 Resolution res = config.Resolution;
-                writer.WriteLine($"{res.Width}.{res.Height}.{res.Frequency}");
+                writer.WriteLine($"{res.Width}.{res.Height}.{config.RefreshRate.Value}");
                 writer.WriteLine((int)config.Antialiasing);
                 writer.WriteLine((int)config.VSync);
                 writer.WriteLine((int)config.ShadowQuality);

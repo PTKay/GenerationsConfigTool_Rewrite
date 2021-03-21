@@ -82,15 +82,22 @@ namespace ConfigurationTool
             if (this.Configuration.GraphicsAdapter != null && this.GPUSelector.Items.IndexOf(this.Configuration.GraphicsAdapter) >= 0)
             {
                 this.GPUSelector.SelectedItem = this.Configuration.GraphicsAdapter;
-                this.ResSelector.SelectedItem = this.Configuration.Resolution;
+                this.ResSelector.SelectedIndex = this.ResSelector.Items.IndexOf(this.Configuration.Resolution); // We do this to not lose the Refresh Rate list
+
+                this.RefreshRateSelector.ItemsSource = ((Resolution)this.ResSelector.SelectedItem).RefreshRates;
+                this.RefreshRateSelector.SelectedItem = this.Configuration.RefreshRate;
             }
             else
             {
+                this.RefreshRateSelector.ItemsSource = this.Configuration.GraphicsAdapter.Resolutions[0].RefreshRates;
+
                 this.Configuration.GraphicsAdapter = (GraphicsAdapter)this.GPUSelector.Items[0];
                 this.Configuration.Resolution = this.Configuration.GraphicsAdapter.Resolutions[0];
+                this.Configuration.RefreshRate = this.Configuration.GraphicsAdapter.Resolutions[0].RefreshRates[0];
 
                 this.GPUSelector.SelectedIndex = 0;
                 this.ResSelector.SelectedIndex = 0;
+                this.RefreshRateSelector.SelectedIndex = 0;
             }
 
             this.AntiAliasingSelector.SelectedItem = this.Configuration.Antialiasing;
@@ -270,6 +277,18 @@ namespace ConfigurationTool
             if (IgnoreSelectionTriggers) return;
 
             this.Configuration.Resolution = (Resolution)e.AddedItems[0];
+
+            IgnoreSelectionTriggers = true;
+            this.RefreshRateSelector.ItemsSource = this.Configuration.Resolution.RefreshRates;
+            IgnoreSelectionTriggers = false;
+            this.RefreshRateSelector.SelectedIndex = 0;
+        }
+
+        private void RefreshRateSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IgnoreSelectionTriggers) return;
+
+            this.Configuration.RefreshRate = (RefreshRate)e.AddedItems[0];
         }
 
         private void AntiAliasingSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

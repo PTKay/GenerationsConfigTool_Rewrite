@@ -55,8 +55,16 @@
                         <ComboBox x:Name="GPUSelector" Grid.Row="2" Margin="0 5 0 5" VerticalContentAlignment="Center" MouseEnter="GPUSelector_MouseEnter" SelectionChanged="GPUSelector_SelectionChanged"/>
 
                         <TextBlock Grid.Row="3" Text="{StaticResource Resolution}" MouseEnter="ResSelector_MouseEnter"/>
-                        <ComboBox x:Name="ResSelector" Grid.Row="4" Margin="0 5 0 5" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="False" MouseEnter="ResSelector_MouseEnter" SelectionChanged="ResSelector_SelectionChanged"/>
+                        <Grid Grid.Row="4" Margin="0 5 0 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0.2*" />
+                            </Grid.ColumnDefinitions>
 
+                            <ComboBox x:Name="ResSelector" Grid.Column="0" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="False" MouseEnter="ResSelector_MouseEnter" SelectionChanged="ResSelector_SelectionChanged"/>
+                            <ComboBox x:Name="RefreshRateSelector" Grid.Column="1" Margin="10 0 0 0" VerticalContentAlignment="Center" ScrollViewer.CanContentScroll="False" MouseEnter="ResSelector_MouseEnter" SelectionChanged="RefreshRateSelector_SelectionChanged"/>
+                        </Grid>
+                        
                         <TextBlock Grid.Row="5" Text="{StaticResource Antialiasing}" MouseEnter="AntiAliasingSelector_MouseEnter"/>
                         <ComboBox x:Name="AntiAliasingSelector" Grid.Row="6" Margin="0 5 0 5" SelectedIndex="0" VerticalContentAlignment="Center" MouseEnter="AntiAliasingSelector_MouseEnter" SelectionChanged="AntiAliasingSelector_SelectionChanged" />
 

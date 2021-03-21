@@ -1,4 +1,6 @@
-﻿using ConfigurationTool.Model.Devices;
+﻿using ConfigurationTool.Helpers;
+using ConfigurationTool.Model.Devices;
+using ConfigurationTool.Model.Settings;
 using ConfigurationTool.Settings.Model;
 using SharpDX.Direct3D9;
 using SharpDX.DirectSound;
@@ -27,15 +29,24 @@ namespace ConfigurationTool.Handlers
 
                 foreach (SharpDX.Direct3D9.DisplayMode mode in adapter.GetDisplayModes(adapter.CurrentDisplayMode.Format))
                 {
-                    currAdapter.Resolutions.Add(new Resolution()
+                    Resolution res = new Resolution()
                     {
                         Width = mode.Width,
-                        Height = mode.Height,
-                        Frequency = mode.RefreshRate
-                    });
-                }
+                        Height = mode.Height
+                    };
+                    RefreshRate refreshRate = new RefreshRate(mode.RefreshRate);
 
-                currAdapter.Resolutions.Sort((a, b) => b.CompareTo(a));
+                    int idx = currAdapter.Resolutions.IndexOf(res);
+                    if (idx >= 0)
+                    {
+                        currAdapter.Resolutions[idx].RefreshRates.InsertElementDescending(refreshRate);
+                    }
+                    else
+                    {
+                        res.RefreshRates.Add(refreshRate);
+                        currAdapter.Resolutions.InsertElementDescending(res);
+                    }
+                }
             }
 
             return toReturn;

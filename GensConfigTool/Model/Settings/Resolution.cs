@@ -1,44 +1,43 @@
-﻿using System;
+﻿using ConfigurationTool.Model.Settings;
+using System;
+using System.Collections.Generic;
 
 namespace ConfigurationTool.Settings.Model
 {
-    public class Resolution : IComparable<Resolution>
+    public class Resolution : IComparable
     {
         public int Width { get; set; }
         public int Height { get; set; }
-        public int Frequency { get; set; }
+        public List<RefreshRate> RefreshRates = new List<RefreshRate>();
 
-        public int CompareTo(Resolution other)
+        public int CompareTo(object other)
         {
+            Resolution res = (Resolution)other;
+
             if (other == null)
             {
                 return 1;
             }
 
-            if (this.Width == other.Width && this.Height == other.Height)
+            if (this.Width == res.Width)
             {
-                return this.Frequency.CompareTo(other.Frequency);
+                return this.Height.CompareTo(res.Height);
             }
 
-            if (this.Width == other.Width)
-            {
-                return this.Height.CompareTo(other.Height);
-            }
-
-            return this.Width.CompareTo(other.Width);
+            return this.Width.CompareTo(res.Width);
         }
-        public override string ToString() => $"{Width} x {Height} ({Frequency}Hz)";
+        public override string ToString() => $"{Width} x {Height}";
 
         public override bool Equals(object obj)
         {
             Resolution res = (Resolution)obj;
 
-            return Width == res.Width && Height == res.Height && Frequency == res.Frequency;
+            return Width == res.Width && Height == res.Height;
         }
 
         public override int GetHashCode()
         {
-            return Tuple.Create(Width, Height, Frequency).GetHashCode();
+            return Tuple.Create(Width, Height).GetHashCode();
         }
     }
 }
