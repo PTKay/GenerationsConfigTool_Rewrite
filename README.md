@@ -1,4 +1,5 @@
 # Sonic Generations Configuration Tool (Rewrite)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/rexeqgearff4a119?svg=true)](https://ci.appveyor.com/project/PTKickass/generationsconfigtool-rewrite)
 
 Rewriting Sonic Generations' Configuration Tool using WPF as a way to teach myself how to use it.
 
