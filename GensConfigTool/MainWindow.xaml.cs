@@ -84,16 +84,12 @@ namespace ConfigurationTool
             {
                 this.GPUSelector.SelectedItem = this.Configuration.GraphicsAdapter;
                 idx = this.ResSelector.Items.IndexOf(this.Configuration.Resolution); // We do this to not lose the Refresh Rate 
-                this.ResSelector.SelectedIndex = idx < 0 ? 0 : idx;
-                this.RefreshRateSelector.ItemsSource = ((Resolution)this.ResSelector.SelectedItem).RefreshRates;
+                this.ResSelector.SelectedIndex = idx;
 
-                idx = this.RefreshRateSelector.Items.IndexOf(this.Configuration.RefreshRate);
-                this.RefreshRateSelector.SelectedIndex = idx < 0 ? 0 : idx;
-
-                if (idx < 0)
+                if (idx >= 0)
                 {
-                    this.Configuration.Resolution = (Resolution)this.ResSelector.SelectedItem;
-                    this.Configuration.RefreshRate = (RefreshRate)this.RefreshRateSelector.SelectedItem;
+                    this.RefreshRateSelector.ItemsSource = ((Resolution)this.ResSelector.SelectedItem).RefreshRates;
+                    this.RefreshRateSelector.SelectedItem = this.Configuration.RefreshRate;
                 }
             }
             else
@@ -115,12 +111,7 @@ namespace ConfigurationTool
             this.ShadowSelector.SelectedItem = this.Configuration.ShadowQuality;
             this.ReflectionSelector.SelectedItem = this.Configuration.ReflectionQuality;
 
-            idx = this.AudioSelector.Items.IndexOf(this.Configuration.AudioDevice);
-            this.AudioSelector.SelectedIndex = idx < 0 ? 0 : idx;
-            if (idx < 0)
-            {
-                this.Configuration.AudioDevice = (AudioDevice)this.AudioSelector.SelectedItem;
-            }
+            this.AudioSelector.SelectedItem = this.Configuration.AudioDevice;
 
             this.AnalyticsSelector.SelectedItem = this.Configuration.Analytics;
             this.LanguageSelector.SelectedItem = this.Configuration.Language;
