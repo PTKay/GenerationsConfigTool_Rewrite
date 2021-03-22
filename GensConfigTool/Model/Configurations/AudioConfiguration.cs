@@ -34,7 +34,6 @@ namespace ConfigurationTool.Model.Configurations
 
         public void SaveConfiguration(Configuration config)
         {
-
             using (StreamWriter writer = new StreamWriter(ConfigLocation))
             {
                 writer.WriteLine(config.AudioDevice.Name);

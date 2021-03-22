@@ -79,17 +79,26 @@ namespace ConfigurationTool
 
         private void UpdateConfigView()
         {
+            int idx;
             if (this.Configuration.GraphicsAdapter != null && this.GPUSelector.Items.IndexOf(this.Configuration.GraphicsAdapter) >= 0)
             {
                 this.GPUSelector.SelectedItem = this.Configuration.GraphicsAdapter;
-                this.ResSelector.SelectedIndex = this.ResSelector.Items.IndexOf(this.Configuration.Resolution); // We do this to not lose the Refresh Rate list
-
+                idx = this.ResSelector.Items.IndexOf(this.Configuration.Resolution); // We do this to not lose the Refresh Rate 
+                this.ResSelector.SelectedIndex = idx < 0 ? 0 : idx;
                 this.RefreshRateSelector.ItemsSource = ((Resolution)this.ResSelector.SelectedItem).RefreshRates;
-                this.RefreshRateSelector.SelectedItem = this.Configuration.RefreshRate;
+
+                idx = this.RefreshRateSelector.Items.IndexOf(this.Configuration.RefreshRate);
+                this.RefreshRateSelector.SelectedIndex = idx < 0 ? 0 : idx;
+
+                if (idx < 0)
+                {
+                    this.Configuration.Resolution = (Resolution)this.ResSelector.SelectedItem;
+                    this.Configuration.RefreshRate = (RefreshRate)this.RefreshRateSelector.SelectedItem;
+                }
             }
             else
             {
-                this.RefreshRateSelector.ItemsSource = this.Configuration.GraphicsAdapter.Resolutions[0].RefreshRates;
+                this.RefreshRateSelector.ItemsSource = ((Resolution)this.ResSelector.Items[0]).RefreshRates;
 
                 this.Configuration.GraphicsAdapter = (GraphicsAdapter)this.GPUSelector.Items[0];
                 this.Configuration.Resolution = this.Configuration.GraphicsAdapter.Resolutions[0];
@@ -106,8 +115,12 @@ namespace ConfigurationTool
             this.ShadowSelector.SelectedItem = this.Configuration.ShadowQuality;
             this.ReflectionSelector.SelectedItem = this.Configuration.ReflectionQuality;
 
-            int idx = this.AudioSelector.Items.IndexOf(this.Configuration.AudioDevice);
+            idx = this.AudioSelector.Items.IndexOf(this.Configuration.AudioDevice);
             this.AudioSelector.SelectedIndex = idx < 0 ? 0 : idx;
+            if (idx < 0)
+            {
+                this.Configuration.AudioDevice = (AudioDevice)this.AudioSelector.SelectedItem;
+            }
 
             this.AnalyticsSelector.SelectedItem = this.Configuration.Analytics;
             this.LanguageSelector.SelectedItem = this.Configuration.Language;
