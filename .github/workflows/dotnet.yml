@@ -20,4 +20,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --verbosity q
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.2
+      with:
+        name: ConfigurationTool
+        path: /home/runner/work/GenerationsConfigTool_Rewrite/GenerationsConfigTool_Rewrite/GensConfigTool/bin/Release/net472
