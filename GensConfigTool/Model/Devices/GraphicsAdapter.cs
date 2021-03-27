@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ConfigurationTool.Model.Devices
 {
-    public class GraphicsAdapter
+    public class GraphicsAdapter : IComparable
     {
         public String Description { get; set; }
         public String Name { get; set; }
@@ -26,6 +26,17 @@ namespace ConfigurationTool.Model.Devices
         public override int GetHashCode()
         {
             return Tuple.Create(Description, Name, GUID, Index).GetHashCode();
+        }
+        public int CompareTo(object other)
+        {
+            GraphicsAdapter adapter = (GraphicsAdapter)other;
+
+            if (adapter == null)
+            {
+                return 1;
+            }
+
+            return this.Index.CompareTo(adapter.Index);
         }
     }
 }

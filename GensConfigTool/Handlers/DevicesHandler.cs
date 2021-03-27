@@ -15,17 +15,17 @@ namespace ConfigurationTool.Handlers
             List<GraphicsAdapter> toReturn = new List<GraphicsAdapter>();
 
             Direct3D d3d = new Direct3D();
-            for (int i = 0; i < d3d.AdapterCount; i++)
+            foreach (AdapterInformation adapter in d3d.Adapters)
             {
-                AdapterInformation adapter = d3d.Adapters[i];
                 GraphicsAdapter currAdapter = new GraphicsAdapter()
                 {
                     Description = adapter.Details.Description,
                     Name = adapter.Details.DeviceName,
                     GUID = adapter.Details.DeviceIdentifier.ToString(),
-                    Index = i
+                    Index = adapter.Adapter
                 };
-                toReturn.Add(currAdapter);
+
+                toReturn.InsertElementDescending(currAdapter);
 
                 foreach (SharpDX.Direct3D9.DisplayMode mode in adapter.GetDisplayModes(adapter.CurrentDisplayMode.Format))
                 {
