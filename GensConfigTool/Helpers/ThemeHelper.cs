@@ -18,10 +18,7 @@ namespace ConfigurationTool.Helpers
                 RegistryValueName);
 
         public enum WindowsTheme
-        {
-            Light,
-            Dark
-        }
+        { Light, Dark }
 
         private readonly Action<WindowsTheme> ThemeListener;
 
@@ -43,9 +40,7 @@ namespace ConfigurationTool.Helpers
 
                 watcher.Start();
             }
-            catch
-            {
-            }
+            catch {}
 
             ThemeListener(GetWindowsTheme());
         }

@@ -50,8 +50,8 @@ namespace ConfigurationTool.Model.Configurations
                         GUID = sr.ReadLine(),
                         Name = adapterName,
                         Description = adapterDesc,
+                        MonitorID = sr.ReadLine()
                     };
-                    sr.ReadLine(); // Skip unused monitor line
 
                     config.DepthFormat = DepthFormat.FromFourCC(int.Parse(sr.ReadLine()));
                     return config;
@@ -79,7 +79,7 @@ namespace ConfigurationTool.Model.Configurations
                 writer.WriteLine((int)config.ReflectionQuality);
                 writer.WriteLine((int)config.DisplayMode);
                 writer.WriteLine(config.GraphicsAdapter.GUID);
-                writer.WriteLine(""); // Skip unused monitor line
+                writer.WriteLine(config.GraphicsAdapter.MonitorID);
                 writer.WriteLine(config.DepthFormat.GetFourCC());
             }
         }
