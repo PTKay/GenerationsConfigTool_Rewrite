@@ -5,8 +5,6 @@ namespace ConfigurationTool.Helpers
 {
     public class GraphicsDeviceTypes
     {
-        [DllImport("user32.dll")]
-        public static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref DeviceMode devMode);
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool EnumDisplayDevices(string lpDevice, uint iDevNum, ref DISPLAYDEV lpDisplayDevice, uint dwFlags);
 
