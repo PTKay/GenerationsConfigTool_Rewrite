@@ -26,6 +26,9 @@ namespace ConfigurationTool.Handlers
                     GUID = adapter.Details.DeviceIdentifier.ToString(),
                     Index = adapter.Adapter
                 };
+
+                /*
+                // Get the monitor ID
                 var monitor = new DISPLAYDEV();
                 monitor.cb = Marshal.SizeOf(monitor);
                 EnumDisplayDevices(currAdapter.Name, 0, ref monitor, 0);
@@ -34,6 +37,7 @@ namespace ConfigurationTool.Handlers
                 {
                     currAdapter.MonitorID = monitor.DeviceID;
                 }
+                */
 
                 toReturn.InsertElementDescending(currAdapter);
 

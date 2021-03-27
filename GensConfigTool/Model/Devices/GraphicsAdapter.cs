@@ -22,7 +22,6 @@ namespace ConfigurationTool.Model.Devices
             return Description.Equals(adapter.Description) &&
                 Name.Equals(adapter.Name) &&
                 GUID.Equals(adapter.GUID) &&
-                MonitorID.Equals(adapter.MonitorID) &&
                 Index == adapter.Index;
         }
 
