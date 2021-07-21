@@ -21,13 +21,12 @@ namespace ConfigurationTool.Model.Devices
             GraphicsAdapter adapter = (GraphicsAdapter)obj;
             return Description.Equals(adapter.Description) &&
                 Name.Equals(adapter.Name) &&
-                GUID.Equals(adapter.GUID) &&
-                Index == adapter.Index;
+                GUID.Equals(adapter.GUID);
         }
 
         public override int GetHashCode()
         {
-            return Tuple.Create(Description, Name, GUID, Index).GetHashCode();
+            return Tuple.Create(Description, Name, GUID).GetHashCode();
         }
         public int CompareTo(object other)
         {

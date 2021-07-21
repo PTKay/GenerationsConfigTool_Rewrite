@@ -39,7 +39,7 @@ namespace ConfigurationTool.Handlers
                 }
                 */
 
-                toReturn.InsertElementDescending(currAdapter);
+                toReturn.InsertElementAscending(currAdapter);
 
                 foreach (SharpDX.Direct3D9.DisplayMode mode in adapter.GetDisplayModes(adapter.CurrentDisplayMode.Format))
                 {
