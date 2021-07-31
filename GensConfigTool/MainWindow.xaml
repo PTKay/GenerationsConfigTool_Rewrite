@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         FontSize="13"
-        Title="{StaticResource Title}" MinHeight="760" MinWidth="1000" Height="760" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="{StaticResource Title}" MinHeight="720" MinWidth="955" Height="760" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid x:Name="ParentGrid" Margin="0">
         <Grid.RowDefinitions>
