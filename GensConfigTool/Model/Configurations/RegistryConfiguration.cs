@@ -17,7 +17,7 @@ namespace ConfigurationTool.Model.Configurations
         public const string REGDATA_INSTALLPATH = "install_path";
         public const string REGDATA_EXEPATH = "exe_path";
         public const string REGDATA_LOCALE = "locale";
-        public const string REGDATA_SAVELOCATION = "savelocation";
+        public const string REGDATA_SAVELOCATION = "SaveLocation";
 
         public Configuration LoadConfiguration(Configuration config)
         {

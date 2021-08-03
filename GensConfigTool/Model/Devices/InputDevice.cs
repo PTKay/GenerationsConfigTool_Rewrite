@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace ConfigurationTool.Model.Devices
 {
     public enum DeviceType { XINPUT, DINPUT, KEYBOARD }
+    public enum MovementType { DPAD, JOYSTICK, KEYBOARD }
 
     abstract class InputDevice
     {
@@ -15,9 +16,10 @@ namespace ConfigurationTool.Model.Devices
 
         public string Name;
         public string GUID;
+        public MovementType MovementType;
 
         public ButtonConfiguration Buttons = new ButtonConfiguration();
-        public AxisMap AxisMap = new AxisMap(); // Apparently unused outside DInput devices
+        public AxisMap AxisMap = new AxisMap(); // Only used when MovementType is set to JOYSTICK
         public int Deadzone = 0;
 
         protected abstract int[] InvalidKeyCodes { get; }
@@ -25,7 +27,7 @@ namespace ConfigurationTool.Model.Devices
 
         public string Serialize()
         {
-            return $"{Name}\n$G:{GUID}$B:{Buttons}$A:{AxisMap}$D:{Deadzone}$";
+            return $"{Name}\n$G:{GUID}$B:{Buttons} {(int)MovementType}$A:{AxisMap}$D:{Deadzone}$";
         }
 
         public async Task SetKey(string keyName, InputDevice targetDevice, Action<int> keyConsumer)

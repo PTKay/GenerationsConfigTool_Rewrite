@@ -16,6 +16,7 @@ namespace ConfigurationTool.Model.Devices
             this.Name = Application.Current.TryFindResource("XinputDevice").ToString();
             this.GUID = "00000000-0000-0000-0000-000000000000";
             this.DeviceType = DeviceType.XINPUT;
+            this.MovementType = MovementType.JOYSTICK; // Unused
             this.Controller = new Controller(port);
 
             foreach (FieldInfo field in Buttons.GetType().GetFields())

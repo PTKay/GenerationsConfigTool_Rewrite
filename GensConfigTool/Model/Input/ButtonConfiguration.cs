@@ -25,7 +25,6 @@
         public int Unknown1 = 0;
         public int Unknown2 = 0;
         public int Unknown3 = 0;
-        public int Unknown4 = 2;
 
         public static ButtonConfiguration DeSerialize(string buttons)
         {
@@ -56,7 +55,7 @@
 
         public override string ToString()
         {
-            return $"{A} {X} {Y} {B} {Start} {Back} {LB} {RB} {LT} {RT} {Up} {Down} {Right} {Left} {Unknown0} {Unknown1} {Unknown2} {Unknown3} {Unknown4}";
+            return $"{A} {X} {Y} {B} {Start} {Back} {LB} {RB} {LT} {RT} {Up} {Down} {Right} {Left} {Unknown0} {Unknown1} {Unknown2} {Unknown3}";
         }
     }
 }

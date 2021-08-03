@@ -33,6 +33,7 @@ namespace ConfigurationTool.Model.Devices
             this.Name = Application.Current.TryFindResource("Keyboard").ToString();
             this.GUID = "00000001-0000-0000-0000-000000000000";
             this.DeviceType = DeviceType.KEYBOARD;
+            this.MovementType = MovementType.KEYBOARD;
         }
 
         public static Keyboard DeSerialize(string serialized)
@@ -47,7 +48,7 @@ namespace ConfigurationTool.Model.Devices
 
             toReturn.GUID = split[1];
             toReturn.Buttons = ButtonConfiguration.DeSerialize(split[2]);
-            toReturn.AxisMap = new AxisMap(); // It's all unknown so we force the default
+            toReturn.AxisMap = new AxisMap(); // It's unused to we force default
             toReturn.Deadzone = int.Parse(split[4]);
             return toReturn;
         }
