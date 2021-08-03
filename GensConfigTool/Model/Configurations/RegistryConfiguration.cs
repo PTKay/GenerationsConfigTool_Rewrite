@@ -69,14 +69,18 @@ namespace ConfigurationTool.Model.Configurations
             if (saveLocation == null)
             {
                 fixRegistry = fixRegistry >= 0 ? 2 : fixRegistry;
-                saveLocation = config.InputSaveLocation;
+            } 
+            else
+            {
+                config.InputSaveLocation = (string)saveLocation;
             }
+
             registryKey?.Close();
 
-            config.InputSaveLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\{saveLocation}";
+
             try
             {
-                Directory.CreateDirectory(config.InputSaveLocation);
+                Directory.CreateDirectory(config.AbsoluteInputSaveLocation);
             }
             catch
             {
@@ -96,7 +100,7 @@ namespace ConfigurationTool.Model.Configurations
             if (registryKey != null)
             {
                 registryKey.SetValue(REGDATA_LOCALE, ((int)config.Language).ToString());
-                // Could save input location too but no need
+                registryKey.SetValue(REGDATA_SAVELOCATION, config.InputSaveLocation);
             }
             registryKey?.Close();
         }

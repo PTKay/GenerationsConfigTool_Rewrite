@@ -11,7 +11,7 @@ namespace ConfigurationTool.Model.Configurations
         public Configuration LoadConfiguration(Configuration config)
         {
             if (config == null) config = new Configuration();
-            string path = $"{config.InputSaveLocation}\\{ConfigLocation}";
+            string path = $"{config.AbsoluteInputSaveLocation}\\{ConfigLocation}";
 
             if (!File.Exists(path)) return config;
             try
@@ -32,9 +32,9 @@ namespace ConfigurationTool.Model.Configurations
 
         public void SaveConfiguration(Configuration config)
         {
-            string path = $"{config.InputSaveLocation}\\{ConfigLocation}";
+            string path = $"{config.AbsoluteInputSaveLocation}\\{ConfigLocation}";
 
-            Directory.CreateDirectory(config.InputSaveLocation);
+            Directory.CreateDirectory(config.AbsoluteInputSaveLocation);
             using (StreamWriter writer = new StreamWriter(File.Create(path)))
             {
                 writer.Write(config.Keyboard.Serialize());
