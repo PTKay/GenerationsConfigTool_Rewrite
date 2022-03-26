@@ -6,11 +6,11 @@ namespace ConfigurationTool.Model.Devices
 {
     public class GraphicsAdapter : IComparable
     {
-        public String Description { get; set; }
-        public String Name { get; set; }
-        public String GUID { get; set; }
-        public int Index { get; set; }
-        public String MonitorID { get; set; }
+        public String Description { get; set; } // GPU Name 
+        public String Name { get; set; } // Monitor index (\\.\DISPLAY1)
+        public String GUID { get; set; } // GPU GUID
+        public int Index { get; set; } // Monitor index
+        public String MonitorID { get; set; } // Monitor ID
 
         public List<Resolution> Resolutions = new List<Resolution>();
 
@@ -20,7 +20,7 @@ namespace ConfigurationTool.Model.Devices
         {
             GraphicsAdapter adapter = (GraphicsAdapter)obj;
             return Description.Equals(adapter.Description) &&
-                Name.Equals(adapter.Name) &&
+                MonitorID.Equals(adapter.MonitorID) &&
                 GUID.Equals(adapter.GUID);
         }
 

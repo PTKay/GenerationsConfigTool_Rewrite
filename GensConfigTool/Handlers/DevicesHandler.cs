@@ -27,7 +27,6 @@ namespace ConfigurationTool.Handlers
                     Index = adapter.Adapter
                 };
 
-                /*
                 // Get the monitor ID
                 var monitor = new DISPLAYDEV();
                 monitor.cb = Marshal.SizeOf(monitor);
@@ -37,8 +36,7 @@ namespace ConfigurationTool.Handlers
                 {
                     currAdapter.MonitorID = monitor.DeviceID;
                 }
-                */
-
+                
                 toReturn.InsertElementAscending(currAdapter);
 
                 foreach (SharpDX.Direct3D9.DisplayMode mode in adapter.GetDisplayModes(adapter.CurrentDisplayMode.Format))
