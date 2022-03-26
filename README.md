@@ -10,7 +10,7 @@ Rewriting Sonic Generations' Configuration Tool using WPF as a way to teach myse
 - Supports proper scaling
 - Includes settings descriptions and images to better visualize the impact of each one
 - Proper Nvidia Optimus support, so the config tool will always detect your high performance Nvidia GPU
-- Supports changing the in-game language (requires admin rights because they store it in LOCAL_MACHINE for some reason)
+- Supports changing the in-game language (requires admin rights because this is stored in LOCAL_MACHINE for some reason)
 - Supports Dark Theme
 - Significantly smaller file size compared to the original configuration tool (~5MB vs ~28MB)
 
