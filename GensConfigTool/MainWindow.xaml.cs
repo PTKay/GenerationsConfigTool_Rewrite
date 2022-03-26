@@ -79,18 +79,23 @@ namespace ConfigurationTool
 
         private void UpdateConfigView()
         {
-            int idx;
-            if (this.Configuration.GraphicsAdapter != null && (idx = this.GPUSelector.Items.IndexOf(this.Configuration.GraphicsAdapter)) >= 0)
+            int idx = this.GPUSelector.Items.IndexOf(null);
+            if (idx >= 0)
             {
                 this.GPUSelector.SelectedIndex = idx;
-                this.ResSelector.ItemsSource = ((GraphicsAdapter)this.GPUSelector.SelectedItem).Resolutions;
-                idx = this.ResSelector.Items.IndexOf(this.Configuration.Resolution); // We do this to not lose the Refresh Rate 
-                this.ResSelector.SelectedIndex = idx;
 
+                this.ResSelector.ItemsSource = ((GraphicsAdapter)this.GPUSelector.SelectedItem).Resolutions;
+                idx = this.ResSelector.Items.IndexOf(this.Configuration.Resolution); // We do this to not lose the Refresh Rate
+                this.ResSelector.SelectedIndex = idx >= 0 ? idx : 0;
+
+                this.RefreshRateSelector.ItemsSource = ((Resolution)this.ResSelector.SelectedItem).RefreshRates;
                 if (idx >= 0)
                 {
-                    this.RefreshRateSelector.ItemsSource = ((Resolution)this.ResSelector.SelectedItem).RefreshRates;
                     this.RefreshRateSelector.SelectedItem = this.Configuration.RefreshRate;
+                } 
+                else
+                {
+                    this.RefreshRateSelector.SelectedIndex = 0;
                 }
             }
             else

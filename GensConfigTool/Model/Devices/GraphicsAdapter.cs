@@ -20,7 +20,7 @@ namespace ConfigurationTool.Model.Devices
         {
             GraphicsAdapter adapter = (GraphicsAdapter)obj;
             return Description.Equals(adapter.Description) &&
-                MonitorID.Equals(adapter.MonitorID) &&
+                Name.Equals(adapter.Name) &&
                 GUID.Equals(adapter.GUID);
         }
 
